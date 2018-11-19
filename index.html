@@ -393,7 +393,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  509 字
+                  506 字
                 </span>
               
 
@@ -431,16 +431,16 @@
 
       
         
-          
-            <h1 id="同源策略"><a href="#同源策略" class="headerlink" title="同源策略"></a>同源策略</h1><p>最近在补一些基础知识，在浏览器安全最开头就看到了一个新的名词：同源策略</p>
-<h2 id="首先是源的概念："><a href="#首先是源的概念：" class="headerlink" title="首先是源的概念："></a>首先是源的概念：</h2><p>•    源（origin）就是协议、域名和端口号。 以下是相对于 <a href="http://www.a.com/test/index.html" target="_blank" rel="noopener">http://www.a.com/test/index.html</a> 的同源检测<br>•    <a href="http://www.a.com/dir/page.html" target="_blank" rel="noopener">http://www.a.com/dir/page.html</a> —-成功<br>•    <a href="http://www.child.a.com/test/index.html" target="_blank" rel="noopener">http://www.child.a.com/test/index.html</a> —-失败，域名不同<br>•    <a href="https://www.a.com/test/index.html" target="_blank" rel="noopener">https://www.a.com/test/index.html</a> —-失败，协议不同<br>所以所谓同源就是协议、域名和端口号均相同。<br>&lt; !–more–&gt;</p>
-<h2 id="什么是同源策略："><a href="#什么是同源策略：" class="headerlink" title="什么是同源策略："></a>什么是同源策略：</h2><p>同源策略是一种约定，限制了来自不同源的“document”或脚本，对当前“doucument”的读取或者设置某些属性。</p>
-<h6 id="举个例子："><a href="#举个例子：" class="headerlink" title="举个例子："></a>举个例子：</h6><p>如果没有同源策略，可能a.com里的一段JS脚本在b.com未加载此脚本时也可以修改b.com的内容。 同源策略限制了不同源的对象之间的互相干扰，也就是说当JS被浏览器认为来自不同源时，请求被拒绝。注意，对于当前页面来说，页面里存放JS文件的域不重要，重要的是加载JS界面的域是什么。</p>
-<h2 id="什么是跨域"><a href="#什么是跨域" class="headerlink" title="什么是跨域"></a>什么是跨域</h2><p>浏览器从一个域名的网页去请求另一个域名的资源时，域名、端口、协议任一不同，都是跨域</p>
-<h6 id="不受同源策略限制的："><a href="#不受同源策略限制的：" class="headerlink" title="不受同源策略限制的："></a>不受同源策略限制的：</h6><p>1、页面中的链接，重定向以及表单提交是不会受到同源策略限制的。<br> 2、跨域资源的引入是可以的。但是js不能读写加载的内容。如嵌入到页面中的 &lt; script src=”…” &gt; &lt; /script &gt;，&lt; img &gt;，&lt; link &gt;，&lt; iframe &gt;等。 所以我们就可以利用&lt; script &gt;标签来绕过了同源策略，来找到跨域漏洞。</p>
-<p>第一次写博客，内容不是很全，也会有许多错误的地方，了解的知识很有限，一些名词和漏洞名称从来没有接触过，希望大家可以指出错误。</p>
-
-          
+          <h1 id="同源策略"><a href="#同源策略" class="headerlink" title="同源策略"></a>同源策略</h1><p>最近在补一些基础知识，在浏览器安全最开头就看到了一个新的名词：同源策略</p>
+<h2 id="首先是源的概念："><a href="#首先是源的概念：" class="headerlink" title="首先是源的概念："></a>首先是源的概念：</h2><p>•    源（origin）就是协议、域名和端口号。 以下是相对于 <a href="http://www.a.com/test/index.html" target="_blank" rel="noopener">http://www.a.com/test/index.html</a> 的同源检测<br>•    <a href="http://www.a.com/dir/page.html" target="_blank" rel="noopener">http://www.a.com/dir/page.html</a> —-成功<br>•    <a href="http://www.child.a.com/test/index.html" target="_blank" rel="noopener">http://www.child.a.com/test/index.html</a> —-失败，域名不同<br>•    <a href="https://www.a.com/test/index.html" target="_blank" rel="noopener">https://www.a.com/test/index.html</a> —-失败，协议不同<br>所以所谓同源就是协议、域名和端口号均相同。</p>
+<h2 id="什么是同源策略："><a href="#什么是同源策略：" class="headerlink" title="什么是同源策略："></a>什么是同源策略：</h2>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/11/19/同源策略/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
