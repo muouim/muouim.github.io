@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-12-10T10:10:56.909Z</updated>
+  <updated>2018-12-10T10:16:40.925Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -21,16 +21,13 @@
     <link href="http://yoursite.com/2018/12/01/xss%E8%B7%A8%E7%AB%99%E8%84%9A%E6%9C%AC%E6%94%BB%E5%87%BB-1/"/>
     <id>http://yoursite.com/2018/12/01/xss跨站脚本攻击-1/</id>
     <published>2018-12-01T00:30:46.000Z</published>
-    <updated>2018-12-10T10:10:56.909Z</updated>
+    <updated>2018-12-10T10:16:40.925Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="XSS-Reflected"><a href="#XSS-Reflected" class="headerlink" title="XSS (Reflected)"></a>XSS (Reflected)</h1><p>用phpstudy搭了一个渗透测试环境，从xss开始吧，难度从低到高的源码<br><img src="/2018/12/01/xss跨站脚本攻击-1/捕获.PNG" alt=" "><br>&lt;–!more–&gt;<br>low难度没有任何过滤直接 <script>alert(‘xss’)</script>就可以得到弹窗，medium难度加了str_replace，high难度加了preg_replace，这两个函数有什么区别呢？搜索一波，</p><h3 id="str-replace（）："><a href="#str-replace（）：" class="headerlink" title="str_replace（）："></a>str_replace（）：</h3><p>定义和用法</p><p>str_replace() 函数以其他字符替换字符串中的一些字符（区分大小写）。</p><p>该函数必须遵循下列规则：</p><p>如果搜索的字符串是数组，那么它将返回数组。<br>如果搜索的字符串是数组，那么它将对数组中的每个元素进行查找和替换。<br>如果同时需要对数组进行查找和替换，并且需要执行替换的元素少于查找到的元素的数量，那么多余元素将用空字符串进行替换<br>如果查找的是数组，而替换的是字符串，那么替代字符串将对所有查找到的值起作用。<br>注释：该函数区分大小写。请使用 str_ireplace() 函数执行不区分大小写的搜索。<br><img src="/2018/12/01/xss跨站脚本攻击-1/1.PNG" alt=" "></p><h5 id="1-大小写绕过-lt-sCript-gt"><a href="#1-大小写绕过-lt-sCript-gt" class="headerlink" title="(1)大小写绕过&lt; sCript&gt;"></a>(1)大小写绕过&lt; sCript&gt;</h5><h5 id="2-双写绕过-lt-scr-lt-script-gt-ipt-gt"><a href="#2-双写绕过-lt-scr-lt-script-gt-ipt-gt" class="headerlink" title="(2)双写绕过&lt; scr&lt; script&gt;ipt&gt;"></a>(2)双写绕过&lt; scr&lt; script&gt;ipt&gt;</h5><p>（原文：<a href="https://blog.csdn.net/caoyouming0609/article/details/75208002）" target="_blank" rel="noopener">https://blog.csdn.net/caoyouming0609/article/details/75208002）</a>  </p><h3 id="preg-replace（）："><a href="#preg-replace（）：" class="headerlink" title="preg_replace（）："></a>preg_replace（）：</h3><p>.： 匹配除“\n”之外的任何单个字符。<br>*： 匹配前面的子表达式零次或多次。<br>所以&lt; script&gt;标签不可用，&lt; img src=”javascript:alert(‘xss’);”&gt;也不可用，我们无法依靠属性值进行跨站，但可以产生自己的事件<br>&lt; img src=”1” onerror=alert(‘xss’)&gt;</p><p>onerror是IMG标记的一个事件，只要页面发生错误，该事件立即被激活，语句中浏览器解释IMG标记时，会加载src属性引用的图片地址，该图片不存在则触发onerror事件。</p><p>###盗取cookie</p>]]></content>
+    <content type="html"><![CDATA[<h1 id="XSS-Reflected"><a href="#XSS-Reflected" class="headerlink" title="XSS (Reflected)"></a>XSS (Reflected)</h1><p>用phpstudy搭了一个渗透测试环境，从xss开始吧，难度从低到高的源码<br><img src="/2018/12/01/xss跨站脚本攻击-1/捕获.PNG" alt=" "><br><a id="more"></a><br>low难度没有任何过滤直接 <script>alert(‘xss’)</script>就可以得到弹窗，medium难度加了str_replace，high难度加了preg_replace，这两个函数有什么区别呢？搜索一波，</p><h3 id="str-replace（）："><a href="#str-replace（）：" class="headerlink" title="str_replace（）："></a>str_replace（）：</h3><p>定义和用法</p><p>str_replace() 函数以其他字符替换字符串中的一些字符（区分大小写）。</p><p>该函数必须遵循下列规则：</p><p>如果搜索的字符串是数组，那么它将返回数组。<br>如果搜索的字符串是数组，那么它将对数组中的每个元素进行查找和替换。<br>如果同时需要对数组进行查找和替换，并且需要执行替换的元素少于查找到的元素的数量，那么多余元素将用空字符串进行替换<br>如果查找的是数组，而替换的是字符串，那么替代字符串将对所有查找到的值起作用。<br>注释：该函数区分大小写。请使用 str_ireplace() 函数执行不区分大小写的搜索。<br><img src="/2018/12/01/xss跨站脚本攻击-1/1.PNG" alt=" "></p><h5 id="1-大小写绕过-lt-sCript-gt"><a href="#1-大小写绕过-lt-sCript-gt" class="headerlink" title="(1)大小写绕过&lt; sCript&gt;"></a>(1)大小写绕过&lt; sCript&gt;</h5><h5 id="2-双写绕过-lt-scr-lt-script-gt-ipt-gt"><a href="#2-双写绕过-lt-scr-lt-script-gt-ipt-gt" class="headerlink" title="(2)双写绕过&lt; scr&lt; script&gt;ipt&gt;"></a>(2)双写绕过&lt; scr&lt; script&gt;ipt&gt;</h5><p>（原文：<a href="https://blog.csdn.net/caoyouming0609/article/details/75208002）" target="_blank" rel="noopener">https://blog.csdn.net/caoyouming0609/article/details/75208002）</a>  </p><h3 id="preg-replace（）："><a href="#preg-replace（）：" class="headerlink" title="preg_replace（）："></a>preg_replace（）：</h3><p>.： 匹配除“\n”之外的任何单个字符。<br>*： 匹配前面的子表达式零次或多次。<br>所以&lt; script&gt;标签不可用，&lt; img src=”javascript:alert(‘xss’);”&gt;也不可用，我们无法依靠属性值进行跨站，但可以产生自己的事件<br>&lt; img src=”1” onerror=alert(‘xss’)&gt;</p><p>onerror是IMG标记的一个事件，只要页面发生错误，该事件立即被激活，语句中浏览器解释IMG标记时，会加载src属性引用的图片地址，该图片不存在则触发onerror事件。</p><h3 id="盗取cookie"><a href="#盗取cookie" class="headerlink" title="盗取cookie"></a>盗取cookie</h3><p>(咕~)</p>]]></content>
     
     <summary type="html">
     
-      
-      
-        &lt;h1 id=&quot;XSS-Reflected&quot;&gt;&lt;a href=&quot;#XSS-Reflected&quot; class=&quot;headerlink&quot; title=&quot;XSS (Reflected)&quot;&gt;&lt;/a&gt;XSS (Reflected)&lt;/h1&gt;&lt;p&gt;用phpstudy搭了一个渗透测试环境，从x
-      
+      &lt;h1 id=&quot;XSS-Reflected&quot;&gt;&lt;a href=&quot;#XSS-Reflected&quot; class=&quot;headerlink&quot; title=&quot;XSS (Reflected)&quot;&gt;&lt;/a&gt;XSS (Reflected)&lt;/h1&gt;&lt;p&gt;用phpstudy搭了一个渗透测试环境，从xss开始吧，难度从低到高的源码&lt;br&gt;&lt;img src=&quot;/2018/12/01/xss跨站脚本攻击-1/捕获.PNG&quot; alt=&quot; &quot;&gt;&lt;br&gt;&lt;/p&gt;
     
     </summary>
     
