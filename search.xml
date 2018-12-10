@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[xss跨站脚本攻击(1)]]></title>
+    <url>%2F2018%2F12%2F01%2Fxss%E8%B7%A8%E7%AB%99%E8%84%9A%E6%9C%AC%E6%94%BB%E5%87%BB-1%2F</url>
+    <content type="text"><![CDATA[XSS (Reflected)用phpstudy搭了一个渗透测试环境，从xss开始吧，难度从低到高的源码low难度没有任何过滤直接 alert(‘xss’)就可以得到弹窗，medium难度加了str_replace，high难度加了preg_replace，这两个函数有什么区别呢？搜索一波， str_replace（）：定义和用法 str_replace() 函数以其他字符替换字符串中的一些字符（区分大小写）。 该函数必须遵循下列规则： 如果搜索的字符串是数组，那么它将返回数组。如果搜索的字符串是数组，那么它将对数组中的每个元素进行查找和替换。如果同时需要对数组进行查找和替换，并且需要执行替换的元素少于查找到的元素的数量，那么多余元素将用空字符串进行替换如果查找的是数组，而替换的是字符串，那么替代字符串将对所有查找到的值起作用。注释：该函数区分大小写。请使用 str_ireplace() 函数执行不区分大小写的搜索。 (1)大小写绕过&lt; sCript&gt;(2)双写绕过&lt; scr&lt; script&gt;ipt&gt;（原文：https://blog.csdn.net/caoyouming0609/article/details/75208002） preg_replace（）：. ： 匹配除“\n”之外的任何单个字符。 ： 匹配前面的子表达式零次或多次。&lt; script&gt;标签不可用，&lt; img src=”javascript:alert(‘xss’);”&gt;也不可用，我们无法依靠属性值进行跨站，但可以产生自己的事件&lt; img src=”1” onerror=alert(‘xss’)&gt; onerror是IMG标记的一个事件，只要页面发生错误，该事件立即被激活，语句中浏览器解释IMG标记时，会加载src属性引用的图片地址，该图片不存在则触发onerror事件。]]></content>
+      <categories>
+        <category>基础</category>
+      </categories>
+      <tags>
+        <tag>Web</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[文件包含漏洞]]></title>
     <url>%2F2018%2F11%2F29%2F%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E%2F</url>
     <content type="text"><![CDATA[文件包含漏洞（NCTF Web题‘基本操作’）又是一次毫无游戏体验的ctf，留下没技术的泪水，还是乖乖复现补题吧。 本地文件包含（恶意代码执行或者敏感信息泄露）探查路径遍历漏洞漏洞产生的原因是因为攻击者可以将路径遍历序列放入文件名内，从指定的文件目录向上回溯，从而访问服务器上的文件。路径遍历序列叫做“../” 1.包含目录文件?targent=test.txt如果里面的内容是php，则内容会被当成php执行,不是php则会读取到文件内容(用来读取/etc/passw等等配置文件的敏感信息) ?targent=./../../test.txt./当前目录,../上一级目录,这样的遍历目录来读取文件Linux：/root/.ssh/authorized_keys/root/.ssh/id_rsa/root/.ssh/id_ras.keystore/root/.ssh/known_hosts/etc/passwd/etc/shadow/etc/my.cnf/etc/httpd/conf/httpd.conf/root/.bash_history/root/.mysql_history/proc/self/fd/fd[0-9]*(文件标识符)/proc/mounts/porc/config.gz 2.包含日志文件无法上传文件的时候,可以尝试利用UA插入payload到日志文件,然后包含容器的日志文件(错误、访问文件都行),注意：选择凌晨包含最好,payload后面加一个exit()退出程序,以防大日志导致浏览器卡死,如果包含不成功,也许是open_basedir限制了目录常见几个路径：/var/log/apache/access_log/var/www/logs/access_log/var/log/access_log 3.包含session文件session中的内容可以被控制，传入恶意代码。session的存储位置可以获取。 通过phpinfo的信息可以获取到session的存储位置。 通过猜测默认的session存放位置进行尝试。session 文件一般存放在 / tmp/、/var/lib/php/session/、/var/lib/php/session / 等目录下，文件名字一般以 sess_SESSIONID 来保存本题复现登陆界面，guest弱口令进入，通过数据库查询语句在session中写入一句话木马“select &lt;?php eval($_get[‘a’]);?&gt;” 留下查询记录。burp抓包得到sessionid为 p5skdakeoussr62f91bg2oo2cv3is54i，包含session文件，一句话木马会将获取到的GET型a变量的值存入到session中。再构造index.php?target=db_sql.php%253f/../../../../../../../../tmp/sess_p5skdakeoussr62f91bg2oo2cv3is54i&amp;a=echo%20shell_exec(%22ls%20/%22) 列出当前目录所以文件看到nctfffffffff，cat就能拿到flag。php一句话木马查看php的shell信息：&lt;?php phpinfo();exit;?&gt;eval函数将接受的字符串当做代码执行：&lt;?php eval($_get[‘a’]);?&gt;&lt;?php @eval($_POST[‘c’]);?&gt;]]></content>
