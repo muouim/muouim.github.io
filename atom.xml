@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-12-26T15:33:15.521Z</updated>
+  <updated>2018-12-30T04:05:36.943Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="http://yoursite.com/2018/12/26/Bugku-2/"/>
     <id>http://yoursite.com/2018/12/26/Bugku-2/</id>
     <published>2018-12-26T15:02:56.000Z</published>
-    <updated>2018-12-26T15:33:15.521Z</updated>
+    <updated>2018-12-30T04:05:36.943Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="Web8-welcome-to-bugkuctf"><a href="#Web8-welcome-to-bugkuctf" class="headerlink" title="Web8/welcome to bugkuctf"></a>Web8/welcome to bugkuctf</h2><p>##php变量覆盖漏洞</p><p>&lt;?php<br>extract($_GET);<br>if (!empty($ac))<br>{<br>$f = trim(file_get_contents($fn));<br>if ($ac === $f)<br>{<br>echo “This is flag:” .” $flag”;<br>}<br>else<br>{<br>echo”sorry!”;<br>}<br>}<br>?&gt;</p><h3 id="先说一下php函数"><a href="#先说一下php函数" class="headerlink" title="先说一下php函数"></a>先说一下php函数</h3><h4 id="extract-函数"><a href="#extract-函数" class="headerlink" title="extract() 函数"></a>extract() 函数</h4><p>从数组中将变量导入到当前的符号表。<br>该函数使用数组键名作为变量名，使用数组键值作为变量值。针对数组中的每个元素，将在当前符号表中创建对应的一个变量。<br>第二个参数 type 用于指定当某个变量已经存在，而数组中又有同名元素时，extract() 函数如何对待这样的冲突。<br>该函数返回成功导入到符号表中的变量数目。</p><h4 id="trim-string-charlist"><a href="#trim-string-charlist" class="headerlink" title="trim(string,charlist)"></a>trim(string,charlist)</h4><p>string    必需。规定要检查的字符串。<br>charlist<br>可选。<br>规定从字符串中删除哪些字符。如果被省略，则移除以下所有字符：<br>“\0” - NULL<br>“\t” - 制表符<br>“\n” - 换行<br>“\x0B” - 垂直制表符<br>“\r” - 回车<br>“ “ - 空格</p><p>####empty()和isset()<br>PHP的isset()函数 一般用来检测变量是否设置 </p><p>若变量不存在则返回 FALSE<br>若变量存在且其值为NULL，也返回 FALSE<br>若变量存在且值不为NULL，则返回 TURE </p><p>PHP的empty()函数 判断值为否为空 </p><p>若变量不存在则返回 TRUE<br>若变量存在且其值为””、0、”0”、NULL、、FALSE、array()、var $var; 以及没有任何属性的对象，则返回 TURE<br>若变量存在且值不为””、0、”0”、NULL、、FALSE、array()、var $var; 以及没有任何属性的对象，则返回 FALSE   </p>]]></content>
+    <content type="html"><![CDATA[<h2 id="Web8-welcome-to-bugkuctf"><a href="#Web8-welcome-to-bugkuctf" class="headerlink" title="Web8/welcome to bugkuctf"></a>Web8/welcome to bugkuctf</h2><p>##php变量覆盖漏洞</p><p>&lt;?php<br>extract($_GET);<br>if (!empty($ac))<br>{<br>$f = trim(file_get_contents($fn));<br>if ($ac === $f)<br>{<br>echo “This is flag:” .” $flag”;<br>}<br>else<br>{<br>echo”sorry!”;<br>}<br>}<br>?&gt;</p><h3 id="先说一下php函数"><a href="#先说一下php函数" class="headerlink" title="先说一下php函数"></a>先说一下php函数</h3><h4 id="extract-函数"><a href="#extract-函数" class="headerlink" title="extract() 函数"></a>extract() 函数</h4><p>从数组中将变量导入到当前的符号表。<br>该函数使用数组键名作为变量名，使用数组键值作为变量值。针对数组中的每个元素，将在当前符号表中创建对应的一个变量。<br>第二个参数 type 用于指定当某个变量已经存在，而数组中又有同名元素时，extract() 函数如何对待这样的冲突。<br>该函数返回成功导入到符号表中的变量数目。</p><h4 id="trim-string-charlist"><a href="#trim-string-charlist" class="headerlink" title="trim(string,charlist)"></a>trim(string,charlist)</h4><p>string    必需。规定要检查的字符串。<br>charlist<br>可选。<br>规定从字符串中删除哪些字符。如果被省略，则移除以下所有字符：<br>“\0” - NULL<br>“\t” - 制表符<br>“\n” - 换行<br>“\x0B” - 垂直制表符<br>“\r” - 回车<br>“ “ - 空格</p><p>####empty()和isset()<br>PHP的isset()函数 一般用来检测变量是否设置 </p><p>若变量不存在则返回 FALSE<br>若变量存在且其值为NULL，也返回 FALSE<br>若变量存在且值不为NULL，则返回 TURE </p><p>PHP的empty()函数 判断值为否为空 </p><p>若变量不存在则返回 TRUE<br>若变量存在且其值为””、0、”0”、NULL、、FALSE、array()、var $var; 以及没有任何属性的对象，则返回 TURE<br>若变量存在且值不为””、0、”0”、NULL、、FALSE、array()、var $var; 以及没有任何属性的对象，则返回 FALSE   </p><p>php封装协议php://input写入fn的值与a相同即可</p><h3 id="php反序列化"><a href="#php反序列化" class="headerlink" title="php反序列化"></a>php反序列化</h3>]]></content>
     
     <summary type="html">
     
