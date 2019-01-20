@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[SQL注入]]></title>
+    <url>%2F2019%2F01%2F19%2FSQL%E6%B3%A8%E5%85%A5%2F</url>
+    <content type="text"></content>
+  </entry>
+  <entry>
     <title><![CDATA[Bugku(2)]]></title>
     <url>%2F2018%2F12%2F26%2FBugku-2%2F</url>
     <content type="text"><![CDATA[Web8/welcome to bugkuctfphp变量覆盖漏洞&lt;?phpextract($_GET);if (!empty($ac)){$f = trim(file_get_contents($fn));if ($ac === $f){echo “This is flag:” .” $flag”;}else{echo”sorry!”;}}?&gt; 先说一下php函数extract() 函数从数组中将变量导入到当前的符号表。该函数使用数组键名作为变量名，使用数组键值作为变量值。针对数组中的每个元素，将在当前符号表中创建对应的一个变量。第二个参数 type 用于指定当某个变量已经存在，而数组中又有同名元素时，extract() 函数如何对待这样的冲突。该函数返回成功导入到符号表中的变量数目。 trim(string,charlist)string 必需。规定要检查的字符串。charlist可选。规定从字符串中删除哪些字符。如果被省略，则移除以下所有字符：“\0” - NULL“\t” - 制表符“\n” - 换行“\x0B” - 垂直制表符“\r” - 回车“ “ - 空格 empty()和isset()PHP的isset()函数 一般用来检测变量是否设置 若变量不存在则返回 FALSE若变量存在且其值为NULL，也返回 FALSE若变量存在且值不为NULL，则返回 TURE PHP的empty()函数 判断值为否为空 若变量不存在则返回 TRUE若变量存在且其值为””、0、”0”、NULL、、FALSE、array()、var $var; 以及没有任何属性的对象，则返回 TURE若变量存在且值不为””、0、”0”、NULL、、FALSE、array()、var $var; 以及没有任何属性的对象，则返回 FALSE php封装协议php://input写入fn的值与a相同即可 php反序列化]]></content>
