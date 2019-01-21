@@ -89,7 +89,7 @@
 <meta property="og:site_name" content="木偶&#39;s blog">
 <meta property="og:description" content="Web8/welcome to bugkuctfphp变量覆盖漏洞&amp;lt;?phpextract($_GET);if (!empty($ac)){$f = trim(file_get_contents($fn));if ($ac === $f){echo “This is flag:” .” $flag”;}else{echo”sorry!”;}}?&amp;gt;">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-01-21T10:05:38.612Z">
+<meta property="og:updated_time" content="2019-01-21T10:10:23.652Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Bugku(2)">
 <meta name="twitter:description" content="Web8/welcome to bugkuctfphp变量覆盖漏洞&amp;lt;?phpextract($_GET);if (!empty($ac)){$f = trim(file_get_contents($fn));if ($ac === $f){echo “This is flag:” .” $flag”;}else{echo”sorry!”;}}?&amp;gt;">
@@ -369,7 +369,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  703 字
+                  691 字
                 </span>
               
 
@@ -432,7 +432,7 @@ if(isset($user)&&(file_get_contents($user,'r')==="welcome to the bugkuctf")){
     echo "you are not admin ! ";  
 }  
  -->  
-<p>源码中可以看到如果没有匹配到flag的话就会引用file的文件，所以file=hint.php，password的值进行序列化构造，当序列化对象时，PHP 将试图在序列动作之前调用该对象的成员函数 <strong>sleep()。这样就允许对象在被序列化之前做任何清除操作。类似的，当使用 unserialize() 恢复对象时， 将调用 </strong>wakeup() 成员函数。<br>unserialize()函数变量可控所以就可以构造payload使得hint.php的全局变量file为flag.php<br>password=O:4:”Flag”:1:{s:4:”file”;s:8:”flag.php”;}最终构造的payload为<a href="http://123.206.87.240:8006/test1/?txt=php://input&amp;file=hint.php&amp;password=O:4:&quot;Flag&quot;:1:{s:4:&quot;file&quot;;s:8:&quot;flag.php&quot;;}" target="_blank" rel="noopener">http://123.206.87.240:8006/test1/?txt=php://input&amp;file=hint.php&amp;password=O:4:&quot;Flag&quot;:1:{s:4:&quot;file&quot;;s:8:&quot;flag.php&quot;;}</a> </p>
+<p>源码中可以看到如果没有匹配到flag的话就会引用file的文件，所以file=hint.php，password的值进行序列化构造，当序列化对象时，PHP 将试图在序列动作之前调用该对象的成员函数 <strong>sleep()。这样就允许对象在被序列化之前做任何清除操作。类似的，当使用 unserialize() 恢复对象时， 将调用 </strong>wakeup() 成员函数。<br>unserialize()函数变量可控所以就可以构造payload使得hint.php的全局变量file为flag.php<br>password=O:4:”Flag”:1:{s:4:”file”;s:8:”flag.php”;}最终构造的payload为?txt=php://input&amp;file=hint.php&amp;password=O:4:”Flag”:1:{s:4:”file”;s:8:”flag.php”;} </p>
 
       
     </div>
