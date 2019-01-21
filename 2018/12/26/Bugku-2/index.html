@@ -89,7 +89,7 @@
 <meta property="og:site_name" content="木偶&#39;s blog">
 <meta property="og:description" content="Web8/welcome to bugkuctfphp变量覆盖漏洞&amp;lt;?phpextract($_GET);if (!empty($ac)){$f = trim(file_get_contents($fn));if ($ac === $f){echo “This is flag:” .” $flag”;}else{echo”sorry!”;}}?&amp;gt;">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-01-19T03:58:05.207Z">
+<meta property="og:updated_time" content="2019-01-21T10:05:38.612Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Bugku(2)">
 <meta name="twitter:description" content="Web8/welcome to bugkuctfphp变量覆盖漏洞&amp;lt;?phpextract($_GET);if (!empty($ac)){$f = trim(file_get_contents($fn));if ($ac === $f){echo “This is flag:” .” $flag”;}else{echo”sorry!”;}}?&amp;gt;">
@@ -369,7 +369,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  393 字
+                  703 字
                 </span>
               
 
@@ -385,7 +385,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1 分钟
+                  2 分钟
                 </span>
               
             </div>
@@ -414,7 +414,26 @@
 <p>PHP的empty()函数 判断值为否为空 </p>
 <p>若变量不存在则返回 TRUE<br>若变量存在且其值为””、0、”0”、NULL、、FALSE、array()、var $var; 以及没有任何属性的对象，则返回 TURE<br>若变量存在且值不为””、0、”0”、NULL、、FALSE、array()、var $var; 以及没有任何属性的对象，则返回 FALSE   </p>
 <p>php封装协议php://input写入fn的值与a相同即可</p>
-<h3 id="php反序列化"><a href="#php反序列化" class="headerlink" title="php反序列化"></a>php反序列化</h3>
+<h3 id="php反序列化"><a href="#php反序列化" class="headerlink" title="php反序列化"></a>php反序列化</h3><p>welcome to the bugkuctf中利用php封装协议读取index.php和hint.php的内容得到全部的源码，可知flag在flag.php里，但是需要绕过一步正则匹配的限制。</p>
+<h6 id="hint-php"><a href="#hint-php" class="headerlink" title="hint.php"></a>hint.php</h6><p>&lt;?php  </p>
+<p>class Flag{//flag.php<br>    public $file;<br>    public function __tostring(){<br>        if(isset($this-&gt;file)){<br>            echo file_get_contents($this-&gt;file);<br>            echo “<br>“;<br>        return (“good”);<br>        }<br>    }<br>}<br>?&gt;  </p>
+<h6 id="index-php"><a href="#index-php" class="headerlink" title="index.php"></a>index.php</h6><p>&lt;?php<br>$txt = $_GET[“txt”];<br>$file = $_GET[“file”];<br>$password = $_GET[“password”];  </p>
+<p>if(isset($txt)&amp;&amp;(file_get_contents($txt,’r’)===”welcome to the bugkuctf”)){<br>    echo “hello friend!<br>“;<br>    if(preg_match(“/flag/“,$file)){<br>        echo “???è????°??¨?°±??????flag??|”;<br>        exit();<br>    }else{<br>        include($file);<br>        $password = unserialize($password);<br>        echo $password;<br>    }<br>}else{<br>    echo “you are not the number of bugku ! “;<br>}  </p>
+<p>?&gt;  </p>
+<!--  
+$user = $_GET["txt"];  
+$file = $_GET["file"];  
+$pass = $_GET["password"];  
+
+if(isset($user)&&(file_get_contents($user,'r')==="welcome to the bugkuctf")){  
+    echo "hello admin!<br>";  
+    include($file); //hint.php  
+}else{  
+    echo "you are not admin ! ";  
+}  
+ -->  
+<p>源码中可以看到如果没有匹配到flag的话就会引用file的文件，所以file=hint.php，password的值进行序列化构造，当序列化对象时，PHP 将试图在序列动作之前调用该对象的成员函数 <strong>sleep()。这样就允许对象在被序列化之前做任何清除操作。类似的，当使用 unserialize() 恢复对象时， 将调用 </strong>wakeup() 成员函数。<br>unserialize()函数变量可控所以就可以构造payload使得hint.php的全局变量file为flag.php<br>password=O:4:”Flag”:1:{s:4:”file”;s:8:”flag.php”;}最终构造的payload为<a href="http://123.206.87.240:8006/test1/?txt=php://input&amp;file=hint.php&amp;password=O:4:&quot;Flag&quot;:1:{s:4:&quot;file&quot;;s:8:&quot;flag.php&quot;;}" target="_blank" rel="noopener">http://123.206.87.240:8006/test1/?txt=php://input&amp;file=hint.php&amp;password=O:4:&quot;Flag&quot;:1:{s:4:&quot;file&quot;;s:8:&quot;flag.php&quot;;}</a> </p>
+
       
     </div>
     
@@ -672,7 +691,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Web8-welcome-to-bugkuctf"><span class="nav-number">1.</span> <span class="nav-text">Web8/welcome to bugkuctf</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#php变量覆盖漏洞"><span class="nav-number">2.</span> <span class="nav-text">php变量覆盖漏洞</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#先说一下php函数"><span class="nav-number">2.1.</span> <span class="nav-text">先说一下php函数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#extract-函数"><span class="nav-number">2.1.1.</span> <span class="nav-text">extract() 函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#trim-string-charlist"><span class="nav-number">2.1.2.</span> <span class="nav-text">trim(string,charlist)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#empty-和isset"><span class="nav-number">2.1.3.</span> <span class="nav-text">empty()和isset()</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#php反序列化"><span class="nav-number">2.2.</span> <span class="nav-text">php反序列化</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Web8-welcome-to-bugkuctf"><span class="nav-number">1.</span> <span class="nav-text">Web8/welcome to bugkuctf</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#php变量覆盖漏洞"><span class="nav-number">2.</span> <span class="nav-text">php变量覆盖漏洞</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#先说一下php函数"><span class="nav-number">2.1.</span> <span class="nav-text">先说一下php函数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#extract-函数"><span class="nav-number">2.1.1.</span> <span class="nav-text">extract() 函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#trim-string-charlist"><span class="nav-number">2.1.2.</span> <span class="nav-text">trim(string,charlist)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#empty-和isset"><span class="nav-number">2.1.3.</span> <span class="nav-text">empty()和isset()</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#php反序列化"><span class="nav-number">2.2.</span> <span class="nav-text">php反序列化</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#hint-php"><span class="nav-number">2.2.0.0.1.</span> <span class="nav-text">hint.php</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#index-php"><span class="nav-number">2.2.0.0.2.</span> <span class="nav-text">index.php</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
