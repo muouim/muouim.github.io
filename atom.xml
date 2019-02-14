@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-02-14T03:19:08.982Z</updated>
+  <updated>2019-02-14T03:46:44.429Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="http://yoursite.com/2019/02/14/hgame-php/"/>
     <id>http://yoursite.com/2019/02/14/hgame-php/</id>
     <published>2019-02-14T02:07:57.000Z</published>
-    <updated>2019-02-14T03:19:08.982Z</updated>
+    <updated>2019-02-14T03:46:44.429Z</updated>
     
     <content type="html"><![CDATA[<p>杭电vidar的hgame，其中几道php的题，写一下学到的。<br><a id="more"></a></p><h2 id="php-trick"><a href="#php-trick" class="headerlink" title="php trick"></a>php trick</h2><p><img src="/2019/02/14/hgame-php/1.jpg" alt=" "></p><p>十多个php的绕过，题目挂了，用了一个师傅博客里的图片（之前忘写了，懒~）  </p><p>#####（1）<br><img src="/2019/02/14/hgame-php/2.jpg" alt=" "><br>==和!=之间不会去判断数据类型，1和2又都被强制转换为了字符型，所以不能用数组，可用0e开头的MD5值绕过  </p><h5 id="（2）"><a href="#（2）" class="headerlink" title="（2）"></a>（2）</h5><p><img src="/2019/02/14/hgame-php/3.jpg" alt=" "><br>===则会判断数据类型，两个必须完全相等才返回true，所以用数组绕过，不同值的数组都返回0（详细见<a href="https://blog.csdn.net/qq_19980431/article/details/83018232）" target="_blank" rel="noopener">https://blog.csdn.net/qq_19980431/article/details/83018232）</a></p><p>#####（3）<br><img src="/2019/02/14/hgame-php/4.jpg" alt=" "></p><p>php里的特性+和.会被解析为_,所以H_game写为H+game,或者是$_SERVER[‘QUERY_STRING’] 是不会自动URLDecode 的，所以我们只需要传个URL编码过的参数名即可绕过这里</p><p>#####（4）<br><img src="/2019/02/14/hgame-php/5.jpg" alt=" ">  </p><p>数组绕过</p><p>#####（5）<br><img src="/2019/02/14/hgame-php/6.jpg" alt=" "><br>这里被难住了，ssrf类型，必须是http开头，开头的提示为admin.php,本来想着可以file协议忽略前面的地址直接读取文件内容，但是http的限制没法绕过，parse_url 里的 PHP_URL_HOST 参数获取的是 最后一个@ 符号后面的域名，而 curl 使用的是第一个 @ 符号后面的域名，这样我们就可以用 http:<a href="mailto://@127.0.0.1" target="_blank" rel="noopener">//@127.0.0.1</a>:<a href="mailto:80@www.baidu.com" target="_blank" rel="noopener">80@www.baidu.com</a>/admin.php 来绕过,从而读取admin.php</p><p>#####（6）<br><img src="/2019/02/14/hgame-php/7.jpg" alt=" "><br>这里又卡住了，之前做bugku的时候对file_getcontent理解不到位，file_getcontent内容可以执行为协议，所以直接filename=php://filter/read=convert.base64-encode/resource=flag.php就可以绕过php_exits.</p><p>#####（7）<br><img src="/2019/02/14/hgame-php/8.jpg" alt=" "><br>最终payload为：str1=s878926199a&amp;str2=s155964671a&amp;str3[]=22&amp;str4[]=1&amp;H+game[]=9e10000000000%00&amp;url=http:<a href="mailto://@127.0.0.1" target="_blank" rel="noopener">//@127.0.0.1</a>:<a href="mailto:80@www.baidu.com" target="_blank" rel="noopener">80@www.baidu.com</a>/admin.php?filename=php://filter/read=convert.base64-encode/resource=flag.php</p><h2 id="php-is-the-best-language"><a href="#php-is-the-best-language" class="headerlink" title="php is the best language"></a>php is the best language</h2><p><img src="/2019/02/14/hgame-php/12.png" alt=" "><br>我们需要POST的参数，door，key，gate。但这里secret是未知的，所以我们需要对door进行处理使secert的值为空，对于hash_mac函数<br>hash_hmac ( string $algo , string $data , string $key [, bool $raw_output = FALSE ] ) : string<br>参数<br>algo：<br>要使用的哈希算法名称，例如：”md5”，”sha256”，”haval160,4” 等。<br>data：<br>要进行哈希运算的消息。<br>key：<br>使用 HMAC 生成信息摘要时所使用的密钥<br>raw_output：设置为 TRUE 输出原始二进制数据， 设置为 FALSE 输出小写 16 进制字符串。</p><p>当data的数据为数组时，返回空，所以传入data[]=0,secret的值就变成了null，然后gate的值是对key进行shal256加密，密钥为空。key的值可以确定，这里又是MD5碰撞的问题，在网上找到了一篇博客，下附地址：<br><a href="https://www.k2zone.cn/?p=2019" target="_blank" rel="noopener">https://www.k2zone.cn/?p=2019</a><br>双MD5，得到key可取key=7r4lGXCH2Ksu2JNT3BYM<br>之后可求gate<br>php&gt; var_dump(hash_hmac(‘sha256’, ‘7r4lGXCH2Ksu2JNT3BYM’, NULL)) string(64) “81f581b7553943f5041f054ca92e5e7e490e2c40296a93d94d214f1 36aa84fe6”  </p><p>最终payloadgate=81f581b7553943f5041f054ca92e5e7e490e2c40296a93d94d2 14f136aa84fe6&amp;key=7r4lGXCH2Ksu2JNT3BYM&amp;door[]=1</p>]]></content>
     
@@ -30,6 +30,8 @@
       &lt;p&gt;杭电vidar的hgame，其中几道php的题，写一下学到的。&lt;br&gt;&lt;/p&gt;
     
     </summary>
+    
+      <category term="WP" scheme="http://yoursite.com/categories/WP/"/>
     
     
       <category term="WP" scheme="http://yoursite.com/tags/WP/"/>
@@ -41,7 +43,7 @@
     <link href="http://yoursite.com/2019/02/07/Python%E7%88%AC%E8%99%AB/"/>
     <id>http://yoursite.com/2019/02/07/Python爬虫/</id>
     <published>2019-02-07T11:58:08.000Z</published>
-    <updated>2019-02-14T03:25:51.278Z</updated>
+    <updated>2019-02-14T03:47:09.834Z</updated>
     
     <content type="html"><![CDATA[<p>hgame的爬虫题，做到一半就卡住了，菜是原罪，整理一下关于爬虫的知识，requests库、urllib库、re库和Beautifulsoup库。<br>咕~</p>]]></content>
     
@@ -54,6 +56,8 @@
       
     
     </summary>
+    
+      <category term="WP" scheme="http://yoursite.com/categories/WP/"/>
     
     
       <category term="WP" scheme="http://yoursite.com/tags/WP/"/>
@@ -84,11 +88,33 @@
   </entry>
   
   <entry>
+    <title>SQL攻击</title>
+    <link href="http://yoursite.com/2019/01/19/SQL%E6%B3%A8%E5%85%A5/"/>
+    <id>http://yoursite.com/2019/01/19/SQL注入/</id>
+    <published>2019-01-19T04:11:09.000Z</published>
+    <updated>2019-02-14T03:46:59.728Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="hgame-sql"><a href="#hgame-sql" class="headerlink" title="hgame sql"></a>hgame sql</h2><p>hgame两道sql题都不算太难，有验证不过没过滤，再次响起招新被时间盲注支配的恐惧~，整理一下大致的框架，<br><a id="more"></a></p><h3 id="数字型和字符型"><a href="#数字型和字符型" class="headerlink" title="数字型和字符型"></a>数字型和字符型</h3><p>按查询的数据类型可以分为数字和字符型</p><h4 id="判断方式："><a href="#判断方式：" class="headerlink" title="判断方式："></a>判断方式：</h4><p>?id=1 and 1=1返回正确则是数字型<br>?id=1’and’1’=’2返回正确则是字符型</p><h3 id="有回显的注入-联合查询"><a href="#有回显的注入-联合查询" class="headerlink" title="有回显的注入:联合查询"></a>有回显的注入:联合查询</h3><h3 id="盲注："><a href="#盲注：" class="headerlink" title="盲注："></a>盲注：</h3><h4 id="布尔盲注"><a href="#布尔盲注" class="headerlink" title="布尔盲注"></a>布尔盲注</h4><h4 id="时间盲注"><a href="#时间盲注" class="headerlink" title="时间盲注"></a>时间盲注</h4><h4 id="基于报错型的盲注"><a href="#基于报错型的盲注" class="headerlink" title="基于报错型的盲注"></a>基于报错型的盲注</h4><h3 id="sql约束攻击"><a href="#sql约束攻击" class="headerlink" title="sql约束攻击"></a>sql约束攻击</h3><h4 id="BugKu-login1"><a href="#BugKu-login1" class="headerlink" title="BugKu login1"></a>BugKu login1</h4><p>题目hint里给了是基于约束的sql攻击，搜索了一下，</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;hgame-sql&quot;&gt;&lt;a href=&quot;#hgame-sql&quot; class=&quot;headerlink&quot; title=&quot;hgame sql&quot;&gt;&lt;/a&gt;hgame sql&lt;/h2&gt;&lt;p&gt;hgame两道sql题都不算太难，有验证不过没过滤，再次响起招新被时间盲注支配的恐惧~，整理一下大致的框架，&lt;br&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="WP" scheme="http://yoursite.com/categories/WP/"/>
+    
+    
+      <category term="WP" scheme="http://yoursite.com/tags/WP/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Bugku(2)</title>
     <link href="http://yoursite.com/2018/12/26/Bugku-2/"/>
     <id>http://yoursite.com/2018/12/26/Bugku-2/</id>
     <published>2018-12-26T15:02:56.000Z</published>
-    <updated>2019-01-30T07:43:06.839Z</updated>
+    <updated>2019-02-14T03:46:25.533Z</updated>
     
     <content type="html"><![CDATA[<h2 id="Web8-welcome-to-bugkuctf"><a href="#Web8-welcome-to-bugkuctf" class="headerlink" title="Web8/welcome to bugkuctf"></a>Web8/welcome to bugkuctf</h2><h2 id="php变量覆盖漏洞"><a href="#php变量覆盖漏洞" class="headerlink" title="php变量覆盖漏洞"></a>php变量覆盖漏洞</h2><p>&lt;?php<br>extract($_GET);<br>if (!empty($ac))<br>{<br>$f = trim(file_get_contents($fn));<br>if ($ac === $f)<br>{<br>echo “This is flag:” .” $flag”;<br>}<br>else<br>{<br>echo”sorry!”;<br>}<br>}<br>?&gt;<br><a id="more"></a></p><h3 id="先说一下php函数"><a href="#先说一下php函数" class="headerlink" title="先说一下php函数"></a>先说一下php函数</h3><h4 id="extract-函数"><a href="#extract-函数" class="headerlink" title="extract() 函数"></a>extract() 函数</h4><p>从数组中将变量导入到当前的符号表。<br>该函数使用数组键名作为变量名，使用数组键值作为变量值。针对数组中的每个元素，将在当前符号表中创建对应的一个变量。<br>第二个参数 type 用于指定当某个变量已经存在，而数组中又有同名元素时，extract() 函数如何对待这样的冲突。<br>该函数返回成功导入到符号表中的变量数目。</p><h4 id="trim-string-charlist"><a href="#trim-string-charlist" class="headerlink" title="trim(string,charlist)"></a>trim(string,charlist)</h4><p>string    必需。规定要检查的字符串。<br>charlist<br>可选。<br>规定从字符串中删除哪些字符。如果被省略，则移除以下所有字符：<br>“\0” - NULL<br>“\t” - 制表符<br>“\n” - 换行<br>“\x0B” - 垂直制表符<br>“\r” - 回车<br>“ “ - 空格</p><h4 id="empty-和isset"><a href="#empty-和isset" class="headerlink" title="empty()和isset()"></a>empty()和isset()</h4><p>PHP的isset()函数 一般用来检测变量是否设置 </p><p>若变量不存在则返回 FALSE<br>若变量存在且其值为NULL，也返回 FALSE<br>若变量存在且值不为NULL，则返回 TURE </p><p>PHP的empty()函数 判断值为否为空 </p><p>若变量不存在则返回 TRUE<br>若变量存在且其值为””、0、”0”、NULL、、FALSE、array()、var $var; 以及没有任何属性的对象，则返回 TURE<br>若变量存在且值不为””、0、”0”、NULL、、FALSE、array()、var $var; 以及没有任何属性的对象，则返回 FALSE   </p><p>php封装协议php://input写入fn的值与a相同即可</p><h3 id="php反序列化"><a href="#php反序列化" class="headerlink" title="php反序列化"></a>php反序列化</h3><p>welcome to the bugkuctf中利用php封装协议读取index.php和hint.php的内容得到全部的源码，可知flag在flag.php里，但是需要绕过一步正则匹配的限制。</p><h5 id="hint-php"><a href="#hint-php" class="headerlink" title="hint.php"></a>hint.php</h5><p>&lt;?php  </p><p>class Flag{//flag.php<br>    public $file;<br>    public function __tostring(){<br>        if(isset($this-&gt;file)){<br>            echo file_get_contents($this-&gt;file);<br>            echo “<br>“;<br>        return (“good”);<br>        }<br>    }<br>}<br>?&gt;  </p><h5 id="index-php"><a href="#index-php" class="headerlink" title="index.php"></a>index.php</h5><p>&lt;?php<br>$txt = $_GET[“txt”];<br>$file = $_GET[“file”];<br>$password = $_GET[“password”];  </p><p>if(isset($txt)&amp;&amp;(file_get_contents($txt,’r’)===”welcome to the bugkuctf”)){<br>    echo “hello friend!<br>“;<br>    if(preg_match(“/flag/“,$file)){<br>        echo “不能现在就给你flag”;<br>        exit();<br>    }else{<br>        include($file);<br>        $password = unserialize($password);<br>        echo $password;<br>    }<br>}else{<br>    echo “you are not the number of bugku ! “;<br>}  </p><p>?&gt;  </p><!--  $user = $_GET["txt"];  $file = $_GET["file"];  $pass = $_GET["password"];  if(isset($user)&&(file_get_contents($user,'r')==="welcome to the bugkuctf")){      echo "hello admin!<br>";      include($file); //hint.php  }else{      echo "you are not admin ! ";  }   -->  <p>源码中可以看到如果没有匹配到flag的话就会引用file的文件，所以file=hint.php，password的值进行序列化构造，当序列化对象时，PHP 将试图在序列动作之前调用该对象的成员函数 <strong>sleep()。这样就允许对象在被序列化之前做任何清除操作。类似的，当使用 unserialize() 恢复对象时， 将调用 </strong>wakeup() 成员函数。<br>unserialize()函数变量可控所以就可以构造payload使得hint.php的全局变量file为flag.php<br>password=O:4:”Flag”:1:{s:4:”file”;s:8:”flag.php”;}最终构造的payload为?txt=php://input&amp;file=hint.php&amp;password=O:4:”Flag”:1:{s:4:”file”;s:8:”flag.php”;} </p>]]></content>
     
@@ -97,6 +123,8 @@
       &lt;h2 id=&quot;Web8-welcome-to-bugkuctf&quot;&gt;&lt;a href=&quot;#Web8-welcome-to-bugkuctf&quot; class=&quot;headerlink&quot; title=&quot;Web8/welcome to bugkuctf&quot;&gt;&lt;/a&gt;Web8/welcome to bugkuctf&lt;/h2&gt;&lt;h2 id=&quot;php变量覆盖漏洞&quot;&gt;&lt;a href=&quot;#php变量覆盖漏洞&quot; class=&quot;headerlink&quot; title=&quot;php变量覆盖漏洞&quot;&gt;&lt;/a&gt;php变量覆盖漏洞&lt;/h2&gt;&lt;p&gt;&amp;lt;?php&lt;br&gt;extract($_GET);&lt;br&gt;if (!empty($ac))&lt;br&gt;{&lt;br&gt;$f = trim(file_get_contents($fn));&lt;br&gt;if ($ac === $f)&lt;br&gt;{&lt;br&gt;echo “This is flag:” .” $flag”;&lt;br&gt;}&lt;br&gt;else&lt;br&gt;{&lt;br&gt;echo”sorry!”;&lt;br&gt;}&lt;br&gt;}&lt;br&gt;?&amp;gt;&lt;br&gt;&lt;/p&gt;
     
     </summary>
+    
+      <category term="WP" scheme="http://yoursite.com/categories/WP/"/>
     
     
       <category term="WP" scheme="http://yoursite.com/tags/WP/"/>

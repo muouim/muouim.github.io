@@ -4,6 +4,9 @@
     <title><![CDATA[hgame(php)]]></title>
     <url>%2F2019%2F02%2F14%2Fhgame-php%2F</url>
     <content type="text"><![CDATA[杭电vidar的hgame，其中几道php的题，写一下学到的。 php trick 十多个php的绕过，题目挂了，用了一个师傅博客里的图片（之前忘写了，懒~） #####（1）==和!=之间不会去判断数据类型，1和2又都被强制转换为了字符型，所以不能用数组，可用0e开头的MD5值绕过 （2）===则会判断数据类型，两个必须完全相等才返回true，所以用数组绕过，不同值的数组都返回0（详细见https://blog.csdn.net/qq_19980431/article/details/83018232） #####（3） php里的特性+和.会被解析为_,所以H_game写为H+game,或者是$_SERVER[‘QUERY_STRING’] 是不会自动URLDecode 的，所以我们只需要传个URL编码过的参数名即可绕过这里 #####（4） 数组绕过 #####（5）这里被难住了，ssrf类型，必须是http开头，开头的提示为admin.php,本来想着可以file协议忽略前面的地址直接读取文件内容，但是http的限制没法绕过，parse_url 里的 PHP_URL_HOST 参数获取的是 最后一个@ 符号后面的域名，而 curl 使用的是第一个 @ 符号后面的域名，这样我们就可以用 http://@127.0.0.1:80@www.baidu.com/admin.php 来绕过,从而读取admin.php #####（6）这里又卡住了，之前做bugku的时候对file_getcontent理解不到位，file_getcontent内容可以执行为协议，所以直接filename=php://filter/read=convert.base64-encode/resource=flag.php就可以绕过php_exits. #####（7）最终payload为：str1=s878926199a&amp;str2=s155964671a&amp;str3[]=22&amp;str4[]=1&amp;H+game[]=9e10000000000%00&amp;url=http://@127.0.0.1:80@www.baidu.com/admin.php?filename=php://filter/read=convert.base64-encode/resource=flag.php php is the best language我们需要POST的参数，door，key，gate。但这里secret是未知的，所以我们需要对door进行处理使secert的值为空，对于hash_mac函数hash_hmac ( string $algo , string $data , string $key [, bool $raw_output = FALSE ] ) : string参数algo：要使用的哈希算法名称，例如：”md5”，”sha256”，”haval160,4” 等。data：要进行哈希运算的消息。key：使用 HMAC 生成信息摘要时所使用的密钥raw_output：设置为 TRUE 输出原始二进制数据， 设置为 FALSE 输出小写 16 进制字符串。 当data的数据为数组时，返回空，所以传入data[]=0,secret的值就变成了null，然后gate的值是对key进行shal256加密，密钥为空。key的值可以确定，这里又是MD5碰撞的问题，在网上找到了一篇博客，下附地址：https://www.k2zone.cn/?p=2019双MD5，得到key可取key=7r4lGXCH2Ksu2JNT3BYM之后可求gatephp&gt; var_dump(hash_hmac(‘sha256’, ‘7r4lGXCH2Ksu2JNT3BYM’, NULL)) string(64) “81f581b7553943f5041f054ca92e5e7e490e2c40296a93d94d214f1 36aa84fe6” 最终payloadgate=81f581b7553943f5041f054ca92e5e7e490e2c40296a93d94d2 14f136aa84fe6&amp;key=7r4lGXCH2Ksu2JNT3BYM&amp;door[]=1]]></content>
+      <categories>
+        <category>WP</category>
+      </categories>
       <tags>
         <tag>WP</tag>
       </tags>
@@ -12,6 +15,9 @@
     <title><![CDATA[Python爬虫]]></title>
     <url>%2F2019%2F02%2F07%2FPython%E7%88%AC%E8%99%AB%2F</url>
     <content type="text"><![CDATA[hgame的爬虫题，做到一半就卡住了，菜是原罪，整理一下关于爬虫的知识，requests库、urllib库、re库和Beautifulsoup库。咕~]]></content>
+      <categories>
+        <category>WP</category>
+      </categories>
       <tags>
         <tag>WP</tag>
       </tags>
@@ -25,9 +31,23 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[SQL攻击]]></title>
+    <url>%2F2019%2F01%2F19%2FSQL%E6%B3%A8%E5%85%A5%2F</url>
+    <content type="text"><![CDATA[hgame sqlhgame两道sql题都不算太难，有验证不过没过滤，再次响起招新被时间盲注支配的恐惧~，整理一下大致的框架， 数字型和字符型按查询的数据类型可以分为数字和字符型 判断方式：?id=1 and 1=1返回正确则是数字型?id=1’and’1’=’2返回正确则是字符型 有回显的注入:联合查询盲注：布尔盲注时间盲注基于报错型的盲注sql约束攻击BugKu login1题目hint里给了是基于约束的sql攻击，搜索了一下，]]></content>
+      <categories>
+        <category>WP</category>
+      </categories>
+      <tags>
+        <tag>WP</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Bugku(2)]]></title>
     <url>%2F2018%2F12%2F26%2FBugku-2%2F</url>
     <content type="text"><![CDATA[Web8/welcome to bugkuctfphp变量覆盖漏洞&lt;?phpextract($_GET);if (!empty($ac)){$f = trim(file_get_contents($fn));if ($ac === $f){echo “This is flag:” .” $flag”;}else{echo”sorry!”;}}?&gt; 先说一下php函数extract() 函数从数组中将变量导入到当前的符号表。该函数使用数组键名作为变量名，使用数组键值作为变量值。针对数组中的每个元素，将在当前符号表中创建对应的一个变量。第二个参数 type 用于指定当某个变量已经存在，而数组中又有同名元素时，extract() 函数如何对待这样的冲突。该函数返回成功导入到符号表中的变量数目。 trim(string,charlist)string 必需。规定要检查的字符串。charlist可选。规定从字符串中删除哪些字符。如果被省略，则移除以下所有字符：“\0” - NULL“\t” - 制表符“\n” - 换行“\x0B” - 垂直制表符“\r” - 回车“ “ - 空格 empty()和isset()PHP的isset()函数 一般用来检测变量是否设置 若变量不存在则返回 FALSE若变量存在且其值为NULL，也返回 FALSE若变量存在且值不为NULL，则返回 TURE PHP的empty()函数 判断值为否为空 若变量不存在则返回 TRUE若变量存在且其值为””、0、”0”、NULL、、FALSE、array()、var $var; 以及没有任何属性的对象，则返回 TURE若变量存在且值不为””、0、”0”、NULL、、FALSE、array()、var $var; 以及没有任何属性的对象，则返回 FALSE php封装协议php://input写入fn的值与a相同即可 php反序列化welcome to the bugkuctf中利用php封装协议读取index.php和hint.php的内容得到全部的源码，可知flag在flag.php里，但是需要绕过一步正则匹配的限制。 hint.php&lt;?php class Flag{//flag.php public $file; public function __tostring(){ if(isset($this-&gt;file)){ echo file_get_contents($this-&gt;file); echo ““; return (“good”); } }}?&gt; index.php&lt;?php$txt = $_GET[“txt”];$file = $_GET[“file”];$password = $_GET[“password”]; if(isset($txt)&amp;&amp;(file_get_contents($txt,’r’)===”welcome to the bugkuctf”)){ echo “hello friend!“; if(preg_match(“/flag/“,$file)){ echo “不能现在就给你flag”; exit(); }else{ include($file); $password = unserialize($password); echo $password; }}else{ echo “you are not the number of bugku ! “;} ?&gt; 源码中可以看到如果没有匹配到flag的话就会引用file的文件，所以file=hint.php，password的值进行序列化构造，当序列化对象时，PHP 将试图在序列动作之前调用该对象的成员函数 sleep()。这样就允许对象在被序列化之前做任何清除操作。类似的，当使用 unserialize() 恢复对象时， 将调用 wakeup() 成员函数。unserialize()函数变量可控所以就可以构造payload使得hint.php的全局变量file为flag.phppassword=O:4:”Flag”:1:{s:4:”file”;s:8:”flag.php”;}最终构造的payload为?txt=php://input&amp;file=hint.php&amp;password=O:4:”Flag”:1:{s:4:”file”;s:8:”flag.php”;}]]></content>
+      <categories>
+        <category>WP</category>
+      </categories>
       <tags>
         <tag>WP</tag>
       </tags>

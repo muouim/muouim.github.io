@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="WP,">
 
 
 
@@ -81,18 +81,18 @@
 
 
 
-<meta name="description" content="一个零基础小白的成长记录。">
-<meta name="keywords" content="Web">
+<meta name="description" content="hgame sqlhgame两道sql题都不算太难，有验证不过没过滤，再次响起招新被时间盲注支配的恐惧~，整理一下大致的框架，">
+<meta name="keywords" content="WP">
 <meta property="og:type" content="article">
-<meta property="og:title" content="SQL注入">
+<meta property="og:title" content="SQL攻击">
 <meta property="og:url" content="http://yoursite.com/2019/01/19/SQL注入/index.html">
 <meta property="og:site_name" content="木偶&#39;s blog">
-<meta property="og:description" content="一个零基础小白的成长记录。">
+<meta property="og:description" content="hgame sqlhgame两道sql题都不算太难，有验证不过没过滤，再次响起招新被时间盲注支配的恐惧~，整理一下大致的框架，">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-01-19T04:11:09.119Z">
+<meta property="og:updated_time" content="2019-02-14T03:46:59.728Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="SQL注入">
-<meta name="twitter:description" content="一个零基础小白的成长记录。">
+<meta name="twitter:title" content="SQL攻击">
+<meta name="twitter:description" content="hgame sqlhgame两道sql题都不算太难，有验证不过没过滤，再次响起招新被时间盲注支配的恐惧~，整理一下大致的框架，">
 
 
 
@@ -128,7 +128,7 @@
 
 
 
-  <title>SQL注入 | 木偶's blog</title>
+  <title>SQL攻击 | 木偶's blog</title>
   
 
 
@@ -315,7 +315,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">SQL注入</h1>
+          <h1 class="post-title" itemprop="name headline">SQL攻击</h1>
         
 
         <div class="post-meta">
@@ -337,6 +337,28 @@
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/WP/" itemprop="url" rel="index">
+                    <span itemprop="name">WP</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -369,7 +391,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  0 字
+                  152 字
                 </span>
               
 
@@ -406,7 +428,11 @@
       
 
       
-        
+        <h2 id="hgame-sql"><a href="#hgame-sql" class="headerlink" title="hgame sql"></a>hgame sql</h2><p>hgame两道sql题都不算太难，有验证不过没过滤，再次响起招新被时间盲注支配的恐惧~，整理一下大致的框架，<br><a id="more"></a></p>
+<h3 id="数字型和字符型"><a href="#数字型和字符型" class="headerlink" title="数字型和字符型"></a>数字型和字符型</h3><p>按查询的数据类型可以分为数字和字符型</p>
+<h4 id="判断方式："><a href="#判断方式：" class="headerlink" title="判断方式："></a>判断方式：</h4><p>?id=1 and 1=1返回正确则是数字型<br>?id=1’and’1’=’2返回正确则是字符型</p>
+<h3 id="有回显的注入-联合查询"><a href="#有回显的注入-联合查询" class="headerlink" title="有回显的注入:联合查询"></a>有回显的注入:联合查询</h3><h3 id="盲注："><a href="#盲注：" class="headerlink" title="盲注："></a>盲注：</h3><h4 id="布尔盲注"><a href="#布尔盲注" class="headerlink" title="布尔盲注"></a>布尔盲注</h4><h4 id="时间盲注"><a href="#时间盲注" class="headerlink" title="时间盲注"></a>时间盲注</h4><h4 id="基于报错型的盲注"><a href="#基于报错型的盲注" class="headerlink" title="基于报错型的盲注"></a>基于报错型的盲注</h4><h3 id="sql约束攻击"><a href="#sql约束攻击" class="headerlink" title="sql约束攻击"></a>sql约束攻击</h3><h4 id="BugKu-login1"><a href="#BugKu-login1" class="headerlink" title="BugKu login1"></a>BugKu login1</h4><p>题目hint里给了是基于约束的sql攻击，搜索了一下，</p>
+
       
     </div>
     
@@ -420,6 +446,12 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/WP/" rel="tag"># WP</a>
+          
+        </div>
       
 
       
@@ -439,6 +471,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/30/MD5碰撞/" rel="prev" title="MD5碰撞">
+                MD5碰撞 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -493,8 +529,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -509,7 +554,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -635,6 +680,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#hgame-sql"><span class="nav-number">1.</span> <span class="nav-text">hgame sql</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数字型和字符型"><span class="nav-number">1.1.</span> <span class="nav-text">数字型和字符型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#判断方式："><span class="nav-number">1.1.1.</span> <span class="nav-text">判断方式：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#有回显的注入-联合查询"><span class="nav-number">1.2.</span> <span class="nav-text">有回显的注入:联合查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#盲注："><span class="nav-number">1.3.</span> <span class="nav-text">盲注：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#布尔盲注"><span class="nav-number">1.3.1.</span> <span class="nav-text">布尔盲注</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#时间盲注"><span class="nav-number">1.3.2.</span> <span class="nav-text">时间盲注</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#基于报错型的盲注"><span class="nav-number">1.3.3.</span> <span class="nav-text">基于报错型的盲注</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sql约束攻击"><span class="nav-number">1.4.</span> <span class="nav-text">sql约束攻击</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#BugKu-login1"><span class="nav-number">1.4.1.</span> <span class="nav-text">BugKu login1</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
