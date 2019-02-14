@@ -11,7 +11,10 @@
   <entry>
     <title><![CDATA[Python爬虫]]></title>
     <url>%2F2019%2F02%2F07%2FPython%E7%88%AC%E8%99%AB%2F</url>
-    <content type="text"></content>
+    <content type="text"><![CDATA[hgame的爬虫题，做到一半就卡住了，菜是原罪，整理一下关于爬虫的知识，requests库、urllib库、re库和Beautifulsoup库。咕~]]></content>
+      <tags>
+        <tag>WP</tag>
+      </tags>
   </entry>
   <entry>
     <title><![CDATA[MD5碰撞]]></title>
