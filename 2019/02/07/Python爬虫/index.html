@@ -81,18 +81,18 @@
 
 
 
-<meta name="description" content="hgame的爬虫题，做到一半就卡住了，菜是原罪，整理一下关于爬虫的知识，requests库、urllib库、re库和Beautifulsoup库。咕~">
+<meta name="description" content="hgame的爬虫题，做到一半就卡住了，菜是原罪，整理一下关于爬虫的知识，requests库、urllib库、re库和Beautifulsoup库。咕~ hgame里的baby-spider，一开始直接被反日，虚拟机关机，提醒写爬虫要加浏览器伪造，后来一直显示you are wrong，最后看了别人的脚本才发现是css上出了问题，把第十次之后的cookie打印下来再传到浏览器上可以发现爬取的题目与显">
 <meta name="keywords" content="WP">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Python爬虫">
 <meta property="og:url" content="http://yoursite.com/2019/02/07/Python爬虫/index.html">
 <meta property="og:site_name" content="木偶&#39;s blog">
-<meta property="og:description" content="hgame的爬虫题，做到一半就卡住了，菜是原罪，整理一下关于爬虫的知识，requests库、urllib库、re库和Beautifulsoup库。咕~">
+<meta property="og:description" content="hgame的爬虫题，做到一半就卡住了，菜是原罪，整理一下关于爬虫的知识，requests库、urllib库、re库和Beautifulsoup库。咕~ hgame里的baby-spider，一开始直接被反日，虚拟机关机，提醒写爬虫要加浏览器伪造，后来一直显示you are wrong，最后看了别人的脚本才发现是css上出了问题，把第十次之后的cookie打印下来再传到浏览器上可以发现爬取的题目与显">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-02-14T03:47:09.834Z">
+<meta property="og:updated_time" content="2019-02-25T08:27:36.286Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python爬虫">
-<meta name="twitter:description" content="hgame的爬虫题，做到一半就卡住了，菜是原罪，整理一下关于爬虫的知识，requests库、urllib库、re库和Beautifulsoup库。咕~">
+<meta name="twitter:description" content="hgame的爬虫题，做到一半就卡住了，菜是原罪，整理一下关于爬虫的知识，requests库、urllib库、re库和Beautifulsoup库。咕~ hgame里的baby-spider，一开始直接被反日，虚拟机关机，提醒写爬虫要加浏览器伪造，后来一直显示you are wrong，最后看了别人的脚本才发现是css上出了问题，把第十次之后的cookie打印下来再传到浏览器上可以发现爬取的题目与显">
 
 
 
@@ -391,7 +391,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  37 字
+                  243 字
                 </span>
               
 
@@ -429,6 +429,22 @@
 
       
         <p>hgame的爬虫题，做到一半就卡住了，菜是原罪，整理一下关于爬虫的知识，requests库、urllib库、re库和Beautifulsoup库。<br>咕~</p>
+<p>hgame里的baby-spider，一开始直接被反日，虚拟机关机，提醒写爬虫要加浏览器伪造，后来一直显示you are wrong，最后看了别人的脚本才发现是css上出了问题，把第十次之后的cookie打印下来再传到浏览器上可以发现爬取的题目与显示的题目无关，网页上的渲染把题目修改了，加载公式时在network里可以看到引用了一个新的字体，利用python 里的函数 str.maketrans() 可以把css渲染后的字体转换出来</p>
+<pre><code>fuck = str.maketrans(&apos;01345679&apos;, &apos;10694357&apos;)  
+question = getquestion1()
+b = question.translate(fuck)
+</code></pre><p>第三步</p>
+<pre><code>    .question-container span{
+display: none;
+}
+.question-container{
+font-family: Ariali;
+font-weight: bold;
+}
+.question-container:after{
+content:&quot;(776299203/883952569)+(547789483)*683263066-(215127140)=?&quot;;
+}
+</code></pre><p>直接爬取style.css里的 .question-container:after里的content内容</p>
 
       
     </div>
@@ -542,7 +558,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

