@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="WP,">
+  <meta name="keywords" content="基础,">
 
 
 
@@ -81,28 +81,21 @@
 
 
 
-<meta name="description" content="杭电vidar的hgame，其中几道php的题，写一下学到的。">
-<meta name="keywords" content="WP">
+<meta name="description" content="CTF赛程结束后，Web题目环境关了不是太好复现，学习了下怎么用Dockerfile来重新搭建一下环境（只学会了怎么用，自己出题还是不会写，菜哭）">
+<meta name="keywords" content="基础">
 <meta property="og:type" content="article">
-<meta property="og:title" content="hgame(php)">
-<meta property="og:url" content="http://yoursite.com/2019/02/14/hgame-php/index.html">
+<meta property="og:title" content="Dockerfile搭建简单Web题目">
+<meta property="og:url" content="http://yoursite.com/2019/07/11/Dockerfile搭建简单Web题目/index.html">
 <meta property="og:site_name" content="木偶&#39;s blog">
-<meta property="og:description" content="杭电vidar的hgame，其中几道php的题，写一下学到的。">
+<meta property="og:description" content="CTF赛程结束后，Web题目环境关了不是太好复现，学习了下怎么用Dockerfile来重新搭建一下环境（只学会了怎么用，自己出题还是不会写，菜哭）">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2019/02/14/hgame-php/1.jpg">
-<meta property="og:image" content="http://yoursite.com/2019/02/14/hgame-php/2.jpg">
-<meta property="og:image" content="http://yoursite.com/2019/02/14/hgame-php/3.jpg">
-<meta property="og:image" content="http://yoursite.com/2019/02/14/hgame-php/4.jpg">
-<meta property="og:image" content="http://yoursite.com/2019/02/14/hgame-php/5.jpg">
-<meta property="og:image" content="http://yoursite.com/2019/02/14/hgame-php/6.jpg">
-<meta property="og:image" content="http://yoursite.com/2019/02/14/hgame-php/7.jpg">
-<meta property="og:image" content="http://yoursite.com/2019/02/14/hgame-php/8.jpg">
-<meta property="og:image" content="http://yoursite.com/2019/02/14/hgame-php/12.png">
-<meta property="og:updated_time" content="2019-02-14T03:46:44.429Z">
+<meta property="og:image" content="http://yoursite.com/2019/07/11/Dockerfile搭建简单Web题目/2.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/07/11/Dockerfile搭建简单Web题目/1.jpg">
+<meta property="og:updated_time" content="2019-07-11T03:05:40.694Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="hgame(php)">
-<meta name="twitter:description" content="杭电vidar的hgame，其中几道php的题，写一下学到的。">
-<meta name="twitter:image" content="http://yoursite.com/2019/02/14/hgame-php/1.jpg">
+<meta name="twitter:title" content="Dockerfile搭建简单Web题目">
+<meta name="twitter:description" content="CTF赛程结束后，Web题目环境关了不是太好复现，学习了下怎么用Dockerfile来重新搭建一下环境（只学会了怎么用，自己出题还是不会写，菜哭）">
+<meta name="twitter:image" content="http://yoursite.com/2019/07/11/Dockerfile搭建简单Web题目/2.jpg">
 
 
 
@@ -132,13 +125,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/02/14/hgame-php/">
+  <link rel="canonical" href="http://yoursite.com/2019/07/11/Dockerfile搭建简单Web题目/">
 
 
 
 
 
-  <title>hgame(php) | 木偶's blog</title>
+  <title>Dockerfile搭建简单Web题目 | 木偶's blog</title>
   
 
 
@@ -308,7 +301,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/14/hgame-php/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/11/Dockerfile搭建简单Web题目/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="木偶">
@@ -325,7 +318,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">hgame(php)</h1>
+          <h1 class="post-title" itemprop="name headline">Dockerfile搭建简单Web题目</h1>
         
 
         <div class="post-meta">
@@ -337,8 +330,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-14T10:07:57+08:00">
-                2019-02-14
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-11T10:24:50+08:00">
+                2019-07-11
               </time>
             
 
@@ -360,8 +353,8 @@
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/WP/" itemprop="url" rel="index">
-                    <span itemprop="name">WP</span>
+                  <a href="/categories/基础/" itemprop="url" rel="index">
+                    <span itemprop="name">基础</span>
                   </a>
                 </span>
 
@@ -378,8 +371,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/02/14/hgame-php/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/02/14/hgame-php/" itemprop="commentCount"></span>
+                <a href="/2019/07/11/Dockerfile搭建简单Web题目/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/07/11/Dockerfile搭建简单Web题目/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -401,7 +394,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  654 字
+                  388 字
                 </span>
               
 
@@ -417,7 +410,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  2 分钟
+                  1 分钟
                 </span>
               
             </div>
@@ -438,21 +431,41 @@
       
 
       
-        <p>杭电vidar的hgame，其中几道php的题，写一下学到的。<br><a id="more"></a></p>
-<h2 id="php-trick"><a href="#php-trick" class="headerlink" title="php trick"></a>php trick</h2><p><img src="/2019/02/14/hgame-php/1.jpg" alt=" "></p>
-<p>十多个php的绕过，题目挂了，用了一个师傅博客里的图片（之前忘写了，懒~）  </p>
-<p>#####（1）<br><img src="/2019/02/14/hgame-php/2.jpg" alt=" "><br>==和!=之间不会去判断数据类型，1和2又都被强制转换为了字符型，所以不能用数组，可用0e开头的MD5值绕过  </p>
-<h5 id="（2）"><a href="#（2）" class="headerlink" title="（2）"></a>（2）</h5><p><img src="/2019/02/14/hgame-php/3.jpg" alt=" "><br>===则会判断数据类型，两个必须完全相等才返回true，所以用数组绕过，不同值的数组都返回0（详细见<a href="https://blog.csdn.net/qq_19980431/article/details/83018232）" target="_blank" rel="noopener">https://blog.csdn.net/qq_19980431/article/details/83018232）</a></p>
-<p>#####（3）<br><img src="/2019/02/14/hgame-php/4.jpg" alt=" "></p>
-<p>php里的特性+和.会被解析为_,所以H_game写为H+game,或者是$_SERVER[‘QUERY_STRING’] 是不会自动URLDecode 的，所以我们只需要传个URL编码过的参数名即可绕过这里</p>
-<p>#####（4）<br><img src="/2019/02/14/hgame-php/5.jpg" alt=" ">  </p>
-<p>数组绕过</p>
-<p>#####（5）<br><img src="/2019/02/14/hgame-php/6.jpg" alt=" "><br>这里被难住了，ssrf类型，必须是http开头，开头的提示为admin.php,本来想着可以file协议忽略前面的地址直接读取文件内容，但是http的限制没法绕过，parse_url 里的 PHP_URL_HOST 参数获取的是 最后一个@ 符号后面的域名，而 curl 使用的是第一个 @ 符号后面的域名，这样我们就可以用 http:<a href="mailto://@127.0.0.1" target="_blank" rel="noopener">//@127.0.0.1</a>:<a href="mailto:80@www.baidu.com" target="_blank" rel="noopener">80@www.baidu.com</a>/admin.php 来绕过,从而读取admin.php</p>
-<p>#####（6）<br><img src="/2019/02/14/hgame-php/7.jpg" alt=" "><br>这里又卡住了，之前做bugku的时候对file_getcontent理解不到位，file_getcontent内容可以执行为协议，所以直接filename=php://filter/read=convert.base64-encode/resource=flag.php就可以绕过php_exits.</p>
-<p>#####（7）<br><img src="/2019/02/14/hgame-php/8.jpg" alt=" "><br>最终payload为：str1=s878926199a&amp;str2=s155964671a&amp;str3[]=22&amp;str4[]=1&amp;H+game[]=9e10000000000%00&amp;url=http:<a href="mailto://@127.0.0.1" target="_blank" rel="noopener">//@127.0.0.1</a>:<a href="mailto:80@www.baidu.com" target="_blank" rel="noopener">80@www.baidu.com</a>/admin.php?filename=php://filter/read=convert.base64-encode/resource=flag.php</p>
-<h2 id="php-is-the-best-language"><a href="#php-is-the-best-language" class="headerlink" title="php is the best language"></a>php is the best language</h2><p><img src="/2019/02/14/hgame-php/12.png" alt=" "><br>我们需要POST的参数，door，key，gate。但这里secret是未知的，所以我们需要对door进行处理使secert的值为空，对于hash_mac函数<br>hash_hmac ( string $algo , string $data , string $key [, bool $raw_output = FALSE ] ) : string<br>参数<br>algo：<br>要使用的哈希算法名称，例如：”md5”，”sha256”，”haval160,4” 等。<br>data：<br>要进行哈希运算的消息。<br>key：<br>使用 HMAC 生成信息摘要时所使用的密钥<br>raw_output：设置为 TRUE 输出原始二进制数据， 设置为 FALSE 输出小写 16 进制字符串。</p>
-<p>当data的数据为数组时，返回空，所以传入data[]=0,secret的值就变成了null，然后gate的值是对key进行shal256加密，密钥为空。key的值可以确定，这里又是MD5碰撞的问题，在网上找到了一篇博客，下附地址：<br><a href="https://www.k2zone.cn/?p=2019" target="_blank" rel="noopener">https://www.k2zone.cn/?p=2019</a><br>双MD5，得到key可取key=7r4lGXCH2Ksu2JNT3BYM<br>之后可求gate<br>php&gt; var_dump(hash_hmac(‘sha256’, ‘7r4lGXCH2Ksu2JNT3BYM’, NULL)) string(64) “81f581b7553943f5041f054ca92e5e7e490e2c40296a93d94d214f1 36aa84fe6”  </p>
-<p>最终payloadgate=81f581b7553943f5041f054ca92e5e7e490e2c40296a93d94d2 14f136aa84fe6&amp;key=7r4lGXCH2Ksu2JNT3BYM&amp;door[]=1</p>
+        <p>CTF赛程结束后，Web题目环境关了不是太好复现，学习了下怎么用Dockerfile来重新搭建一下环境（只学会了怎么用，自己出题还是不会写，菜哭）<br><a id="more"></a></p>
+<p>##Docker简介</p>
+<p>##Docker常用命令</p>
+<p>拉取镜像： </p>
+<pre><code>docker pull imagename  
+</code></pre><p>查看docker当前镜像：   </p>
+<pre><code>docker images  
+</code></pre><p>新建一个docker容器，并映射端口号：</p>
+<pre><code>docker run -d -p host port:docker port imagename
+</code></pre><p>用到的一些命令： </p>
+<pre><code>-d  后台运行
+-P(大写)  随机把容器的端口映射到一个主机未使用的高端口
+-p(小写)  格式为主机端口：容器端口 ，自选端口映射
+-i  以交互模式运行容器，常与-t连用
+-t  为容器重新分配一个伪输入终端，常与-i连用
+</code></pre><p>查看运行中的docker容器：</p>
+<pre><code>docker ps -a 
+</code></pre><p>进入一个docker容器：</p>
+<pre><code>docker exec -it container—id bash
+</code></pre><p>拷贝本地文件到docker：</p>
+<pre><code>docker cp /root/ container id:容器内路径（var/www/html）
+</code></pre><p>开始/停止容器</p>
+<pre><code>docker start/stop container id
+</code></pre><p>首先我们在github下载开源的Web题目源码<br>php4fun的好多challenge，选取了challenge2</p>
+<p>利用xftp6将文件上传到服务器root文件夹下，cd命令进入该文件，</p>
+<pre><code>docker build -t w .
+</code></pre><p>使用下载的dockerfile文件创建一个命名为w的镜像</p>
+<p>新建容器，并随机分配端口</p>
+<pre><code>docker run -d -P w
+</code></pre><p><img src="/2019/07/11/Dockerfile搭建简单Web题目/2.jpg" alt=" "> </p>
+<p>访问32774端口，题目搭建完成</p>
+<p><img src="/2019/07/11/Dockerfile搭建简单Web题目/1.jpg" alt=" "> </p>
+<p>解题payload：</p>
+<pre><code>?str=${phpinfo()}
+</code></pre><p>str=${phpinfo()}，$str=phpinfo(),eval就执行了此命令，不过cat命令不知道为什么没反应<br>读取flag.php的内容拿到flag估计需要拿shell？</p>
 
       
     </div>
@@ -470,7 +483,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/WP/" rel="tag"># WP</a>
+            <a href="/tags/基础/" rel="tag"># 基础</a>
           
         </div>
       
@@ -483,8 +496,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/02/07/Python爬虫/" rel="next" title="Python爬虫">
-                <i class="fa fa-chevron-left"></i> Python爬虫
+              <a href="/2019/05/04/ARP攻击/" rel="next" title="ARP攻击">
+                <i class="fa fa-chevron-left"></i> ARP攻击
               </a>
             
           </div>
@@ -492,10 +505,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/04/07/SSTI-1/" rel="prev" title="SSTI(1)">
-                SSTI(1) <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -550,17 +559,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -701,22 +701,6 @@
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#php-trick"><span class="nav-number">1.</span> <span class="nav-text">php trick</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#（2）"><span class="nav-number">1.0.0.1.</span> <span class="nav-text">（2）</span></a></li></ol></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#php-is-the-best-language"><span class="nav-number">2.</span> <span class="nav-text">php is the best language</span></a></li></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
