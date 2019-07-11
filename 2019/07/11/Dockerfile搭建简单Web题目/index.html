@@ -89,13 +89,13 @@
 <meta property="og:site_name" content="木偶&#39;s blog">
 <meta property="og:description" content="CTF赛程结束后，Web题目环境关了不是太好复现，学习了下怎么用Dockerfile来重新搭建一下环境（只学会了怎么用，自己出题还是不会写，菜哭）">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2019/07/11/Dockerfile搭建简单Web题目/2.jpg">
-<meta property="og:image" content="http://yoursite.com/2019/07/11/Dockerfile搭建简单Web题目/1.jpg">
-<meta property="og:updated_time" content="2019-07-11T03:05:40.694Z">
+<meta property="og:image" content="http://yoursite.com/2019/07/11/Dockerfile搭建简单Web题目/2.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/11/Dockerfile搭建简单Web题目/1.png">
+<meta property="og:updated_time" content="2019-07-11T03:15:59.204Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Dockerfile搭建简单Web题目">
 <meta name="twitter:description" content="CTF赛程结束后，Web题目环境关了不是太好复现，学习了下怎么用Dockerfile来重新搭建一下环境（只学会了怎么用，自己出题还是不会写，菜哭）">
-<meta name="twitter:image" content="http://yoursite.com/2019/07/11/Dockerfile搭建简单Web题目/2.jpg">
+<meta name="twitter:image" content="http://yoursite.com/2019/07/11/Dockerfile搭建简单Web题目/2.png">
 
 
 
@@ -394,7 +394,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  388 字
+                  387 字
                 </span>
               
 
@@ -432,9 +432,7 @@
 
       
         <p>CTF赛程结束后，Web题目环境关了不是太好复现，学习了下怎么用Dockerfile来重新搭建一下环境（只学会了怎么用，自己出题还是不会写，菜哭）<br><a id="more"></a></p>
-<p>##Docker简介</p>
-<p>##Docker常用命令</p>
-<p>拉取镜像： </p>
+<h2 id="Docker简介"><a href="#Docker简介" class="headerlink" title="Docker简介"></a>Docker简介</h2><h2 id="Docker常用命令"><a href="#Docker常用命令" class="headerlink" title="Docker常用命令"></a>Docker常用命令</h2><p>拉取镜像： </p>
 <pre><code>docker pull imagename  
 </code></pre><p>查看docker当前镜像：   </p>
 <pre><code>docker images  
@@ -460,9 +458,9 @@
 </code></pre><p>使用下载的dockerfile文件创建一个命名为w的镜像</p>
 <p>新建容器，并随机分配端口</p>
 <pre><code>docker run -d -P w
-</code></pre><p><img src="/2019/07/11/Dockerfile搭建简单Web题目/2.jpg" alt=" "> </p>
+</code></pre><p><img src="/2019/07/11/Dockerfile搭建简单Web题目/2.png" alt=" "> </p>
 <p>访问32774端口，题目搭建完成</p>
-<p><img src="/2019/07/11/Dockerfile搭建简单Web题目/1.jpg" alt=" "> </p>
+<p><img src="/2019/07/11/Dockerfile搭建简单Web题目/1.png" alt=" "> </p>
 <p>解题payload：</p>
 <pre><code>?str=${phpinfo()}
 </code></pre><p>str=${phpinfo()}，$str=phpinfo(),eval就执行了此命令，不过cat命令不知道为什么没反应<br>读取flag.php的内容拿到flag估计需要拿shell？</p>
@@ -559,8 +557,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -701,6 +708,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Docker简介"><span class="nav-number">1.</span> <span class="nav-text">Docker简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Docker常用命令"><span class="nav-number">2.</span> <span class="nav-text">Docker常用命令</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
