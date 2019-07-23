@@ -91,7 +91,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2019/07/11/Dockerfile搭建简单Web题目/2.png">
 <meta property="og:image" content="http://yoursite.com/2019/07/11/Dockerfile搭建简单Web题目/1.png">
-<meta property="og:updated_time" content="2019-07-11T03:20:59.895Z">
+<meta property="og:updated_time" content="2019-07-23T03:42:27.832Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Dockerfile搭建简单Web题目">
 <meta name="twitter:description" content="CTF赛程结束后，Web题目环境关了不是太好复现，学习了下怎么用Dockerfile来重新搭建一下环境（只学会了怎么用，自己出题还是不会写，菜哭）">
@@ -394,7 +394,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  387 字
+                  439 字
                 </span>
               
 
@@ -461,8 +461,10 @@
 </code></pre><p><img src="/2019/07/11/Dockerfile搭建简单Web题目/2.png" alt=" "> </p>
 <p>访问32774端口，题目搭建完成</p>
 <p><img src="/2019/07/11/Dockerfile搭建简单Web题目/1.png" alt=" "> </p>
-<p>解题payload：</p>
-<pre><code>?str=${phpinfo()}
+<h2 id="搭建时遇到的问题"><a href="#搭建时遇到的问题" class="headerlink" title="搭建时遇到的问题"></a>搭建时遇到的问题</h2><pre><code>docker: Error response from daemon: OCI runtime create failed: container_linux.go:345: starting container process caused &quot;exec: \&quot;httpd-foreground\&quot;: executable file not found in $PATH&quot;: unknown.
+</code></pre><p>解决方案 更改文件权限</p>
+<pre><code>chmod +x httpd-foreground
+</code></pre><h2 id="解题payload："><a href="#解题payload：" class="headerlink" title="解题payload："></a>解题payload：</h2><pre><code>?str=${phpinfo()}
 </code></pre><p>str=${phpinfo()}，$str=phpinfo(),eval就执行了此命令，不过cat命令不知道为什么没反应<br>读取flag.php的内容拿到flag估计需要拿shell？</p>
 
       
@@ -718,7 +720,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Docker简介"><span class="nav-number">1.</span> <span class="nav-text">Docker简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Docker常用命令"><span class="nav-number">2.</span> <span class="nav-text">Docker常用命令</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Docker简介"><span class="nav-number">1.</span> <span class="nav-text">Docker简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Docker常用命令"><span class="nav-number">2.</span> <span class="nav-text">Docker常用命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#搭建时遇到的问题"><span class="nav-number">3.</span> <span class="nav-text">搭建时遇到的问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解题payload："><span class="nav-number">4.</span> <span class="nav-text">解题payload：</span></a></li></ol></div>
             
 
           </div>
