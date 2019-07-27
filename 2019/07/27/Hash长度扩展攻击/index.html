@@ -81,18 +81,18 @@
 
 
 
-<meta name="description" content="Hash长度扩展攻击&amp;lt;?php  //$flag and $secret in flag.php and strlen($secret)==15 include(&amp;quot;flag.php&amp;quot;); if(!isset($_POST[&amp;apos;username&amp;apos;])){show_source(__FILE__);die();} $username = $_POST[&amp;qu">
+<meta name="description" content="Hash长度扩展攻击很早之前蓝鲸ctf的时候就遇到了hash扩展长度攻击的问题，当时没有整理，趁把这道题放夏令营的时候整理一下">
 <meta name="keywords" content="基础">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Hash长度扩展攻击">
 <meta property="og:url" content="http://yoursite.com/2019/07/27/Hash长度扩展攻击/index.html">
 <meta property="og:site_name" content="木偶&#39;s blog">
-<meta property="og:description" content="Hash长度扩展攻击&amp;lt;?php  //$flag and $secret in flag.php and strlen($secret)==15 include(&amp;quot;flag.php&amp;quot;); if(!isset($_POST[&amp;apos;username&amp;apos;])){show_source(__FILE__);die();} $username = $_POST[&amp;qu">
+<meta property="og:description" content="Hash长度扩展攻击很早之前蓝鲸ctf的时候就遇到了hash扩展长度攻击的问题，当时没有整理，趁把这道题放夏令营的时候整理一下">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-27T13:51:16.488Z">
+<meta property="og:updated_time" content="2019-07-27T13:54:27.489Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hash长度扩展攻击">
-<meta name="twitter:description" content="Hash长度扩展攻击&amp;lt;?php  //$flag and $secret in flag.php and strlen($secret)==15 include(&amp;quot;flag.php&amp;quot;); if(!isset($_POST[&amp;apos;username&amp;apos;])){show_source(__FILE__);die();} $username = $_POST[&amp;qu">
+<meta name="twitter:description" content="Hash长度扩展攻击很早之前蓝鲸ctf的时候就遇到了hash扩展长度攻击的问题，当时没有整理，趁把这道题放夏令营的时候整理一下">
 
 
 
@@ -391,7 +391,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  934 字
+                  933 字
                 </span>
               
 
@@ -428,7 +428,8 @@
       
 
       
-        <h2 id="Hash长度扩展攻击"><a href="#Hash长度扩展攻击" class="headerlink" title="Hash长度扩展攻击"></a>Hash长度扩展攻击</h2><pre><code>&lt;?php 
+        <h2 id="Hash长度扩展攻击"><a href="#Hash长度扩展攻击" class="headerlink" title="Hash长度扩展攻击"></a>Hash长度扩展攻击</h2><p>很早之前蓝鲸ctf的时候就遇到了hash扩展长度攻击的问题，当时没有整理，趁把这道题放夏令营的时候整理一下<br><a id="more"></a></p>
+<pre><code>&lt;?php 
 //$flag and $secret in flag.php and strlen($secret)==15
 include(&quot;flag.php&quot;);
 if(!isset($_POST[&apos;username&apos;])){show_source(__FILE__);die();}
@@ -461,8 +462,7 @@ if ($_COOKIE[&quot;source&quot;] != 0) {
     echo &quot;&quot;; // This source code is outputted here
 }
 }
-</code></pre><p>很早之前蓝鲸ctf的时候就遇到了hash扩展长度攻击的问题，当时没有整理，趁把这道题放夏令营的时候整理一下</p>
-<p>我们已知的是：  </p>
+</code></pre><p>我们已知的是：  </p>
 <pre><code>md5($secret.adminadmin)= 2aba05712564dde4fb15fdb5f0e0de66;
 以及$secret的长度为15；  
 </code></pre><p>我们要得到的是如何构造一个$password让</p>
