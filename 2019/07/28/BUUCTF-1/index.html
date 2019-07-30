@@ -94,7 +94,7 @@
 <meta property="og:image" content="http://yoursite.com/2019/07/28/BUUCTF-1/3.png">
 <meta property="og:image" content="http://yoursite.com/2019/07/28/BUUCTF-1/5.png">
 <meta property="og:image" content="http://yoursite.com/2019/07/28/BUUCTF-1/6.png">
-<meta property="og:updated_time" content="2019-07-28T13:54:38.744Z">
+<meta property="og:updated_time" content="2019-07-29T04:09:29.053Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="BUUCTF(1)">
 <meta name="twitter:description" content="BUUCTF好多之前比赛没做也没来得及补的题，良心平台QAQ">
@@ -397,7 +397,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  727 字
+                  1.6k 字
                 </span>
               
 
@@ -413,7 +413,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  3 分钟
+                  6 分钟
                 </span>
               
             </div>
@@ -519,7 +519,35 @@ if (! empty($_REQUEST[&apos;file&apos;])
 <p>alter table 原表名 rename to 新表名;</p>
 <p>alter table 表名 change 要修改的字段名  新字段名 新字段的数据类型;</p>
 <p>(题目好像挂了，明天写</p>
-<h3 id="upload"><a href="#upload" class="headerlink" title="upload"></a>upload</h3>
+<h3 id="easy-tornado"><a href="#easy-tornado" class="headerlink" title="easy tornado"></a>easy tornado</h3><p>开始以为是hash长度拓展攻击，但是没有secret长度，file参数传递也要是/fllllllllllllag，试了半天没试出来QAQ，看了writeup，error那存在ssti，（自闭了 貌似是render提示了是ssti</p>
+<pre><code>http://web9.buuoj.cn/error?msg={{globals}}
+</code></pre><p>加号被过滤了2不行，其他测试都是orz</p>
+<pre><code>http://web9.buuoj.cn/error?msg={{handler.settings}}
+</code></pre><p>handler.settings内有cookie_secret（又自闭了，为什么QAQ<br>tornado框架里handler.settings保存一些配置选项</p>
+<pre><code>settings，使用tornado.web.Application(handler, **settings)
+我们却不知道这个settings到底是什么，究竟有什么作用，今天就来介绍一下
+settings是一个字典，主要保存一些配置选项
+</code></pre><p>拿到cookie_secret就拿到flag了</p>
+<h3 id="upload"><a href="#upload" class="headerlink" title="upload"></a>upload</h3><h4 id="补充一下条件竞争："><a href="#补充一下条件竞争：" class="headerlink" title="补充一下条件竞争："></a>补充一下条件竞争：</h4><p>下面以相关操作逻辑顺序设计的不合理为例，具体讨论一下这类问题的成因。在很多系统中都会包含上传文件或者从远端获取文件保存在服务器的功能（如：允许用户使用网络上的图片作为自己的头像的功能），下面是一段简单的上传文件释义代码：</p>
+<pre><code>&lt;?php
+  if(isset($_GET[&apos;src&apos;])){
+    copy($_GET[&apos;src&apos;],$_GET[&apos;dst&apos;]);
+    //...
+    //check file
+    unlink($_GET[&apos;dst&apos;]);
+    //...
+ }
+?&gt;
+</code></pre><p>这段代码看似一切正常，先通过copy($GET[‘src’],$GET[‘dst’])将文件从源地址复制到目的地址，然后检查$GET[‘dst’]的安全性，如果发现$GET[‘dst’]不安全就马上通过unlink($_GET[‘dst’])将其删除。但是，当程序在服务端并发处理用户请求时问题就来了。如果在文件上传成功后但是在相关安全检查发现它是不安全文件删除它以前这个文件就被执行了那么会怎样呢？</p>
+<p>假设攻击者上传了一个用来生成恶意shell的文件，在上传完成和安全检查完成并删除它的间隙，攻击者通过不断地发起访问请求的方法访问了该文件，该文件就会被执行，并且在服务器上生成一个恶意shell的文件。至此，该文件的任务就已全部完成，至于后面发现它是一个不安全的文件并把它删除的问题都已经不重要了，因为攻击者已经成功的在服务器中植入了一个shell文件，后续的一切就都不是问题了。</p>
+<p>由上述过程我们可以看到这种“先将猛兽放进屋，再杀之”的处理逻辑在并发的情况下是十分危险的，极易导致条件竞争漏洞的发生。  </p>
+<p>仍以上述情境为例，攻击者通过不断地发起访问上传的恶意文件请求的方法成功的将原有处理不安全文件，一个脚本多线程发包，一个脚本不断去访问上传的文件生成shell文件</p>
+<pre><code>上传文件E→删除不安全文件E
+</code></pre><p>的业务逻辑变成了</p>
+<pre><code>上传文件E→访问执行文件E，生成shell文件S→删除不安全文件E
+</code></pre><p>不安全文件E虽然被删除了，但是有它生成出来的shell文件S却保留在了服务器中，对攻击者来说这个shell文件S才是后续攻击的关键。</p>
+<p>原文链接：<a href="http://wiki.secbug.net/web_race-condtion.html" target="_blank" rel="noopener">http://wiki.secbug.net/web_race-condtion.html</a></p>
+
       
     </div>
     
@@ -773,7 +801,7 @@ if (! empty($_REQUEST[&apos;file&apos;])
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#BUUCTF"><span class="nav-number">1.</span> <span class="nav-text">BUUCTF</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#warmup"><span class="nav-number">1.1.</span> <span class="nav-text">warmup</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#随便注"><span class="nav-number">1.2.</span> <span class="nav-text">随便注</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#堆叠注入："><span class="nav-number">1.2.1.</span> <span class="nav-text">堆叠注入：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#存储过程绕过"><span class="nav-number">1.2.2.</span> <span class="nav-text">存储过程绕过</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#重命名"><span class="nav-number">1.2.3.</span> <span class="nav-text">重命名</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#upload"><span class="nav-number">1.3.</span> <span class="nav-text">upload</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#BUUCTF"><span class="nav-number">1.</span> <span class="nav-text">BUUCTF</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#warmup"><span class="nav-number">1.1.</span> <span class="nav-text">warmup</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#随便注"><span class="nav-number">1.2.</span> <span class="nav-text">随便注</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#堆叠注入："><span class="nav-number">1.2.1.</span> <span class="nav-text">堆叠注入：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#存储过程绕过"><span class="nav-number">1.2.2.</span> <span class="nav-text">存储过程绕过</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#重命名"><span class="nav-number">1.2.3.</span> <span class="nav-text">重命名</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#easy-tornado"><span class="nav-number">1.3.</span> <span class="nav-text">easy tornado</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#upload"><span class="nav-number">1.4.</span> <span class="nav-text">upload</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#补充一下条件竞争："><span class="nav-number">1.4.1.</span> <span class="nav-text">补充一下条件竞争：</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
