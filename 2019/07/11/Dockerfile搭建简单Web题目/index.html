@@ -91,7 +91,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2019/07/11/Dockerfile搭建简单Web题目/2.png">
 <meta property="og:image" content="http://yoursite.com/2019/07/11/Dockerfile搭建简单Web题目/1.png">
-<meta property="og:updated_time" content="2019-08-01T04:40:45.833Z">
+<meta property="og:updated_time" content="2019-08-01T04:45:07.259Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Dockerfile搭建简单Web题目">
 <meta name="twitter:description" content="CTF赛程结束后，Web题目环境关了不是太好复现，学习了下怎么用Dockerfile来重新搭建一下环境（只学会了怎么用，自己出题还是不会写，菜哭）">
@@ -467,8 +467,7 @@
 </code></pre><h2 id="解题payload："><a href="#解题payload：" class="headerlink" title="解题payload："></a>解题payload：</h2><h3 id="PHP-复杂变量"><a href="#PHP-复杂变量" class="headerlink" title="PHP 复杂变量"></a>PHP 复杂变量</h3><p>PHP 中的变量用一个$+变量名来表示。变量区分大小写，我们还可以利用${xxx}的形式来表达一个变量。</p>
 <p>函数、方法、静态类变量和类常量只有在 PHP 5 以后才可在 {$} 中使用。然而，只有在该字符串被定义的命名空间中才可以将其值作为变量名来访问。只单一使用花括号 ({}) 无法处理从函数或方法的返回值或者类常量以及类静态变量的值。</p>
 <p>eval()函数函数的作用如下：  eval() 函数把字符串按照 PHP 代码来计算。   该字符串必须是合法的 PHP 代码，且必须以分号结尾。</p>
-<p>###解题</p>
-<p>题目意思：接受一个$_GET[‘str’]的传参，在经过addslashes()函数转义特殊符号与正则表达式检验之后，传入eval()当中拼接到$str=””;变量当中。</p>
+<h3 id="解题"><a href="#解题" class="headerlink" title="解题"></a>解题</h3><p>题目意思：接受一个$_GET[‘str’]的传参，在经过addslashes()函数转义特殊符号与正则表达式检验之后，传入eval()当中拼接到$str=””;变量当中。</p>
 <pre><code>?str=${phpinfo()}
 </code></pre><p>但phpinfo()并非变量名却依旧执行了该命令，在 php 中，可以接受函数的返回值作为变量名，而phpinfo()的返回值为TRUE，所以先将phpinfo()执行了，将返回值返回作为了变量名。<br>读取flag.php的内容：</p>
 <pre><code>?str=${eval($_REQUEST[c])}&amp;c=system(&apos;cat *&apos;);
@@ -731,7 +730,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Docker简介"><span class="nav-number">1.</span> <span class="nav-text">Docker简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Docker常用命令"><span class="nav-number">2.</span> <span class="nav-text">Docker常用命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#搭建时遇到的问题"><span class="nav-number">3.</span> <span class="nav-text">搭建时遇到的问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解题payload："><span class="nav-number">4.</span> <span class="nav-text">解题payload：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#PHP-复杂变量"><span class="nav-number">4.1.</span> <span class="nav-text">PHP 复杂变量</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Docker简介"><span class="nav-number">1.</span> <span class="nav-text">Docker简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Docker常用命令"><span class="nav-number">2.</span> <span class="nav-text">Docker常用命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#搭建时遇到的问题"><span class="nav-number">3.</span> <span class="nav-text">搭建时遇到的问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解题payload："><span class="nav-number">4.</span> <span class="nav-text">解题payload：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#PHP-复杂变量"><span class="nav-number">4.1.</span> <span class="nav-text">PHP 复杂变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解题"><span class="nav-number">4.2.</span> <span class="nav-text">解题</span></a></li></ol></li></ol></div>
             
 
           </div>

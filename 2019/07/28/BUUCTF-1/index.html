@@ -94,7 +94,7 @@
 <meta property="og:image" content="http://yoursite.com/2019/07/28/BUUCTF-1/3.png">
 <meta property="og:image" content="http://yoursite.com/2019/07/28/BUUCTF-1/5.png">
 <meta property="og:image" content="http://yoursite.com/2019/07/28/BUUCTF-1/6.png">
-<meta property="og:updated_time" content="2019-07-29T04:09:29.053Z">
+<meta property="og:updated_time" content="2019-08-01T04:45:04.720Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="BUUCTF(1)">
 <meta name="twitter:description" content="BUUCTF好多之前比赛没做也没来得及补的题，良心平台QAQ">
@@ -528,7 +528,8 @@ if (! empty($_REQUEST[&apos;file&apos;])
 我们却不知道这个settings到底是什么，究竟有什么作用，今天就来介绍一下
 settings是一个字典，主要保存一些配置选项
 </code></pre><p>拿到cookie_secret就拿到flag了</p>
-<h3 id="upload"><a href="#upload" class="headerlink" title="upload"></a>upload</h3><h4 id="补充一下条件竞争："><a href="#补充一下条件竞争：" class="headerlink" title="补充一下条件竞争："></a>补充一下条件竞争：</h4><p>下面以相关操作逻辑顺序设计的不合理为例，具体讨论一下这类问题的成因。在很多系统中都会包含上传文件或者从远端获取文件保存在服务器的功能（如：允许用户使用网络上的图片作为自己的头像的功能），下面是一段简单的上传文件释义代码：</p>
+<h3 id="upload"><a href="#upload" class="headerlink" title="upload"></a>upload</h3><h3 id="swp"><a href="#swp" class="headerlink" title=".swp"></a>.swp</h3><p>当vim不正常退出时，比如你编辑的文件config.php，由于vim的不正常退出，此时会在同目录下生成:config.php.swp，由于此类格式文件无法解析，此时便可以通过浏览器直接下载此敏感文件！</p>
+<h4 id="补充一下条件竞争："><a href="#补充一下条件竞争：" class="headerlink" title="补充一下条件竞争："></a>补充一下条件竞争：</h4><p>下面以相关操作逻辑顺序设计的不合理为例，具体讨论一下这类问题的成因。在很多系统中都会包含上传文件或者从远端获取文件保存在服务器的功能（如：允许用户使用网络上的图片作为自己的头像的功能），下面是一段简单的上传文件释义代码：</p>
 <pre><code>&lt;?php
   if(isset($_GET[&apos;src&apos;])){
     copy($_GET[&apos;src&apos;],$_GET[&apos;dst&apos;]);
@@ -801,7 +802,7 @@ settings是一个字典，主要保存一些配置选项
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#BUUCTF"><span class="nav-number">1.</span> <span class="nav-text">BUUCTF</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#warmup"><span class="nav-number">1.1.</span> <span class="nav-text">warmup</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#随便注"><span class="nav-number">1.2.</span> <span class="nav-text">随便注</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#堆叠注入："><span class="nav-number">1.2.1.</span> <span class="nav-text">堆叠注入：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#存储过程绕过"><span class="nav-number">1.2.2.</span> <span class="nav-text">存储过程绕过</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#重命名"><span class="nav-number">1.2.3.</span> <span class="nav-text">重命名</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#easy-tornado"><span class="nav-number">1.3.</span> <span class="nav-text">easy tornado</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#upload"><span class="nav-number">1.4.</span> <span class="nav-text">upload</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#补充一下条件竞争："><span class="nav-number">1.4.1.</span> <span class="nav-text">补充一下条件竞争：</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#BUUCTF"><span class="nav-number">1.</span> <span class="nav-text">BUUCTF</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#warmup"><span class="nav-number">1.1.</span> <span class="nav-text">warmup</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#随便注"><span class="nav-number">1.2.</span> <span class="nav-text">随便注</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#堆叠注入："><span class="nav-number">1.2.1.</span> <span class="nav-text">堆叠注入：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#存储过程绕过"><span class="nav-number">1.2.2.</span> <span class="nav-text">存储过程绕过</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#重命名"><span class="nav-number">1.2.3.</span> <span class="nav-text">重命名</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#easy-tornado"><span class="nav-number">1.3.</span> <span class="nav-text">easy tornado</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#upload"><span class="nav-number">1.4.</span> <span class="nav-text">upload</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#swp"><span class="nav-number">1.5.</span> <span class="nav-text">.swp</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#补充一下条件竞争："><span class="nav-number">1.5.1.</span> <span class="nav-text">补充一下条件竞争：</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
