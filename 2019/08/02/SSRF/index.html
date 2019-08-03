@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="WP,">
+  <meta name="keywords" content="基础,">
 
 
 
@@ -81,18 +81,18 @@
 
 
 
-<meta name="description" content="Web8/welcome to bugkuctfphp变量覆盖漏洞&amp;lt;?phpextract($_GET);if (!empty($ac)){$f = trim(file_get_contents($fn));if ($ac === $f){echo “This is flag:” .” $flag”;}else{echo”sorry!”;}}?&amp;gt;">
-<meta name="keywords" content="WP">
+<meta name="description" content="从BUUCTF一道题目看SSRFSSRFme&amp;lt;?php if (isset($_SERVER[&amp;apos;HTTP_X_FORWARDED_FOR&amp;apos;])) {   $_SERVER[&amp;apos;REMOTE_ADDR&amp;apos;] = $_SERVER[&amp;apos;HTTP_X_FORWARDED_FOR&amp;apos;]; } $sandbox = &amp;quot;sandbox/&amp;qu">
+<meta name="keywords" content="基础">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Bugku(2)">
-<meta property="og:url" content="http://yoursite.com/2018/12/26/Bugku-2/index.html">
+<meta property="og:title" content="SSRF">
+<meta property="og:url" content="http://yoursite.com/2019/08/02/SSRF/index.html">
 <meta property="og:site_name" content="木偶&#39;s blog">
-<meta property="og:description" content="Web8/welcome to bugkuctfphp变量覆盖漏洞&amp;lt;?phpextract($_GET);if (!empty($ac)){$f = trim(file_get_contents($fn));if ($ac === $f){echo “This is flag:” .” $flag”;}else{echo”sorry!”;}}?&amp;gt;">
+<meta property="og:description" content="从BUUCTF一道题目看SSRFSSRFme&amp;lt;?php if (isset($_SERVER[&amp;apos;HTTP_X_FORWARDED_FOR&amp;apos;])) {   $_SERVER[&amp;apos;REMOTE_ADDR&amp;apos;] = $_SERVER[&amp;apos;HTTP_X_FORWARDED_FOR&amp;apos;]; } $sandbox = &amp;quot;sandbox/&amp;qu">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-04-14T04:51:36.827Z">
+<meta property="og:updated_time" content="2019-08-03T04:53:05.732Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Bugku(2)">
-<meta name="twitter:description" content="Web8/welcome to bugkuctfphp变量覆盖漏洞&amp;lt;?phpextract($_GET);if (!empty($ac)){$f = trim(file_get_contents($fn));if ($ac === $f){echo “This is flag:” .” $flag”;}else{echo”sorry!”;}}?&amp;gt;">
+<meta name="twitter:title" content="SSRF">
+<meta name="twitter:description" content="从BUUCTF一道题目看SSRFSSRFme&amp;lt;?php if (isset($_SERVER[&amp;apos;HTTP_X_FORWARDED_FOR&amp;apos;])) {   $_SERVER[&amp;apos;REMOTE_ADDR&amp;apos;] = $_SERVER[&amp;apos;HTTP_X_FORWARDED_FOR&amp;apos;]; } $sandbox = &amp;quot;sandbox/&amp;qu">
 
 
 
@@ -122,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/12/26/Bugku-2/">
+  <link rel="canonical" href="http://yoursite.com/2019/08/02/SSRF/">
 
 
 
 
 
-  <title>Bugku(2) | 木偶's blog</title>
+  <title>SSRF | 木偶's blog</title>
   
 
 
@@ -298,7 +298,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/26/Bugku-2/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/02/SSRF/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="木偶">
@@ -315,7 +315,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Bugku(2)</h1>
+          <h1 class="post-title" itemprop="name headline">SSRF</h1>
         
 
         <div class="post-meta">
@@ -327,8 +327,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-26T23:02:56+08:00">
-                2018-12-26
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-02T10:38:27+08:00">
+                2019-08-02
               </time>
             
 
@@ -350,8 +350,8 @@
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/WP/" itemprop="url" rel="index">
-                    <span itemprop="name">WP</span>
+                  <a href="/categories/基础/" itemprop="url" rel="index">
+                    <span itemprop="name">基础</span>
                   </a>
                 </span>
 
@@ -368,8 +368,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/12/26/Bugku-2/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2018/12/26/Bugku-2/" itemprop="commentCount"></span>
+                <a href="/2019/08/02/SSRF/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/08/02/SSRF/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -391,7 +391,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  721 字
+                  598 字
                 </span>
               
 
@@ -428,33 +428,30 @@
       
 
       
-        <h2 id="Web8-welcome-to-bugkuctf"><a href="#Web8-welcome-to-bugkuctf" class="headerlink" title="Web8/welcome to bugkuctf"></a>Web8/welcome to bugkuctf</h2><h2 id="php变量覆盖漏洞"><a href="#php变量覆盖漏洞" class="headerlink" title="php变量覆盖漏洞"></a>php变量覆盖漏洞</h2><p>&lt;?php<br>extract($_GET);<br>if (!empty($ac))<br>{<br>$f = trim(file_get_contents($fn));<br>if ($ac === $f)<br>{<br>echo “This is flag:” .” $flag”;<br>}<br>else<br>{<br>echo”sorry!”;<br>}<br>}<br>?&gt;<br><a id="more"></a></p>
-<h3 id="先说一下php函数"><a href="#先说一下php函数" class="headerlink" title="先说一下php函数"></a>先说一下php函数</h3><h4 id="extract-函数"><a href="#extract-函数" class="headerlink" title="extract() 函数"></a>extract() 函数</h4><p>从数组中将变量导入到当前的符号表。<br>该函数使用数组键名作为变量名，使用数组键值作为变量值。针对数组中的每个元素，将在当前符号表中创建对应的一个变量。<br>第二个参数 type 用于指定当某个变量已经存在，而数组中又有同名元素时，extract() 函数如何对待这样的冲突。<br>该函数返回成功导入到符号表中的变量数目。</p>
-<h4 id="trim-string-charlist"><a href="#trim-string-charlist" class="headerlink" title="trim(string,charlist)"></a>trim(string,charlist)</h4><p>string    必需。规定要检查的字符串。<br>charlist<br>可选。<br>规定从字符串中删除哪些字符。如果被省略，则移除以下所有字符：<br>“\0” - NULL<br>“\t” - 制表符<br>“\n” - 换行<br>“\x0B” - 垂直制表符<br>“\r” - 回车<br>“ “ - 空格</p>
-<h4 id="empty-和isset"><a href="#empty-和isset" class="headerlink" title="empty()和isset()"></a>empty()和isset()</h4><p>PHP的isset()函数 一般用来检测变量是否设置 </p>
-<p>若变量不存在则返回 FALSE<br>若变量存在且其值为NULL，也返回 FALSE<br>若变量存在且值不为NULL，则返回 TURE </p>
-<p>PHP的empty()函数 判断值为否为空 </p>
-<p>若变量不存在则返回 TRUE<br>若变量存在且其值为””、0、”0”、NULL、、FALSE、array()、var $var; 以及没有任何属性的对象，则返回 TURE<br>若变量存在且值不为””、0、”0”、NULL、、FALSE、array()、var $var; 以及没有任何属性的对象，则返回 FALSE   </p>
-<p>php封装协议php://input写入fn的值与a相同即可<br>注意要用post方法，且注意是在那个php文件下执行的该操作</p>
-<h3 id="php反序列化"><a href="#php反序列化" class="headerlink" title="php反序列化"></a>php反序列化</h3><p>welcome to the bugkuctf中利用php封装协议读取index.php和hint.php的内容得到全部的源码，可知flag在flag.php里，但是需要绕过一步正则匹配的限制。</p>
-<h5 id="hint-php"><a href="#hint-php" class="headerlink" title="hint.php"></a>hint.php</h5><p>&lt;?php  </p>
-<p>class Flag{//flag.php<br>    public $file;<br>    public function __tostring(){<br>        if(isset($this-&gt;file)){<br>            echo file_get_contents($this-&gt;file);<br>            echo “<br>“;<br>        return (“good”);<br>        }<br>    }<br>}<br>?&gt;  </p>
-<h5 id="index-php"><a href="#index-php" class="headerlink" title="index.php"></a>index.php</h5><p>&lt;?php<br>$txt = $_GET[“txt”];<br>$file = $_GET[“file”];<br>$password = $_GET[“password”];  </p>
-<p>if(isset($txt)&amp;&amp;(file_get_contents($txt,’r’)===”welcome to the bugkuctf”)){<br>    echo “hello friend!<br>“;<br>    if(preg_match(“/flag/“,$file)){<br>        echo “不能现在就给你flag”;<br>        exit();<br>    }else{<br>        include($file);<br>        $password = unserialize($password);<br>        echo $password;<br>    }<br>}else{<br>    echo “you are not the number of bugku ! “;<br>}  </p>
-<p>?&gt;  </p>
-<!--  
-$user = $_GET["txt"];  
-$file = $_GET["file"];  
-$pass = $_GET["password"];  
+        <h2 id="从BUUCTF一道题目看SSRF"><a href="#从BUUCTF一道题目看SSRF" class="headerlink" title="从BUUCTF一道题目看SSRF"></a>从BUUCTF一道题目看SSRF</h2><h3 id="SSRFme"><a href="#SSRFme" class="headerlink" title="SSRFme"></a>SSRFme</h3><pre><code>&lt;?php
+if (isset($_SERVER[&apos;HTTP_X_FORWARDED_FOR&apos;])) {
+  $_SERVER[&apos;REMOTE_ADDR&apos;] = $_SERVER[&apos;HTTP_X_FORWARDED_FOR&apos;];
+}
+$sandbox = &quot;sandbox/&quot; . md5(&quot;orange&quot; . $_SERVER[&quot;REMOTE_ADDR&quot;]);
+@mkdir($sandbox);
+@chdir($sandbox);
 
-if(isset($user)&&(file_get_contents($user,'r')==="welcome to the bugkuctf")){  
-    echo "hello admin!<br>";  
-    include($file); //hint.php  
-}else{  
-    echo "you are not admin ! ";  
-}  
- -->  
-<p>源码中可以看到如果没有匹配到flag的话就会引用file的文件，所以file=hint.php，password的值进行序列化构造，当序列化对象时，PHP 将试图在序列动作之前调用该对象的成员函数 <strong>sleep()。这样就允许对象在被序列化之前做任何清除操作。类似的，当使用 unserialize() 恢复对象时， 将调用 </strong>wakeup() 成员函数。<br>unserialize()函数变量可控所以就可以构造payload使得hint.php的全局变量file为flag.php<br>password=O:4:”Flag”:1:{s:4:”file”;s:8:”flag.php”;}最终构造的payload为?txt=php://input&amp;file=hint.php&amp;password=O:4:”Flag”:1:{s:4:”file”;s:8:”flag.php”;} </p>
+$data = shell_exec(&quot;GET &quot; . escapeshellarg($_GET[&quot;url&quot;]));
+$info = pathinfo($_GET[&quot;filename&quot;]);
+$dir  = str_replace(&quot;.&quot;, &quot;&quot;, basename($info[&quot;dirname&quot;]));
+@mkdir($dir);
+@chdir($dir);
+@file_put_contents(basename($info[&quot;basename&quot;]), $data);
+highlight_file(__FILE__); 
+</code></pre><p>题目解析<br>1.首先madir创建sandbox/+md5(orange+你的ip)目录，并用chdir修改当前目录<br>2.shell_exec函数会执行内部的代码，返回值为执行命令后所获取内容的第一行<br>3.GET命令执行传入的url参数，GET是Lib for WWW in Perl中的命令 目的是模拟http的GET请求<br>4.escapeshellarg函数将给字符串增加一个单引号并且能引用或者转码任何已经存在的单引号，这样以确保能够直接将一个字符串传入 shell 函数，并且还是确保安全的。<br>5.pathinfo() 函数以数组的形式返回文件路径的信息。  </p>
+<pre><code>&lt;?php print_r(pathinfo(&quot;/testweb/test.txt&quot;));?&gt;
+输出：Array([dirname] =&gt; /testweb [basename] =&gt; test.txt [extension] =&gt; txt)
+</code></pre><p>5.传入filename的最后一级文件夹并将shell_exec函数返回的数据写入文件，可以通过sandbox/+md5(orange+你的ip)/文件名访问</p>
+<p>访问根目录<br>    ?url=/&amp;filename=a</p>
+<p>ip查询</p>
+<h3 id="SSRF介绍"><a href="#SSRF介绍" class="headerlink" title="SSRF介绍"></a>SSRF介绍</h3><p>SSRF(Server-Side Request Forgery:服务器端请求伪造) 是一种由攻击者构造形成由服务端发起请求的一个安全漏洞。一般情况下，SSRF是要目标网站的内部系统。（因为他是从内部系统访问的，所有可以通过它攻击外网无法访问的内部系统，也就是把目标网站当中间人）也就是说通过普通用户可以访问的网站，来攻击内部网络系统。</p>
+<p>SSRF 形成的原因大都是由于服务端提供了从其他服务器应用获取数据的功能(服务器会响应用户的url请求)且没有对目标地址做过滤与限制。比如从指定URL地址获取网页文本内容，加载指定地址的图片，下载等等。</p>
+<p>SSRF漏洞就是通过篡改获取资源的请求发送给服务器，但是服务器并没有检测这个请求是否合法的，然后服务器以他的身份来访问其他服务器的资源。</p>
 
       
     </div>
@@ -472,7 +469,7 @@ if(isset($user)&&(file_get_contents($user,'r')==="welcome to the bugkuctf")){
       
         <div class="post-tags">
           
-            <a href="/tags/WP/" rel="tag"># WP</a>
+            <a href="/tags/基础/" rel="tag"># 基础</a>
           
         </div>
       
@@ -485,8 +482,8 @@ if(isset($user)&&(file_get_contents($user,'r')==="welcome to the bugkuctf")){
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/12/21/Bugku/" rel="next" title="Bugku">
-                <i class="fa fa-chevron-left"></i> Bugku
+              <a href="/2019/07/28/BUUCTF-1/" rel="next" title="BUUCTF(1)">
+                <i class="fa fa-chevron-left"></i> BUUCTF(1)
               </a>
             
           </div>
@@ -494,10 +491,6 @@ if(isset($user)&&(file_get_contents($user,'r')==="welcome to the bugkuctf")){
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/01/27/SQL注入/" rel="prev" title="SQL攻击">
-                SQL攻击 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -713,7 +706,7 @@ if(isset($user)&&(file_get_contents($user,'r')==="welcome to the bugkuctf")){
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Web8-welcome-to-bugkuctf"><span class="nav-number">1.</span> <span class="nav-text">Web8/welcome to bugkuctf</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#php变量覆盖漏洞"><span class="nav-number">2.</span> <span class="nav-text">php变量覆盖漏洞</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#先说一下php函数"><span class="nav-number">2.1.</span> <span class="nav-text">先说一下php函数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#extract-函数"><span class="nav-number">2.1.1.</span> <span class="nav-text">extract() 函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#trim-string-charlist"><span class="nav-number">2.1.2.</span> <span class="nav-text">trim(string,charlist)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#empty-和isset"><span class="nav-number">2.1.3.</span> <span class="nav-text">empty()和isset()</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#php反序列化"><span class="nav-number">2.2.</span> <span class="nav-text">php反序列化</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#hint-php"><span class="nav-number">2.2.0.1.</span> <span class="nav-text">hint.php</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#index-php"><span class="nav-number">2.2.0.2.</span> <span class="nav-text">index.php</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#从BUUCTF一道题目看SSRF"><span class="nav-number">1.</span> <span class="nav-text">从BUUCTF一道题目看SSRF</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SSRFme"><span class="nav-number">1.1.</span> <span class="nav-text">SSRFme</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SSRF介绍"><span class="nav-number">1.2.</span> <span class="nav-text">SSRF介绍</span></a></li></ol></li></ol></div>
             
 
           </div>
