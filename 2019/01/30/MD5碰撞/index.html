@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="WP,">
+  <meta name="keywords" content="基础,">
 
 
 
@@ -81,18 +81,18 @@
 
 
 
-<meta name="description" content="bugku MD5碰撞MD5碰撞的含义：让两个不同内容的字符串或者文件有相同的MD5值。之前遇到了数组的MD5碰撞，现在php里存在另一个MD5碰撞的漏洞。 PHP在处理哈希字符串时，会利用”!=”或”==”来对哈希值进行比较，它把每一个以”0E”开头的哈希值都解释为0，所以如果两个不同的密码经过哈希以后，其哈希值都是以”0E”开头的，那么PHP将会认为他们相同，都是0。 MD5算法原理">
-<meta name="keywords" content="WP">
+<meta name="description" content="ctf中md5常见绕过">
+<meta name="keywords" content="基础">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MD5碰撞">
 <meta property="og:url" content="http://yoursite.com/2019/01/30/MD5碰撞/index.html">
 <meta property="og:site_name" content="木偶&#39;s blog">
-<meta property="og:description" content="bugku MD5碰撞MD5碰撞的含义：让两个不同内容的字符串或者文件有相同的MD5值。之前遇到了数组的MD5碰撞，现在php里存在另一个MD5碰撞的漏洞。 PHP在处理哈希字符串时，会利用”!=”或”==”来对哈希值进行比较，它把每一个以”0E”开头的哈希值都解释为0，所以如果两个不同的密码经过哈希以后，其哈希值都是以”0E”开头的，那么PHP将会认为他们相同，都是0。 MD5算法原理">
+<meta property="og:description" content="ctf中md5常见绕过">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-01-30T07:48:35.977Z">
+<meta property="og:updated_time" content="2019-08-13T10:38:07.970Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MD5碰撞">
-<meta name="twitter:description" content="bugku MD5碰撞MD5碰撞的含义：让两个不同内容的字符串或者文件有相同的MD5值。之前遇到了数组的MD5碰撞，现在php里存在另一个MD5碰撞的漏洞。 PHP在处理哈希字符串时，会利用”!=”或”==”来对哈希值进行比较，它把每一个以”0E”开头的哈希值都解释为0，所以如果两个不同的密码经过哈希以后，其哈希值都是以”0E”开头的，那么PHP将会认为他们相同，都是0。 MD5算法原理">
+<meta name="twitter:description" content="ctf中md5常见绕过">
 
 
 
@@ -338,6 +338,28 @@
           </span>
 
           
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/基础/" itemprop="url" rel="index">
+                    <span itemprop="name">基础</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -369,7 +391,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  143 字
+                  585 字
                 </span>
               
 
@@ -385,7 +407,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1 分钟
+                  3 分钟
                 </span>
               
             </div>
@@ -406,9 +428,139 @@
       
 
       
-        <h3 id="bugku-MD5碰撞"><a href="#bugku-MD5碰撞" class="headerlink" title="bugku MD5碰撞"></a>bugku MD5碰撞</h3><p>MD5碰撞的含义：让两个不同内容的字符串或者文件有相同的MD5值。<br>之前遇到了数组的MD5碰撞，现在php里存在另一个MD5碰撞的漏洞。</p>
-<p>PHP在处理哈希字符串时，会利用”!=”或”==”来对哈希值进行比较，它把每一个以”0E”开头的哈希值都解释为0，所以如果两个不同的密码经过哈希以后，其哈希值都是以”0E”开头的，那么PHP将会认为他们相同，都是0。</p>
-<h3 id="MD5算法原理"><a href="#MD5算法原理" class="headerlink" title="MD5算法原理"></a>MD5算法原理</h3>
+        <h2 id="ctf中md5常见绕过"><a href="#ctf中md5常见绕过" class="headerlink" title="ctf中md5常见绕过"></a>ctf中md5常见绕过</h2><a id="more"></a>
+<h3 id="字符串0e"><a href="#字符串0e" class="headerlink" title="字符串0e"></a>字符串0e</h3><p>PHP在处理哈希字符串时，会利用”!=”或”==”来对哈希值进行比较，它把每一个以”0E”开头的哈希值都解释为0，所以如果两个不同的密码经过哈希以后，其哈希值都是以”0E”开头的，那么PHP将会认为他们相同，都是0。  </p>
+<pre><code>s878926199a  
+0e545993274517709034328855841020  
+s155964671a  
+0e342768416822451524974117254469  
+s214587387a  
+0e848240448830537924465865611904  
+s214587387a
+0e848240448830537924465865611904
+s878926199a
+0e545993274517709034328855841020
+s1091221200a
+0e940624217856561557816327384675
+s1885207154a
+0e509367213418206700842008763514
+s1502113478a
+0e861580163291561247404381396064
+s1885207154a
+0e509367213418206700842008763514
+s1836677006a
+0e481036490867661113260034900752
+s155964671a
+0e342768416822451524974117254469
+s1184209335a
+0e072485820392773389523109082030
+s1665632922a
+0e731198061491163073197128363787
+s1502113478a
+0e861580163291561247404381396064
+s1836677006a
+0e481036490867661113260034900752
+s1091221200a
+0e940624217856561557816327384675
+s155964671a
+0e342768416822451524974117254469
+s1502113478a
+0e861580163291561247404381396064
+s155964671a
+0e342768416822451524974117254469
+s1665632922a
+0e731198061491163073197128363787
+s155964671a
+0e342768416822451524974117254469
+s1091221200a
+0e940624217856561557816327384675
+s1836677006a
+0e481036490867661113260034900752
+s1885207154a
+0e509367213418206700842008763514
+s532378020a
+0e220463095855511507588041205815
+s878926199a
+0e545993274517709034328855841020
+s1091221200a
+0e940624217856561557816327384675
+s214587387a
+0e848240448830537924465865611904
+s1502113478a
+0e861580163291561247404381396064
+s1091221200a
+0e940624217856561557816327384675
+s1665632922a
+0e731198061491163073197128363787
+s1885207154a
+0e509367213418206700842008763514
+s1836677006a
+0e481036490867661113260034900752
+s1665632922a
+0e731198061491163073197128363787
+s878926199a
+0e545993274517709034328855841020
+</code></pre><h3 id="数组绕过"><a href="#数组绕过" class="headerlink" title="数组绕过"></a>数组绕过</h3><pre><code>&lt;?php
+highlight_file(__file__);
+include &quot;flag.php&quot;;
+
+if (!isset($_GET[&apos;a&apos;]) || !isset($_GET[&apos;b&apos;])) {
+    die(&quot;GET me a &amp; b&quot;);
+}
+
+if ($_GET[&apos;a&apos;] !== $_GET[&apos;b&apos;] &amp;&amp; 
+    md5($_GET[&apos;a&apos;]) === md5($_GET[&apos;b&apos;])) {
+    echo $flag;
+} else {
+    echo &quot;No No No&quot;;
+}
+
+?&gt;
+</code></pre><p>当MD5接受的参数为数组时，其值都为0，所以构造payload：</p>
+<pre><code>?a[]=1&amp;b[]=2
+</code></pre><h3 id="真实碰撞"><a href="#真实碰撞" class="headerlink" title="真实碰撞"></a>真实碰撞</h3><pre><code>&lt;?php
+highlight_file(__file__);
+include &quot;flag.php&quot;;
+
+if (!isset($_GET[&apos;a&apos;]) || !isset($_GET[&apos;b&apos;])) {
+    die(&quot;GET me a &amp; b&quot;);
+}
+
+if ((string) $_GET[&apos;a&apos;] !== (string) $_GET[&apos;b&apos;] &amp;&amp; 
+    md5($_GET[&apos;a&apos;]) === md5($_GET[&apos;b&apos;])) {
+    echo $flag;
+} else {
+    echo &quot;No No No&quot;;
+}
+
+?&gt;
+</code></pre><p>“===”以及强制字符串类型转换，这时只能用真实碰撞了</p>
+<p>碰撞工具fastcoll下载地址：<a href="http://www.win.tue.nl/hashclash/fastcoll_v1.0.0.5.exe.zip" target="_blank" rel="noopener">http://www.win.tue.nl/hashclash/fastcoll_v1.0.0.5.exe.zip</a></p>
+<p>创建a.txt,内容为1</p>
+<p>运行fastcoll 输入以下参数。 -p 是源文件 -o 是输出文件</p>
+<p>fastcoll_v1.0.0.5.exe -p a.txt -o 1.txt 2.txt</p>
+<p>生成两个md5值相同，但实际内容不同的文件</p>
+<pre><code>&lt;?php 
+function  readmyfile($path){
+    $fh = fopen($path, &quot;rb&quot;);
+    $data = fread($fh, filesize($path));
+    fclose($fh);
+    return $data;
+}
+echo &apos;二进制hash &apos;. md5( (readmyfile(&quot;1.txt&quot;)));
+echo &quot;&lt;br&gt;&lt;br&gt;\r\n&quot;;
+echo  &apos;URLENCODE &apos;. urlencode(readmyfile(&quot;1.txt&quot;));
+echo &quot;&lt;br&gt;&lt;br&gt;\r\n&quot;;
+echo &apos;URLENCODE hash &apos;.md5(urlencode (readmyfile(&quot;1.txt&quot;)));
+echo &quot;&lt;br&gt;&lt;br&gt;\r\n&quot;;
+echo &apos;二进制hash &apos;.md5( (readmyfile(&quot;2.txt&quot;)));
+echo &quot;&lt;br&gt;&lt;br&gt;\r\n&quot;;
+echo  &apos;URLENCODE &apos;.  urlencode(readmyfile(&quot;2.txt&quot;));
+echo &quot;&lt;br&gt;&lt;br&gt;\r\n&quot;;
+echo &apos;URLENCODE hash &apos;.md5( urlencode(readmyfile(&quot;2.txt&quot;)));
+echo &quot;&lt;br&gt;&lt;br&gt;\r\n&quot;;
+</code></pre><p>传入两个文件输出的urlencode即可</p>
+
       
     </div>
     
@@ -425,7 +577,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/WP/" rel="tag"># WP</a>
+            <a href="/tags/基础/" rel="tag"># 基础</a>
           
         </div>
       
@@ -530,7 +682,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">21</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -666,7 +818,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#bugku-MD5碰撞"><span class="nav-number">1.</span> <span class="nav-text">bugku MD5碰撞</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MD5算法原理"><span class="nav-number">2.</span> <span class="nav-text">MD5算法原理</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#ctf中md5常见绕过"><span class="nav-number">1.</span> <span class="nav-text">ctf中md5常见绕过</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#字符串0e"><span class="nav-number">1.1.</span> <span class="nav-text">字符串0e</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数组绕过"><span class="nav-number">1.2.</span> <span class="nav-text">数组绕过</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#真实碰撞"><span class="nav-number">1.3.</span> <span class="nav-text">真实碰撞</span></a></li></ol></li></ol></div>
             
 
           </div>

@@ -81,20 +81,20 @@
 
 
 
-<meta name="description" content="从BUUCTF和De1CTF两道题目看SSRF两道SSRF的题目，一次复现，一次做一天才做出来(上午就能出的，我是sb)整理了一下">
+<meta name="description" content="BUUCTF和De1CTF两道题目两道SSRF的题目，一次复现，一次做一天才做出来(上午就能出的，我是sb)整理了一下">
 <meta name="keywords" content="WP">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SSRF">
 <meta property="og:url" content="http://yoursite.com/2019/08/02/SSRF/index.html">
 <meta property="og:site_name" content="木偶&#39;s blog">
-<meta property="og:description" content="从BUUCTF和De1CTF两道题目看SSRF两道SSRF的题目，一次复现，一次做一天才做出来(上午就能出的，我是sb)整理了一下">
+<meta property="og:description" content="BUUCTF和De1CTF两道题目两道SSRF的题目，一次复现，一次做一天才做出来(上午就能出的，我是sb)整理了一下">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2019/08/02/SSRF/2.png">
 <meta property="og:image" content="http://yoursite.com/2019/08/02/SSRF/1.png">
-<meta property="og:updated_time" content="2019-08-08T04:39:34.801Z">
+<meta property="og:updated_time" content="2019-08-13T09:52:13.145Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SSRF">
-<meta name="twitter:description" content="从BUUCTF和De1CTF两道题目看SSRF两道SSRF的题目，一次复现，一次做一天才做出来(上午就能出的，我是sb)整理了一下">
+<meta name="twitter:description" content="BUUCTF和De1CTF两道题目两道SSRF的题目，一次复现，一次做一天才做出来(上午就能出的，我是sb)整理了一下">
 <meta name="twitter:image" content="http://yoursite.com/2019/08/02/SSRF/2.png">
 
 
@@ -431,7 +431,7 @@
       
 
       
-        <h2 id="从BUUCTF和De1CTF两道题目看SSRF"><a href="#从BUUCTF和De1CTF两道题目看SSRF" class="headerlink" title="从BUUCTF和De1CTF两道题目看SSRF"></a>从BUUCTF和De1CTF两道题目看SSRF</h2><p>两道SSRF的题目，一次复现，一次做一天才做出来(上午就能出的，我是sb)整理了一下<br><a id="more"></a></p>
+        <h2 id="BUUCTF和De1CTF两道题目"><a href="#BUUCTF和De1CTF两道题目" class="headerlink" title="BUUCTF和De1CTF两道题目"></a>BUUCTF和De1CTF两道题目</h2><p>两道SSRF的题目，一次复现，一次做一天才做出来(上午就能出的，我是sb)整理了一下<br><a id="more"></a></p>
 <h3 id="SSRFme-BUUCTF"><a href="#SSRFme-BUUCTF" class="headerlink" title="SSRFme(BUUCTF)"></a>SSRFme(BUUCTF)</h3><pre><code>&lt;?php
 if (isset($_SERVER[&apos;HTTP_X_FORWARDED_FOR&apos;])) {
   $_SERVER[&apos;REMOTE_ADDR&apos;] = $_SERVER[&apos;HTTP_X_FORWARDED_FOR&apos;];
@@ -712,7 +712,7 @@ Cookie:action=scan%80%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%0
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">21</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -848,7 +848,7 @@ Cookie:action=scan%80%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%0
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#从BUUCTF和De1CTF两道题目看SSRF"><span class="nav-number">1.</span> <span class="nav-text">从BUUCTF和De1CTF两道题目看SSRF</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SSRFme-BUUCTF"><span class="nav-number">1.1.</span> <span class="nav-text">SSRFme(BUUCTF)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SSRFme-De1CTF"><span class="nav-number">1.2.</span> <span class="nav-text">SSRFme(De1CTF)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SSRF介绍"><span class="nav-number">1.3.</span> <span class="nav-text">SSRF介绍</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#BUUCTF和De1CTF两道题目"><span class="nav-number">1.</span> <span class="nav-text">BUUCTF和De1CTF两道题目</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SSRFme-BUUCTF"><span class="nav-number">1.1.</span> <span class="nav-text">SSRFme(BUUCTF)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SSRFme-De1CTF"><span class="nav-number">1.2.</span> <span class="nav-text">SSRFme(De1CTF)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SSRF介绍"><span class="nav-number">1.3.</span> <span class="nav-text">SSRF介绍</span></a></li></ol></li></ol></div>
             
 
           </div>

