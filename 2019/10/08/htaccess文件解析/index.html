@@ -81,22 +81,22 @@
 
 
 
-<meta name="description" content="htaccesshtaccess文件(分布式配置文件，在一个特定的文档目录中放置一个包含一个或多个指令的文件， 以作用于此目录及其所有子目录。  设置初始页面  错误重定向&amp;amp;重定向  设置文件访问权限 1234&amp;lt;Files 1.php&amp;gt;order allow,denydeny from all&amp;lt;/Files&amp;gt;   开启htaccess 1234567apache 配">
+<meta name="description" content="htaccesshtaccess文件(分布式配置文件，在一个特定的文档目录中放置一个包含一个或多个指令的文件， 以作用于此目录及其所有子目录。  设置初始页面  错误重定向&amp;amp;重定向  设置文件访问权限 1234&amp;lt;Files 1.php&amp;gt;order allow,denydeny from all&amp;lt;/Files&amp;gt;">
 <meta name="keywords" content="WP">
 <meta property="og:type" content="article">
 <meta property="og:title" content="文件解析漏洞">
 <meta property="og:url" content="http://yoursite.com/2019/10/08/htaccess文件解析/index.html">
 <meta property="og:site_name" content="木偶&#39;s blog">
-<meta property="og:description" content="htaccesshtaccess文件(分布式配置文件，在一个特定的文档目录中放置一个包含一个或多个指令的文件， 以作用于此目录及其所有子目录。  设置初始页面  错误重定向&amp;amp;重定向  设置文件访问权限 1234&amp;lt;Files 1.php&amp;gt;order allow,denydeny from all&amp;lt;/Files&amp;gt;   开启htaccess 1234567apache 配">
+<meta property="og:description" content="htaccesshtaccess文件(分布式配置文件，在一个特定的文档目录中放置一个包含一个或多个指令的文件， 以作用于此目录及其所有子目录。  设置初始页面  错误重定向&amp;amp;重定向  设置文件访问权限 1234&amp;lt;Files 1.php&amp;gt;order allow,denydeny from all&amp;lt;/Files&amp;gt;">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2019/10/08/htaccess文件解析/Users/Lenovo/AppData/Roaming/Typora/typora-user-images/1570544831768.png">
 <meta property="og:image" content="http://yoursite.com/2019/10/08/htaccess文件解析/Users/Lenovo/AppData/Roaming/Typora/typora-user-images/1570544854762.png">
 <meta property="og:image" content="http://yoursite.com/2019/10/08/htaccess文件解析/Users/Lenovo/AppData/Roaming/Typora/typora-user-images/1570544947029.png">
 <meta property="og:image" content="http://yoursite.com/2019/10/08/htaccess文件解析/Users/Lenovo/AppData/Roaming/Typora/typora-user-images/1570546074326.png">
-<meta property="og:updated_time" content="2019-10-11T13:57:50.832Z">
+<meta property="og:updated_time" content="2019-10-15T13:15:58.980Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="文件解析漏洞">
-<meta name="twitter:description" content="htaccesshtaccess文件(分布式配置文件，在一个特定的文档目录中放置一个包含一个或多个指令的文件， 以作用于此目录及其所有子目录。  设置初始页面  错误重定向&amp;amp;重定向  设置文件访问权限 1234&amp;lt;Files 1.php&amp;gt;order allow,denydeny from all&amp;lt;/Files&amp;gt;   开启htaccess 1234567apache 配">
+<meta name="twitter:description" content="htaccesshtaccess文件(分布式配置文件，在一个特定的文档目录中放置一个包含一个或多个指令的文件， 以作用于此目录及其所有子目录。  设置初始页面  错误重定向&amp;amp;重定向  设置文件访问权限 1234&amp;lt;Files 1.php&amp;gt;order allow,denydeny from all&amp;lt;/Files&amp;gt;">
 <meta name="twitter:image" content="http://yoursite.com/2019/10/08/htaccess文件解析/Users/Lenovo/AppData/Roaming/Typora/typora-user-images/1570544831768.png">
 
 
@@ -421,6 +421,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;Files 1.php&gt;</span><br><span class="line">order allow,deny</span><br><span class="line">deny from all</span><br><span class="line">&lt;/Files&gt;</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
+<a id="more"></a>
 <p>开启<code>htaccess</code></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">apache 配置文件里httpd.conf文件找到</span><br><span class="line"></span><br><span class="line"> AllowOverride None改为AllowOverride All </span><br><span class="line"></span><br><span class="line"> LoadModule rewrite_module modules/mod_rewrite.so 把这个前面的“#”号去掉</span><br><span class="line"></span><br><span class="line"> 然后重启apache。</span><br></pre></td></tr></table></figure>
 <p>针对一些黑名单的限制，php文件无法上传或者无法被解析，</p>
