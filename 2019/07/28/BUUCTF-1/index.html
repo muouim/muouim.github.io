@@ -94,7 +94,8 @@
 <meta property="og:image" content="http://yoursite.com/2019/07/28/BUUCTF-1/3.png">
 <meta property="og:image" content="http://yoursite.com/2019/07/28/BUUCTF-1/5.png">
 <meta property="og:image" content="http://yoursite.com/2019/07/28/BUUCTF-1/6.png">
-<meta property="og:updated_time" content="2019-08-13T10:10:07.887Z">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190528174146842.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI2NDA2NDQ3,size_16,color_FFFFFF,t_70">
+<meta property="og:updated_time" content="2019-10-11T07:57:51.451Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="BUUCTF(1)">
 <meta name="twitter:description" content="BUUCTF好多之前比赛没做也没来得及补的题，良心平台QAQ">
@@ -397,7 +398,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1.6k 字
+                  1.7k 字
                 </span>
               
 
@@ -504,7 +505,6 @@ if (! empty($_REQUEST[&apos;file&apos;])
 <pre><code>1&apos;;show columns from `1919810931114514`;
 </code></pre><p><img src="/2019/07/28/BUUCTF-1/5.png" alt=" ">‘</p>
 <p>但到此处就无法查询字段的内容了  </p>
-<p>大佬writeup中的姿势一个比一个骚：</p>
 <h4 id="存储过程绕过"><a href="#存储过程绕过" class="headerlink" title="存储过程绕过"></a>存储过程绕过</h4><p>sql serve中给变量幅值可以用</p>
 <pre><code>set @变量名=&apos;字符串&apos;;
 </code></pre><p>prepare语句用于预备一个语句，并指定语句名称，以后可用名称引用该语句。语句名称对大小写不敏感。from后可以是一个文字字符串，也可以是一个包含了语句文本的用户变量。该文本必须表现为一个单一的SQL语句，而不是多个语句。<br>语法</p>
@@ -514,11 +514,19 @@ if (! empty($_REQUEST[&apos;file&apos;])
 </code></pre><p><img src="/2019/07/28/BUUCTF-1/6.png" alt=" "><br>payload：</p>
 <pre><code>1&apos;;Set @a=concat(&apos;s&apos;,&apos;elect * from `1919810931114514`&apos;);prepare s from @a;execute s;
 </code></pre><p>strstr对set进行了一步过滤，不过没什么影响，大小写就能绕过(这么看这种解法应该是预期解。</p>
-<h4 id="重命名"><a href="#重命名" class="headerlink" title="重命名"></a>重命名</h4><p>这个真的是太骚了<br>正则中没有过滤alert和rename关键字  </p>
+<h4 id="重命名"><a href="#重命名" class="headerlink" title="重命名"></a>重命名</h4><p>正则中没有过滤alert和rename关键字  </p>
 <p>alter和rename命令</p>
 <p>alter table 原表名 rename to 新表名;</p>
 <p>alter table 表名 change 要修改的字段名  新字段名 新字段的数据类型;</p>
-<p>(题目好像挂了，明天写</p>
+<p><img src="https://img-blog.csdnimg.cn/20190528174146842.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI2NDA2NDQ3,size_16,color_FFFFFF,t_70" alt="8"></p>
+<p>查询的是words表，有两列id和data；</p>
+<p>我们猜测他的查询语句为<code>select * from words where id=</code></p>
+<p>1.将words表改名为其它名字</p>
+<p>2.1919810931114514改名为words</p>
+<p>3.将flag改名为id；</p>
+<p>然后直接查询1就可以找到flag；</p>
+<p>题目环境好像出现了一些问题，没有复现成功QAQ</p>
+<p>suctf sql也是堆叠注入；绕了半天没绕过去，后来发现是git源码泄露，select *一行就查出来了QAQ</p>
 <h3 id="easy-tornado"><a href="#easy-tornado" class="headerlink" title="easy tornado"></a>easy tornado</h3><p>开始以为是hash长度拓展攻击，但是没有secret长度，file参数传递也要是/fllllllllllllag，试了半天没试出来QAQ，看了writeup，error那存在ssti，（自闭了 貌似是render提示了是ssti</p>
 <pre><code>http://web9.buuoj.cn/error?msg={{globals}}
 </code></pre><p>加号被过滤了2不行，其他测试都是orz</p>
@@ -670,7 +678,7 @@ settings是一个字典，主要保存一些配置选项
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-count">22</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

