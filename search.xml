@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Paper规范]]></title>
+    <url>%2F2020%2F11%2F03%2FPaper%E8%A7%84%E8%8C%83%2F</url>
+    <content type="text"><![CDATA[Github-Repo1234567891011121. 把code和paper分开到不同的repo，一般paper的repo的命名： fast21simcomp，&lt;目标会议&gt;&lt;年份&gt;&lt;系统名称&gt;2. paper repo里边放submit（投递），camera，revision（每次修订版本）文件夹 初始只需要submit文件夹3. submit文件夹内，放所有tex文件、cls文件、bst文件、bib文件 一般有一个main.tex，在main.tex里边include其他tex文件； 包含一个pic文件夹，放所有图片（图片为pdf格式）4. submit文件夹内，放一个plot文件夹，放所有画图的源代码 （R语言代码/PPTX） Figures1234561. 使用texlive的工具pdfcrop裁剪pdf图片的白边2.插图大小规范： 正常宽度：3.3in 宽度：高度1:2 双栏宽度：6.7in Reference1234567891. 使用Jabref管理参考文献，参考文献格式： InProceedings，会议论文，只填写Title、Author、Booktitle、Year 其中Booktitle应用这种格式：Proc. of [会议出版社/织] &lt;会议简写&gt; Article，期刊论文，填写Title、Author、Journal、Volume、Number、Year、Pages Misc，其他（例如书、网页、代码等），通常填写Title和HowPublished 2. bibtex key规范：&lt;第一作者姓&gt;&lt;有效2位发表年份&gt;[a/b/c...用于区分作者同一年份发表的不同文章] MainIntroductionBackground]]></content>
+  </entry>
+  <entry>
     <title><![CDATA[博客初建]]></title>
-    <url>%2F2020%2F07%2F19%2F%E9%BB%91%E7%99%BD%E7%9B%92%2Fhello-world%2F</url>
+    <url>%2F2020%2F07%2F19%2Fhello-world%2F</url>
     <content type="text"><![CDATA[从零开始，希望这个博客可以和我一起进步，逐渐懂得更多。 博客更新生成静态页面 1hexo generate 预览博客效果 Localhost:4000 1hexo server 同步到Github 1hexo deploy]]></content>
   </entry>
   <entry>

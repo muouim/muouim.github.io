@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-11-03T02:46:45.818Z</updated>
+  <updated>2020-11-03T03:01:50.817Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -17,9 +17,30 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Paper规范</title>
+    <link href="http://yoursite.com/2020/11/03/Paper%E8%A7%84%E8%8C%83/"/>
+    <id>http://yoursite.com/2020/11/03/Paper规范/</id>
+    <published>2020-11-03T02:51:31.662Z</published>
+    <updated>2020-11-03T03:01:50.817Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="Github-Repo"><a href="#Github-Repo" class="headerlink" title="Github-Repo"></a>Github-Repo</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">1. 把code和paper分开到不同的repo，一般paper的repo的命名：</span><br><span class="line">fast21simcomp，&lt;目标会议&gt;&lt;年份&gt;&lt;系统名称&gt;</span><br><span class="line"></span><br><span class="line">2. paper repo里边放submit（投递），camera，revision（每次修订版本）文件夹</span><br><span class="line">初始只需要submit文件夹</span><br><span class="line"></span><br><span class="line">3. submit文件夹内，放所有tex文件、cls文件、bst文件、bib文件</span><br><span class="line">一般有一个main.tex，在main.tex里边include其他tex文件；</span><br><span class="line">包含一个pic文件夹，放所有图片（图片为pdf格式）</span><br><span class="line"></span><br><span class="line">4. submit文件夹内，放一个plot文件夹，放所有画图的源代码</span><br><span class="line">（R语言代码/PPTX）</span><br></pre></td></tr></table></figure><h3 id="Figures"><a href="#Figures" class="headerlink" title="Figures"></a>Figures</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1. 使用texlive的工具pdfcrop裁剪pdf图片的白边</span><br><span class="line"></span><br><span class="line">2.插图大小规范：</span><br><span class="line">    正常宽度：3.3in</span><br><span class="line">    宽度：高度1:2</span><br><span class="line">    双栏宽度：6.7in</span><br></pre></td></tr></table></figure><h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">1. 使用Jabref管理参考文献，参考文献格式：</span><br><span class="line">InProceedings，会议论文，只填写Title、Author、Booktitle、Year</span><br><span class="line">其中Booktitle应用这种格式：Proc. of [会议出版社/织] &lt;会议简写&gt;</span><br><span class="line"></span><br><span class="line">Article，期刊论文，填写Title、Author、Journal、Volume、Number、Year、Pages</span><br><span class="line"></span><br><span class="line">Misc，其他（例如书、网页、代码等），通常填写Title和HowPublished</span><br><span class="line"></span><br><span class="line">2. bibtex key规范：&lt;第一作者姓&gt;&lt;有效2位发表年份&gt;[a/b/c...用于区分作者同一年份发表的不同文章]</span><br></pre></td></tr></table></figure><h3 id="Main"><a href="#Main" class="headerlink" title="Main"></a>Main</h3><h4 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h4><h4 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h4>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;Github-Repo&quot;&gt;&lt;a href=&quot;#Github-Repo&quot; class=&quot;headerlink&quot; title=&quot;Github-Repo&quot;&gt;&lt;/a&gt;Github-Repo&lt;/h3&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;tabl
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
     <title>博客初建</title>
-    <link href="http://yoursite.com/2020/07/19/%E9%BB%91%E7%99%BD%E7%9B%92/hello-world/"/>
-    <id>http://yoursite.com/2020/07/19/黑白盒/hello-world/</id>
+    <link href="http://yoursite.com/2020/07/19/hello-world/"/>
+    <id>http://yoursite.com/2020/07/19/hello-world/</id>
     <published>2020-07-19T01:55:38.391Z</published>
     <updated>2020-11-03T02:46:45.818Z</updated>
     
@@ -452,28 +473,6 @@ output:
     <summary type="html">
     
       &lt;h2 id=&quot;sql&quot;&gt;&lt;a href=&quot;#sql&quot; class=&quot;headerlink&quot; title=&quot;sql&quot;&gt;&lt;/a&gt;sql&lt;/h2&gt;&lt;p&gt;hgame两道sql题都不算太难，有验证不过没过滤，再次响起招新被时间盲注支配的恐惧~，整理一下大致的框架，&lt;br&gt;&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="WP" scheme="http://yoursite.com/categories/WP/"/>
-    
-    
-      <category term="WP" scheme="http://yoursite.com/tags/WP/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Bugku(2)</title>
-    <link href="http://yoursite.com/2018/12/26/Bugku-2/"/>
-    <id>http://yoursite.com/2018/12/26/Bugku-2/</id>
-    <published>2018-12-26T15:02:56.000Z</published>
-    <updated>2019-04-14T04:51:36.827Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="Web8-welcome-to-bugkuctf"><a href="#Web8-welcome-to-bugkuctf" class="headerlink" title="Web8/welcome to bugkuctf"></a>Web8/welcome to bugkuctf</h2><h2 id="php变量覆盖漏洞"><a href="#php变量覆盖漏洞" class="headerlink" title="php变量覆盖漏洞"></a>php变量覆盖漏洞</h2><p>&lt;?php<br>extract($_GET);<br>if (!empty($ac))<br>{<br>$f = trim(file_get_contents($fn));<br>if ($ac === $f)<br>{<br>echo “This is flag:” .” $flag”;<br>}<br>else<br>{<br>echo”sorry!”;<br>}<br>}<br>?&gt;<br><a id="more"></a></p><h3 id="先说一下php函数"><a href="#先说一下php函数" class="headerlink" title="先说一下php函数"></a>先说一下php函数</h3><h4 id="extract-函数"><a href="#extract-函数" class="headerlink" title="extract() 函数"></a>extract() 函数</h4><p>从数组中将变量导入到当前的符号表。<br>该函数使用数组键名作为变量名，使用数组键值作为变量值。针对数组中的每个元素，将在当前符号表中创建对应的一个变量。<br>第二个参数 type 用于指定当某个变量已经存在，而数组中又有同名元素时，extract() 函数如何对待这样的冲突。<br>该函数返回成功导入到符号表中的变量数目。</p><h4 id="trim-string-charlist"><a href="#trim-string-charlist" class="headerlink" title="trim(string,charlist)"></a>trim(string,charlist)</h4><p>string    必需。规定要检查的字符串。<br>charlist<br>可选。<br>规定从字符串中删除哪些字符。如果被省略，则移除以下所有字符：<br>“\0” - NULL<br>“\t” - 制表符<br>“\n” - 换行<br>“\x0B” - 垂直制表符<br>“\r” - 回车<br>“ “ - 空格</p><h4 id="empty-和isset"><a href="#empty-和isset" class="headerlink" title="empty()和isset()"></a>empty()和isset()</h4><p>PHP的isset()函数 一般用来检测变量是否设置 </p><p>若变量不存在则返回 FALSE<br>若变量存在且其值为NULL，也返回 FALSE<br>若变量存在且值不为NULL，则返回 TURE </p><p>PHP的empty()函数 判断值为否为空 </p><p>若变量不存在则返回 TRUE<br>若变量存在且其值为””、0、”0”、NULL、、FALSE、array()、var $var; 以及没有任何属性的对象，则返回 TURE<br>若变量存在且值不为””、0、”0”、NULL、、FALSE、array()、var $var; 以及没有任何属性的对象，则返回 FALSE   </p><p>php封装协议php://input写入fn的值与a相同即可<br>注意要用post方法，且注意是在那个php文件下执行的该操作</p><h3 id="php反序列化"><a href="#php反序列化" class="headerlink" title="php反序列化"></a>php反序列化</h3><p>welcome to the bugkuctf中利用php封装协议读取index.php和hint.php的内容得到全部的源码，可知flag在flag.php里，但是需要绕过一步正则匹配的限制。</p><h5 id="hint-php"><a href="#hint-php" class="headerlink" title="hint.php"></a>hint.php</h5><p>&lt;?php  </p><p>class Flag{//flag.php<br>    public $file;<br>    public function __tostring(){<br>        if(isset($this-&gt;file)){<br>            echo file_get_contents($this-&gt;file);<br>            echo “<br>“;<br>        return (“good”);<br>        }<br>    }<br>}<br>?&gt;  </p><h5 id="index-php"><a href="#index-php" class="headerlink" title="index.php"></a>index.php</h5><p>&lt;?php<br>$txt = $_GET[“txt”];<br>$file = $_GET[“file”];<br>$password = $_GET[“password”];  </p><p>if(isset($txt)&amp;&amp;(file_get_contents($txt,’r’)===”welcome to the bugkuctf”)){<br>    echo “hello friend!<br>“;<br>    if(preg_match(“/flag/“,$file)){<br>        echo “不能现在就给你flag”;<br>        exit();<br>    }else{<br>        include($file);<br>        $password = unserialize($password);<br>        echo $password;<br>    }<br>}else{<br>    echo “you are not the number of bugku ! “;<br>}  </p><p>?&gt;  </p><!--  $user = $_GET["txt"];  $file = $_GET["file"];  $pass = $_GET["password"];  if(isset($user)&&(file_get_contents($user,'r')==="welcome to the bugkuctf")){      echo "hello admin!<br>";      include($file); //hint.php  }else{      echo "you are not admin ! ";  }   -->  <p>源码中可以看到如果没有匹配到flag的话就会引用file的文件，所以file=hint.php，password的值进行序列化构造，当序列化对象时，PHP 将试图在序列动作之前调用该对象的成员函数 <strong>sleep()。这样就允许对象在被序列化之前做任何清除操作。类似的，当使用 unserialize() 恢复对象时， 将调用 </strong>wakeup() 成员函数。<br>unserialize()函数变量可控所以就可以构造payload使得hint.php的全局变量file为flag.php<br>password=O:4:”Flag”:1:{s:4:”file”;s:8:”flag.php”;}最终构造的payload为?txt=php://input&amp;file=hint.php&amp;password=O:4:”Flag”:1:{s:4:”file”;s:8:”flag.php”;} </p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;Web8-welcome-to-bugkuctf&quot;&gt;&lt;a href=&quot;#Web8-welcome-to-bugkuctf&quot; class=&quot;headerlink&quot; title=&quot;Web8/welcome to bugkuctf&quot;&gt;&lt;/a&gt;Web8/welcome to bugkuctf&lt;/h2&gt;&lt;h2 id=&quot;php变量覆盖漏洞&quot;&gt;&lt;a href=&quot;#php变量覆盖漏洞&quot; class=&quot;headerlink&quot; title=&quot;php变量覆盖漏洞&quot;&gt;&lt;/a&gt;php变量覆盖漏洞&lt;/h2&gt;&lt;p&gt;&amp;lt;?php&lt;br&gt;extract($_GET);&lt;br&gt;if (!empty($ac))&lt;br&gt;{&lt;br&gt;$f = trim(file_get_contents($fn));&lt;br&gt;if ($ac === $f)&lt;br&gt;{&lt;br&gt;echo “This is flag:” .” $flag”;&lt;br&gt;}&lt;br&gt;else&lt;br&gt;{&lt;br&gt;echo”sorry!”;&lt;br&gt;}&lt;br&gt;}&lt;br&gt;?&amp;gt;&lt;br&gt;&lt;/p&gt;
     
     </summary>
     
