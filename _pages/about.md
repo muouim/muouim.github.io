@@ -21,7 +21,7 @@ Prior to my current program, I received a Bachelor’s degree in Cyberspace Secu
 
 - **[FAST'26]** **Guoli Wei**, Yongkun Li, Haoze Song, Tao Li, Lulu Yao, Yinlong Xu, Heming Cui. DMTree: Towards Efficient Tree Indexing on Disaggregated Memory via Compute-side Collaborative Design. Accepted at USENIX FAST 2026.
 
-- **[INFOCOM'22]** Jingwei Li, **Guoli Wei**, Jiacheng Liang, Yanjing Ren, Patrick P. C. Lee, Xiaosong Zhang. Revisiting Frequency Analysis against Encrypted Deduplication via Statistical Distribution. Accepted at IEEE INFOCOM 2022 (**first student author**).
+- **[INFOCOM'22]** Jingwei Li, **Guoli Wei**, Jiacheng Liang, Yanjing Ren, Patrick P. C. Lee, Xiaosong Zhang. Revisiting Frequency Analysis against Encrypted Deduplication via Statistical Distribution. Accepted at IEEE INFOCOM 2022.
 
 
 
