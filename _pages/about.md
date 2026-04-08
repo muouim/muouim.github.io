@@ -7,7 +7,7 @@ redirect_from:
   - /about.html
 ---
 
-I am a Ph.D. student in Computer Science at the University of Science and Technology of China (USTC), starting from September 2024. My advisor is [Prof. Yongkun Li](http://staff.ustc.edu.cn/~ykli/).
+I am a Ph.D. student in Computer Science and Technology at the University of Science and Technology of China (USTC), starting from September 2024. My advisor is [Prof. Yongkun Li](http://staff.ustc.edu.cn/~ykli/).
 
 My research focuses on **cloud storage systems**, particularly **compute-storage disaggregated** architectures, and **RDMA/CXL**-enabled system design.
 
