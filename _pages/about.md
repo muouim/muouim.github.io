@@ -9,7 +9,7 @@ redirect_from:
 
 I am a Ph.D. student in Computer Science at the University of Science and Technology of China (USTC), starting from September 2024. My advisor is [Prof. Yongkun Li](http://staff.ustc.edu.cn/~ykli/).
 
-My research focuses on **cloud storage systems**, with particular emphasis on **disaggregated-memory** and **disaggregated-storage** architectures.
+My research focuses on **cloud storage systems**, with particular emphasis on **compute-storage disaggregated architectures**, and **RDMA/CXL**-enabled system design.
 
 Prior to my current program, I received a Bachelor’s degree in Cyberspace Security from the University of Electronic Science and Technology of China (UESTC), where I was honored as an outstanding graduate under the supervision of [Prof. Jingwei Li](https://jingwei87.github.io/).
 
@@ -19,7 +19,7 @@ Prior to my current program, I received a Bachelor’s degree in Cyberspace Secu
 
 # Publications
 
-- **[FAST'26]** **Guoli Wei**, Yongkun Li, Haoze Song, Tao Li, Lulu Yao, Yinlong Xu, Heming Cui. DMTree: Towards Efficient Tree Indexing on Disaggregated Memory via Compute-side Collaborative Design. Accepted at USENIX FAST 2026.
+- **[FAST'26]** **Guoli Wei**, Yongkun Li, Haoze Song, Tao Li, Lulu Yao, Yinlong Xu, Heming Cui. DMTree: Towards Efficient Tree Indexing on Disaggregated Memory via Compute-side Collaborative Design. Accepted at USENIX FAST 2026. **(Distinguished Artifact Award)**
 
 - **[INFOCOM'22]** Jingwei Li, **Guoli Wei**, Jiacheng Liang, Yanjing Ren, Patrick P. C. Lee, Xiaosong Zhang. Revisiting Frequency Analysis against Encrypted Deduplication via Statistical Distribution. Accepted at IEEE INFOCOM 2022.
 
