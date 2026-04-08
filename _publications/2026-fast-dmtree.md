@@ -3,7 +3,7 @@ title: "FAST‘26 DMTree"
 collection: publications
 category: conferences
 permalink: /publication/2026-fast-dmtree
-excerpt: 'We propose a compute-side collaborative design for efficient tree indexing on disaggregated-memory systems.'
+excerpt: 'Propose a compute-side collaborative design for efficient range indexing on disaggregated-memory systems, alleviating memory-side network bottlenecks through collaboration across compute servers.'
 date: 2026-2-24
 venue: 'USENIX Conference on File and Storage Technologies (FAST)'
 paperurl: 'https://www.usenix.org/system/files/fast26-wei.pdf'
@@ -15,4 +15,4 @@ DMTree: Towards Efficient Tree Indexing on Disaggregated Memory via Compute-side
 
 - Accepted at USENIX FAST 2026 **(Distinguished Artifact Award)**.
 
-- We propose a compute-side collaborative design for efficient tree indexing on disaggregated-memory systems.
+- Propose a compute-side collaborative design for efficient range indexing on disaggregated-memory systems, alleviating memory-side network bottlenecks through collaboration across compute servers.

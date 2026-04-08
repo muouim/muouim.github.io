@@ -9,7 +9,7 @@ redirect_from:
 
 I am a Ph.D. student in Computer Science at the University of Science and Technology of China (USTC), starting from September 2024. My advisor is [Prof. Yongkun Li](http://staff.ustc.edu.cn/~ykli/).
 
-My research focuses on **cloud storage systems**, with particular emphasis on **compute-storage disaggregated architectures**, and **RDMA/CXL**-enabled system design.
+My research focuses on **cloud storage systems**, particularly **compute-storage disaggregated** architectures, and **RDMA/CXL**-enabled system design.
 
 Prior to my current program, I received a Bachelor’s degree in Cyberspace Security from the University of Electronic Science and Technology of China (UESTC), where I was honored as an outstanding graduate under the supervision of [Prof. Jingwei Li](https://jingwei87.github.io/).
 
@@ -29,7 +29,7 @@ Prior to my current program, I received a Bachelor’s degree in Cyberspace Secu
 
 # Awards
 
-- Second Prize, TinyKV Development Contest, Talent Plan Distributed Database Challenge, 2nd OpenAtom Competition (2025). Ranked 2nd out of 10 finalists.
+- 2025, Second Prize, TinyKV Development Contest, Talent Plan Distributed Database Challenge, 2nd OpenAtom Competition (ranked 2nd out of 10 finalists).
 - 2022 - 2024, First-Class Scholarship for Academic Excellence.
 - 2018 - 2021, National Scholarship for Encouragement.
 
