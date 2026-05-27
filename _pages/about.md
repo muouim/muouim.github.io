@@ -19,9 +19,15 @@ Prior to my current program, I received a Bachelor’s degree in Cyberspace Secu
 
 # Publications
 
-- **[FAST'26]** **Guoli Wei**, Yongkun Li, Haoze Song, Tao Li, Lulu Yao, Yinlong Xu, Heming Cui. DMTree: Towards Efficient Tree Indexing on Disaggregated Memory via Compute-side Collaborative Design. Accepted at USENIX FAST 2026. **(Distinguished Artifact Award)**
-
-- **[INFOCOM'22]** Jingwei Li, **Guoli Wei**, Jiacheng Liang, Yanjing Ren, Patrick P. C. Lee, Xiaosong Zhang. Revisiting Frequency Analysis against Encrypted Deduplication via Statistical Distribution. Accepted at IEEE INFOCOM 2022.
+- **[FAST'26]** [DMTree: Towards Efficient Tree Indexing on Disaggregated Memory via Compute-side Collaborative Design.](https://www.usenix.org/system/files/fast26-wei.pdf) <span style="color: green;">**(Distinguished Artifact Award)**</span>  
+  <u>Guoli Wei</u>, Yongkun Li, Haoze Song, Tao Li, Lulu Yao, Yinlong Xu, Heming Cui.  
+  USENIX Conference on File and Storage Technologies (FAST), 2026.
+- **[VLDB'26]** [K2+: A Multi-Region OLTP Database with Disaggregated Storage for High Availability and Strong Consistency.](/publication/2026-vldb-k2plus)  
+  Haoze Song, <u>Guoli Wei</u>, Xusheng Chen, Yazhi Feng, Xieyun Fang, Yong Men, Hao Feng, Yongkun Li, Heming Cui.  
+  Proceedings of the International Conference on Very Large Data Bases (VLDB), 2026.
+- **[INFOCOM'22]** [Revisiting Frequency Analysis against Encrypted Deduplication via Statistical Distribution.](https://ieeexplore.ieee.org/document/9796897)  
+  Jingwei Li, <u>Guoli Wei</u>, Jiacheng Liang, Yanjing Ren, Patrick P. C. Lee, Xiaosong Zhang.  
+  IEEE International Conference on Computer Communications (INFOCOM), 2022.
 
 
 
