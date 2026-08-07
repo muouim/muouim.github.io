@@ -28,6 +28,12 @@ Prior to my current program, I received a Bachelor’s degree in Cyberspace Secu
 - **[INFOCOM'22]** [Revisiting Frequency Analysis against Encrypted Deduplication via Statistical Distribution.](https://ieeexplore.ieee.org/document/9796897)  
   Jingwei Li, <u>Guoli Wei</u>, Jiacheng Liang, Yanjing Ren, Patrick P. C. Lee, Xiaosong Zhang.  
   IEEE International Conference on Computer Communications (INFOCOM), 2022.
+- **[HotStorage'26]** [RLSM: A Disaggregated LSM-Based Key-Value Store with Resource-Aware Compaction.]()  
+  Zhiyuan Lou, <u>Guoli Wei</u>, Qingyang Zhang, Yongkun Li, Yinlong Xu.  
+  ACM Workshop on Hot Topics in Storage and File Systems (HotStorage), 2026.
+- **[HotStorage'26]** [Token Write Amplification in LLM-Mediated State Stores.]()  
+  Shijun Yang, Shuheng Gao, Chaomei Yan, <u>Guoli Wei</u>, Yongkun Li.  
+  ACM Workshop on Hot Topics in Storage and File Systems (HotStorage), 2026.
 
 
 
