@@ -2,6 +2,7 @@
 permalink: /
 title: "Guoli Wei"
 author_profile: true
+classes: wide
 redirect_from: 
   - /about/
   - /about.html
